@@ -1,0 +1,25 @@
+import { readFile,writeFile,mkdir } from 'node:fs/promises'
+const url = path => new URL(path,import.meta.url)
+const text = path => readFile(url(path),'utf8')
+const files = {
+  '/':['index.html','text/html; charset=utf-8'],
+  '/ui.js':['ui.js','text/javascript; charset=utf-8'],
+  '/style.css':['style.css','text/css; charset=utf-8'],
+  '/catalog.json':['catalog.json','application/json; charset=utf-8'],
+  '/hero.webp':['hero.webp','image/webp'],
+  '/vishal-rawal.jpg':['vishal-rawal.jpg','image/jpeg'],
+  '/yashwant-rawal.jpg':['yashwant-rawal.jpg','image/jpeg'],
+  '/download/avantika.apk':['../android/Avantika.apk','application/vnd.android.package-archive']
+}
+const assets = Object.fromEntries(await Promise.all(Object.entries(files).map(async ([path,[file,type]])=>{
+  const source=await readFile(url('../../app/public/'+file))
+  const bytes=path==='/'?Buffer.from(source.toString().replace('<span>Local preview</span>','<a href="/download/avantika.apk" download="Avantika.apk">Download for Android</a>')):source
+  return [path,{type,encoded:bytes.toString('base64'),download:path.endsWith('.apk')}]
+})))
+const catalog=JSON.parse(await text('../../app/public/catalog.json'))
+const devotional=(await text('../../app/devotional.mjs')).replace(/^export /gm,'')
+const application=(await text('../../app/application.mjs')).replace(/^import .*\r?\n/m,'').replace(/^export /gm,'')
+const worker=(await text('index.mjs')).replace(/^import .*\r?\n/gm,'')
+const result=[devotional,application, 'const assets='+JSON.stringify(assets), 'const catalog='+JSON.stringify(catalog),worker].join('\n')
+await mkdir(url('../dist/server/'),{recursive:true})
+await writeFile(url('../dist/server/index.js'),result)

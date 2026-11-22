@@ -87,3 +87,11 @@ The build packages the current web assets, compiles the Android shell, signs the
 Use the FlexiRide **Web application** OAuth client only if you have access to its Google Cloud project. In that client, authorize the exact callback `http://127.0.0.1:4173/api/login/google/callback`. The OAuth consent screen may display the FlexiRide project name. Keep the client secret in a private local configuration and load it as the `GOOGLE_CLIENT_SECRET` environment variable. Set `GOOGLE_CLIENT_ID` from the same client and start the default loopback server. For a different loopback host or port, set `GOOGLE_REDIRECT_URI` to the exact registered callback.
 
 Open `http://127.0.0.1:4173` in a regular desktop browser. The Google button appears in the sign-in dialog when both settings are available and the browser address matches the callback. Google accounts use the devotee role. Existing password accounts retain their original login. The Android WebView and plain-HTTP Wi-Fi address use email and password.
+
+## Connected devotional services
+
+The same request and devotional routes run on desktop or Android. The PC server stores records in SQLite. The hosted Worker uses a separate Cloudflare D1 database, so local accounts and requests do not automatically migrate. New hosted accounts require a 12-character password. Configure hosted `ADMIN_CODE` and `PANDIT_CODE` as private runtime secrets of at least 16 characters before registering staff; local registration codes are independent. See [the comparison and remaining service integrations](FEATURE-COMPARISON.md).
+
+The Android app opens the hosted HTTPS site on a fresh install and offers **Use hosted site**, a local Wi-Fi server, or **Use offline** under **Connection**. An existing installation may remember its earlier Wi-Fi setting.
+
+Operations can publish recordings, readings, Panchang notes, horoscopes and upcoming observances from **Devotional Library**, and review pending posts from **Community**. Dated material is editorial until a verified data source is connected. Chadhava and store requests appear in the staff queue and can receive a recorded outcome or proof link.

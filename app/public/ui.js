@@ -9,9 +9,9 @@ const formatDate = date => new Intl.DateTimeFormat('en-IN',{dateStyle:'medium',t
 const short = id => id.slice(0,8).toUpperCase()
 let user, catalog, googleSignIn
 let noticeTimer
-const nav = [['home','Home'],['poojas','Poojas'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['daan','Daan'],['consult','Consult']]
-const names = {pooja:'Pooja',daan:'Daan',astrology:'Astrology',consultation:'Consultation',support:'Support'}
-const symbols = {poojas:'diya',panchang:'calendar',astrology:'stars',library:'book',daan:'heart',consult:'chat',jaap:'mala',requests:'list'}
+const nav = [['home','Home'],['poojas','Poojas'],['temples','Temples'],['chadhava','Chadhava'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['daan','Daan'],['consult','Consult']]
+const names = {chadhava:'Chadhava',store:'Shop request',pooja:'Pooja',daan:'Daan',astrology:'Astrology',consultation:'Consultation',support:'Support'}
+const symbols = {mandir:'diya',temples:'pin',chadhava:'heart',devotional:'book',community:'chat',store:'list',poojas:'diya',panchang:'calendar',astrology:'stars',library:'book',daan:'heart',consult:'chat',jaap:'mala',requests:'list'}
 const paths = {
  diya:'M3 14h18c-1.5 5-5 7-9 7s-7.5-2-9-7Z M12 14c-5-3 2-5 0-11 5 4 6 9 0 11Z',
  calendar:'M4 6h16v15H4Z M4 10h16 M8 3v5 M16 3v5 M8 14h2 M13 14h3 M8 18h2',
@@ -80,7 +80,7 @@ function submitForm(task, complete) {
 function formBody(fields, label) { return '<form>'+fields+'<p class="form-error" role="alert"></p>'+button(label,'type="submit"')+'</form>' }
 function auth(mode='login', continuation) {
   const creating = mode === 'register'
-  const fields = (creating ? input('name','Name') : '')+input('email','Email',{type:'email'})+input('password','Password',{type:'password',hint:creating?'At least eight characters.':''})+
+  const fields = (creating ? input('name','Name') : '')+input('email','Email',{type:'email'})+input('password','Password',{type:'password',hint:creating?'At least eight characters. Hosted accounts require 12.':''})+
     (creating?select('role','Account type',[['devotee','Devotee'],['pandit','Pandit'],['admin','Operations']])+'<div id="staffCode" hidden>'+input('code','Staff registration code',{required:false})+'</div>':'')
   const googleOption = googleSignIn && !creating
     ? '<a class="secondary google-signin" href="/api/login/google?returnTo='+encodeURIComponent(location.hash.slice(1))+'">Sign in with Google</a>'
@@ -109,7 +109,7 @@ function panditProfiles() {
       '<div><h3>'+pandit.name+'</h3><p class="pandit-alias">'+pandit.knownAs+'</p><p class="eyebrow">'+pandit.topics+'</p><p>'+pandit.intro+'</p></div></article>').join('')+'</div></section>'
 }
 function home() {
-  const quick = [['poojas','Book a Pooja'],['panchang','Panchang'],['astrology','Kundli & Milan'],['daan','Gau Seva & Daan'],['jaap','Jaap Mala'],['library','Ritual Guides'],['consult','Consult an Acharya'],['requests','My Requests']]
+  const quick = [['poojas','Book a Pooja'],['panchang','Panchang'],['astrology','Kundli & Milan'],['daan','Gau Seva & Daan'],['jaap','Jaap Mala'],['library','Ritual Guides'],['consult','Consult an Acharya'],['requests','My Requests'],['mandir','My Mandir'],['temples','Temple Directory'],['chadhava','Chadhava'],['devotional','Devotional Library'],['community','Community'],['store','Store']]
   main.innerHTML = '<div class="welcome"><p>'+icon('pin')+' Ujjain, Madhya Pradesh</p><span>'+new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeZone:'Asia/Kolkata'}).format(new Date())+'</span></div>'+
     '<section class="hero"><div class="hero-copy"><p class="eyebrow">POOJA ON YOUR BEHALF</p><h1>Bring the sacred<br>closer to home.</h1><p>Request a pooja in Ujjain, follow your Sankalp from anywhere, and receive a complimentary ritual video.</p><div class="actions">'+link('Explore poojas','poojas','primary gold')+link('Plan a visit','library/pilgrimage','hero-link')+'</div></div><div class="hero-image" role="img" aria-label="Illustration of a sandstone temple at dawn"></div></section>'+
     '<div class="benefits"><span>'+icon('check')+' Complimentary ritual video</span><span>'+icon('check')+' Free Prasad</span><span>'+icon('check')+' Delivery within India</span></div>'+
@@ -209,6 +209,9 @@ function requestForm(kind, service) {
     '<div class="pair">'+input('date','Preferred date',{type:'date',value:today(),min:today()})+select('language','Priest language',['Hindi','English','Sanskrit'])+'</div>'+
     '<div class="pair">'+input('gotra','Gotra',{required:false})+input('family','Additional family names',{required:false})+input('nakshatra','Nakshatra',{required:false})+input('rashi','Rashi',{required:false})+'</div>'+
     area('sankalp','Sankalp or intention')+'<div id="delivery-options"><label class="tick"><input name="deliver" type="checkbox"> Send free Prasad to an address in India</label><div id="shipping" hidden>'+input('pincode','Indian PIN code',{required:false})+area('address','Delivery address',false)+'</div></div><div id="quote" class="quote"></div>'
+  if (kind==='chadhava') fields += select('temple','Temple',devotion.temples.map(temple=>[temple.id,temple.name]))+
+    input('gotra','Gotra',{required:false})+area('sankalp','Sankalp or intention')
+  if (kind==='store') fields += input('amount','Quantity',{type:'number',min:'1',max:'20',value:'1'})+area('note','Requirements',false)
   if (kind==='daan') fields += input('amount','Pledge amount in INR',{type:'number',min:'1',max:'100000'})+area('note','Note',false)
   if (kind==='consultation') fields += '<div class="pair">'+input('date','Preferred date',{type:'date',value:today(),min:today()})+select('channel','Preferred format',['Chat','Audio','Video'])+'</div>'+area('note','Topic or question',false)
   if (kind==='astrology') {
@@ -247,10 +250,12 @@ function requestForm(kind, service) {
     })
   })
 }
-const detailLabels = {name:'Devotee',mode:'Mode',date:'Requested date',gotra:'Gotra',family:'Family',nakshatra:'Nakshatra',rashi:'Rashi',sankalp:'Sankalp',language:'Priest language',pincode:'PIN code',address:'Address',fee:'Ritual estimate',delivery:'Delivery estimate',total:'Total estimate',amount:'Pledged amount',note:'Note',channel:'Format',city:'City',birthDate:'Birth date',birthTime:'Birth time',secondName:'Second name',secondCity:'Second city',secondDate:'Second birth date',secondTime:'Second birth time',confirmedDate:'Confirmed date',confirmedTime:'Confirmed time (IST)',awb:'Courier AWB',result:'Staff response'}
+const detailLabels = {temple:'Temple',quantity:'Quantity',name:'Devotee',mode:'Mode',date:'Requested date',gotra:'Gotra',family:'Family',nakshatra:'Nakshatra',rashi:'Rashi',sankalp:'Sankalp',language:'Priest language',pincode:'PIN code',address:'Address',fee:'Ritual estimate',delivery:'Delivery estimate',total:'Total estimate',amount:'Pledged amount',note:'Note',channel:'Format',city:'City',birthDate:'Birth date',birthTime:'Birth time',secondName:'Second name',secondCity:'Second city',secondDate:'Second birth date',secondTime:'Second birth time',confirmedDate:'Confirmed date',confirmedTime:'Confirmed time (IST)',awb:'Courier AWB',result:'Staff response'}
 const isClosed = row => ['Cancelled','Delivered','Completed','Resolved'].includes(row.status) || row.status==='Video ready'&&!row.details.deliver
 const actions = {
   pooja:{Requested:'Assign',Assigned:'Confirm Muhurat','Muhurat confirmed':'Start ritual','Ritual in progress':'Record ritual completion','Video ready':'Mark Prasad packed','Prasad packed':'Record dispatch',Dispatched:'Mark delivered'},
+  chadhava:{Requested:'Assign',Assigned:'Record offering and proof'},
+  store:{Requested:'Assign',Assigned:'Record availability or quote'},
   daan:{Requested:'Assign',Assigned:'Record fulfillment'},
   consultation:{Requested:'Assign',Assigned:'Schedule session',Scheduled:'Record session outcome'},
   astrology:{Requested:'Assign',Assigned:'Share reviewed result'},
@@ -266,7 +271,7 @@ function requestCard(row) {
   const formatValue = (key,value) => ['fee','delivery','total','amount'].includes(key)?money(value):key==='mode'?(value==='proxy'?'Pooja on your behalf':'In-person visit'):value
   return '<article class="card request"><div class="section-top"><div><p class="eyebrow">'+names[row.kind]+' · '+short(row.id)+'</p><h3>'+escape(row.title)+'</h3></div><span class="pill">'+row.status+'</span></div>'+
     '<p>Submitted '+formatDate(row.created)+'</p><details><summary>Request details and timeline</summary><dl>'+entries.map(([key,label])=>'<dt>'+label+'</dt><dd>'+escape(formatValue(key,details[key]))+'</dd>').join('')+'</dl><ol class="steps">'+row.history.map(event=>'<li>'+escape(event.status)+' <small>'+formatDate(event.date)+'</small></li>').join('')+'</ol></details>'+
-    '<div class="actions">'+[['video','Watch ritual video'],['tracking','Track Prasad'],['proof','Open supporting material']].filter(([key])=>details[key]).map(([key,label])=>'<a class="secondary" href="'+escape(details[key])+'" target="_blank" rel="noopener noreferrer">'+label+'</a>').join('')+
+    '<div class="actions">'+[['video','Watch ritual video'],['tracking','Track Prasad'],['proof','Open supporting material'],['meeting','Join consultation']].filter(([key])=>details[key]).map(([key,label])=>'<a class="secondary" href="'+escape(details[key])+'" target="_blank" rel="noopener noreferrer">'+label+'</a>').join('')+
     (actionable?button(action,'data-transition="'+row.id+'"'):'')+(cancellable?button('Cancel request','data-cancel="'+row.id+'"','secondary'):'')+'</div></article>'
 }
 let queue = []
@@ -296,7 +301,7 @@ function changeRequest(id,cancel) {
     if (!staff.length) return inform('Create a Pandit account before assigning requests.')
     fields=select('assignee','Assign to Pandit',staff.map(item=>[item.id,item.name]))
   } else if (row.status==='Assigned'&&['pooja','consultation'].includes(row.kind)) {
-    fields='<div class="pair">'+input('confirmedDate','Confirmed date',{type:'date',value:row.details.date>=today()?row.details.date:today(),min:today()})+input('confirmedTime','Confirmed time (IST)',{type:'time'})+'</div>'
+    fields='<div class="pair">'+input('confirmedDate','Confirmed date',{type:'date',value:row.details.date>=today()?row.details.date:today(),min:today()})+input('confirmedTime','Confirmed time (IST)',{type:'time'})+'</div>'+(row.kind==='consultation'?input('meeting','HTTPS meeting link',{type:'url',required:false}):'')
   } else if (row.status==='Ritual in progress'&&row.details.mode==='proxy') {
     fields=input('video','Private HTTPS link to complimentary video',{type:'url'})
   } else if (row.status==='Prasad packed') {
@@ -322,6 +327,94 @@ function account() {
     $('#signout').onclick=async()=>{try{await api('logout','POST');user=null;dialog.close();render()}catch(e){inform(e.message)}}
   })
 }
+let devotion
+const devotionTitles = {darshan:'Darshan',audio:'Devotional audio',reading:'Readings',panchang:'Panchang notes',horoscope:'Horoscope',event:'Upcoming observances'}
+const devotionPages = {
+  mandir:['My Mandir','Choose a deity and keep a private record of your virtual offerings.'],
+  temples:['Explore temples','Visit the Ujjain and Madhya Pradesh temple directory.'],
+  chadhava:['Chadhava','Request an offering in your name. Operations confirms availability and records fulfillment.'],
+  devotional:['Devotional library','Read guides and explore darshan, devotional audio and dated updates published by operations.'],
+  community:['Community','Share a devotional reflection. Operations reviews each post before it is public.'],
+  store:['Devotional store','Request availability and a quote for devotional essentials. Payment is handled outside this service.']
+}
+function contentCard(item) {
+  const temple=devotion.temples.find(entry=>entry.id===item.temple)
+  return '<article class="card info"><h3>'+escape(item.title)+'</h3>'+
+    (item.day||temple?'<p class="eyebrow">'+escape([item.day,temple?.name].filter(Boolean).join(' · '))+'</p>':'')+
+    '<p class="preserve-text">'+escape(item.text)+'</p>'+
+    (item.url?'<a class="secondary" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">Open '+escape(devotionTitles[item.category].toLowerCase())+'</a>':'')+'</article>'
+}
+function chooseMandir(model) {
+  const choices = devotion.deities.includes(model.deity)
+    ? [model.deity,...devotion.deities.filter(item=>item!==model.deity)] : devotion.deities
+  open('Choose a deity',formBody(select('deity','Deity',choices),'Save mandir'),()=>{
+    submitForm(values=>api('mandir','PUT',values),()=>{dialog.close();render()})
+  })
+}
+function mandirPanel(model) {
+  return '<section class="card info"><h2>'+escape(model.deity||'Set up your mandir')+'</h2>'+
+    button(model.deity?'Change deity':'Choose a deity','id="chooseMandir"','secondary')+
+    (model.deity?'<div class="actions">'+devotion.offerings.map((item,i)=>button('Offer '+item,'data-offering="'+i+'"')).join('')+'</div>':'')+'</section>'+
+    (model.activity.length?'<section class="section"><h2>Offering history</h2><ul>'+model.activity.map(item=>'<li>'+escape(item.day)+' · '+escape(item.offering)+' × '+escape(item.total)+'</li>').join('')+'</ul></section>':'')
+}
+function publishContent() {
+  open('Publish devotional content',formBody(select('category','Category',devotion.sections.map(item=>[item,devotionTitles[item]]))+
+    input('title','Title')+area('text','Description or entry')+input('url','HTTPS media or source link',{type:'url',required:false})+
+    input('day','Date',{type:'date',required:false})+select('temple','Temple',[['','General'],...devotion.temples.map(item=>[item.id,item.name])]).replace(' required',''),
+    'Publish'),()=>submitForm(values=>api('devotional/content','POST',values),()=>{dialog.close();inform('Entry published.');render()}))
+}
+function submitCommunity() {
+  if (!user) return auth('login',submitCommunity)
+  open('Write a reflection',formBody(input('title','Title')+area('text','Reflection'),'Submit for review'),
+    ()=>submitForm(values=>api('community','POST',values),()=>{dialog.close();inform('Submitted for review.');render()}))
+}
+async function moderate(id,state,target) {
+  target.disabled=true
+  try { await api('community/'+id,'PATCH',{state});render() }
+  catch(error){ inform(error.message);target.disabled=false }
+}
+async function devotionalPage(page,version) {
+  const [title,description]=devotionPages[page]
+  main.innerHTML=heading('AVANTIKA',title,description)+'<p id="devotion-content">Loading…</p>'
+  try {
+    const result=await api('devotional')
+    const panel=page==='community'?await api('community'):page==='mandir'&&user?await api('mandir'):null
+    if (version!==renderNumber) return
+    devotion=result
+    const target=$('#devotion-content')
+    const grid=html=>'<div class="grid">'+html+'</div>'
+    if (page==='mandir') {
+      target.outerHTML=panel?mandirPanel(panel):button('Sign in to set up your mandir','data-auth')
+      if (!panel) return
+      $('#chooseMandir').onclick=()=>chooseMandir(panel)
+      for (const control of main.querySelectorAll('[data-offering]')) control.onclick=async()=>{
+        control.disabled=true
+        try { await api('mandir','POST',{offering:devotion.offerings[Number(control.dataset.offering)]});inform('Offering saved.');render() }
+        catch(error){inform(error.message);control.disabled=false}
+      }
+    } else if (page==='temples') {
+      target.outerHTML=grid(devotion.temples.map(item=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p class="eyebrow">'+escape(item.city+' · '+item.deity)+'</p><p>'+escape(item.description)+'</p>'+
+        devotion.content.filter(entry=>entry.category==='darshan'&&entry.temple===item.id).slice(0,1).map(contentCard).join('')+'</article>').join(''))
+    } else if (['chadhava','store'].includes(page)) {
+      target.outerHTML=grid(devotion[page].map(item=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+
+        button(page==='chadhava'?'Request offering':'Request quote','data-'+page+'="'+escape(item.id)+'"','secondary')+'</article>').join(''))
+    } else if (page==='community') {
+      target.outerHTML=button('Share a reflection','data-community-post')+'<div class="grid section">'+(panel.posts.map(post=>
+        '<article class="card info"><h3>'+escape(post.title)+'</h3><p class="eyebrow">'+escape(post.author+' · '+post.state)+'</p><p class="preserve-text">'+escape(post.text)+'</p>'+
+        (user?.role==='admin'?'<div class="actions">'+(post.state!=='Published'?button('Publish','data-moderate="'+post.id+'" data-state="Published"'):'')+
+        (post.state!=='Hidden'?button('Hide','data-moderate="'+post.id+'" data-state="Hidden"','secondary'):'')+'</div>':'')+'</article>').join('')||'<p>No reflections have been published yet.</p>')+'</div>'
+    } else {
+      target.outerHTML=(user?.role==='admin'?button('Publish content','data-publish-content'):'')+
+        devotion.sections.map(section=>{
+          const entries=devotion.content.filter(item=>item.category===section)
+          return '<section class="section"><h2>'+devotionTitles[section]+'</h2>'+
+            (entries.length?grid(entries.map(contentCard).join('')):'<p>No entries published yet.</p>')+'</section>'
+        }).join('')
+    }
+  } catch(error) {
+    if (version===renderNumber) $('#devotion-content').textContent=error.message
+  }
+}
 function render() {
   const version=++renderNumber
   const [page,subpage]=(location.hash.slice(1)||'home').split('/')
@@ -336,6 +429,7 @@ function render() {
   else if (page==='jaap') jaap()
   else if (page==='requests') requests(version)
   else if (page==='support') support()
+  else if (['mandir','temples','chadhava','devotional','community','store'].includes(page)) devotionalPage(page,version)
   else main.innerHTML=heading('AVANTIKA','Page unavailable','Return home to find available services.')+link('Home','home')
 }
 main.addEventListener('click',event=>{
@@ -349,6 +443,10 @@ main.addEventListener('click',event=>{
   else if ('support' in data) requestForm('support')
   else if ('auth' in data) auth()
   else if ('guide' in data) readGuide(Number(data.guide))
+  else if (data.chadhava || data.store) requestForm(data.chadhava?'chadhava':'store',data.chadhava||data.store)
+  else if ('publishContent' in data) publishContent()
+  else if ('communityPost' in data) submitCommunity()
+  else if (data.moderate) moderate(data.moderate,data.state,target)
   else if (data.transition||data.cancel) changeRequest(data.transition||data.cancel,Boolean(data.cancel))
 })
 $('#account').onclick = account

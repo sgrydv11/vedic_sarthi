@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 
 public final class MainActivity extends Activity {
     private static final String OFFLINE = "https://appassets.androidplatform.net";
+    private static final String HOSTED = "https://avantika-ujjain.trh072026.chatgpt.site";
     private static final Pattern IPV4 = Pattern.compile("(?:[0-9]{1,3}\\.){3}[0-9]{1,3}");
     private static final int WINE = Color.rgb(87, 30, 54);
     private static final Map<String, String> ASSETS;
@@ -57,7 +58,7 @@ public final class MainActivity extends Activity {
         super.onCreate(state);
         getWindow().setStatusBarColor(WINE);
         getWindow().setNavigationBarColor(WINE);
-        server = getPreferences(MODE_PRIVATE).getString("server", "");
+        server = getPreferences(MODE_PRIVATE).getString("server", HOSTED);
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -98,7 +99,7 @@ public final class MainActivity extends Activity {
 
     private void load(String destination) {
         origin = destination;
-        status.setText(OFFLINE.equals(origin) ? "Offline library" : "Local PC server");
+        status.setText(OFFLINE.equals(origin) ? "Offline library" : HOSTED.equals(origin) ? "Avantika online" : "Local PC server");
         web.loadUrl(origin + "/");
     }
 
@@ -106,22 +107,26 @@ public final class MainActivity extends Activity {
         EditText entry = new EditText(this);
         entry.setSingleLine(true);
         entry.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
-        entry.setHint("http://192.168.1.10:4173");
+        entry.setHint(HOSTED);
         entry.setText(server);
 
         LinearLayout contents = new LinearLayout(this);
         contents.setOrientation(LinearLayout.VERTICAL);
         contents.setPadding(dp(22), dp(8), dp(22), 0);
         TextView message = new TextView(this);
-        message.setText("Enter the Avantika server address shown on your PC. Keep both devices on the same trusted Wi-Fi. Use test information for this local build.");
+        message.setText("Use the hosted Avantika address or enter your PC server address on trusted Wi-Fi.");
         contents.addView(message);
         contents.addView(entry);
 
         AlertDialog prompt = new AlertDialog.Builder(this)
-            .setTitle("Connect to your PC")
+            .setTitle("Connect to Avantika")
             .setView(contents)
             .setPositiveButton("Connect", null)
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Use hosted site", (dialog, which) -> {
+                server = HOSTED;
+                getPreferences(MODE_PRIVATE).edit().putString("server", server).apply();
+                load(server);
+            })
             .setNeutralButton("Use offline", (dialog, which) -> {
                 server = "";
                 getPreferences(MODE_PRIVATE).edit().remove("server").apply();
@@ -130,7 +135,7 @@ public final class MainActivity extends Activity {
         prompt.setOnShowListener(dialog -> prompt.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
             String address = validateAddress(entry.getText().toString().trim());
             if (address == null) {
-                entry.setError("Enter a local IPv4 address and port, e.g. http://192.168.1.10:4173");
+                entry.setError("Use the hosted address or a local IPv4 address and port.");
                 return;
             }
             server = address;
@@ -143,6 +148,7 @@ public final class MainActivity extends Activity {
 
     static String validateAddress(String value) {
         try {
+            if (value.equals(HOSTED) || value.equals(HOSTED + "/")) return HOSTED;
             URI uri = new URI(value);
             String host = uri.getHost();
             int port = uri.getPort();
@@ -194,7 +200,7 @@ public final class MainActivity extends Activity {
             String path = url.getPath();
             if ("/api/session".equals(path)) return json(200, "OK", "{\"user\":null}");
             if (path != null && path.startsWith("/api/")) {
-                return json(503, "Offline", "{\"error\":\"Use Connection to connect to your PC before signing in or booking.\"}");
+                return json(503, "Offline", "{\"error\":\"Use Connection to open Avantika online before signing in or booking.\"}");
             }
             if (path == null || !ASSETS.containsKey(path)) return json(404, "Not Found", "{}");
             String file = "/".equals(path) ? "index.html" : path.substring(1);
@@ -211,7 +217,7 @@ public final class MainActivity extends Activity {
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             if (request.isForMainFrame() && !OFFLINE.equals(origin) && request.getUrl().toString().startsWith(origin + "/")) {
-                Toast.makeText(MainActivity.this, "PC server unavailable. Opening the offline library.", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Server unavailable. Opening the offline library.", Toast.LENGTH_LONG).show();
                 load(OFFLINE);
             }
         }

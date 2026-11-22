@@ -135,3 +135,5 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--wine);flex:none}
 .google-signin{display:flex;margin:0 0 14px}
 @media(max-width:760px){.pandit-grid{grid-template-columns:1fr}}
 @media(max-width:420px){.pandit-card{grid-template-columns:76px minmax(0,1fr);gap:12px;padding:14px}.pandit-portrait{width:76px}}
+.preserve-text{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(min-width:821px){header nav{flex-wrap:wrap;justify-content:center;gap:2px 13px}}

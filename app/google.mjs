@@ -74,7 +74,7 @@ export function googleAuth(db, createAccount) {
           throw error
         }
       }
-      setSession(res,user)
+      await setSession(res,user)
       redirect(res,'/#'+route)
     } catch {
       failed()
