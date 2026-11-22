@@ -14,7 +14,7 @@ const data = process.env.AVANTIKA_DATA || new URL('./data/', import.meta.url)
 mkdirSync(data, { recursive: true })
 const db = new DatabaseSync(resolve(data instanceof URL ? fileURLToPath(data) : data, 'avantika.sqlite'))
 db.exec('PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=3000;')
-db.exec(readFileSync(new URL('./schema.sql',import.meta.url),'utf8'))
+for (const schema of ['schema.sql','retail.sql','events.sql']) db.exec(readFileSync(new URL('./'+schema,import.meta.url),'utf8'))
 function verifyLegacy(password,stored) {
   const [salt,digest]=stored.split(':')
   return Boolean(digest?.length===128 && timingSafeEqual(scryptSync(password,salt,64),Buffer.from(digest,'hex')))
@@ -41,7 +41,7 @@ const application = await createApplication({db,catalog,staffCode,google,verifyL
 const server = createServer((req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff')
   res.setHeader('Referrer-Policy','no-referrer')
-  res.setHeader('Content-Security-Policy',"default-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")
+  res.setHeader('Content-Security-Policy',"default-src 'self'; media-src 'self' https:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")
   if (!hosts.has(req.headers.host?.split(':')[0])) return res.writeHead(403).end('Use the local app address.')
   const path=new URL(req.url,'http://localhost').pathname
   const method=req.method

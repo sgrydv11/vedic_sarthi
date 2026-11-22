@@ -1,1 +1,1 @@
-{"version":"7","dialect":"sqlite","entries":[{"idx":0,"version":"6","when":1795340000000,"tag":"0000_avantika","breakpoints":true}]}
+{"version": "7", "dialect": "sqlite", "entries": [{"idx": 0, "version": "6", "when": 1795340000000, "tag": "0000_avantika", "breakpoints": true}, {"idx": 1, "version": "6", "when": 1795340100000, "tag": "0001_retail", "breakpoints": true}, {"idx": 2, "version": "6", "when": 1795340200000, "tag": "0002_events", "breakpoints": true}]}

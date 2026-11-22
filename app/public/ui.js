@@ -9,7 +9,7 @@ const formatDate = date => new Intl.DateTimeFormat('en-IN',{dateStyle:'medium',t
 const short = id => id.slice(0,8).toUpperCase()
 let user, catalog, googleSignIn
 let noticeTimer
-const nav = [['home','Home'],['poojas','Poojas'],['temples','Temples'],['chadhava','Chadhava'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['daan','Daan'],['consult','Consult']]
+const nav = [['home','Home'],['poojas','Poojas'],['temples','Temples'],['chadhava','Chadhava'],['events','Events'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['daan','Daan'],['consult','Consult']]
 const names = {chadhava:'Chadhava',store:'Shop request',pooja:'Pooja',daan:'Daan',astrology:'Astrology',consultation:'Consultation',support:'Support'}
 const symbols = {mandir:'diya',temples:'pin',chadhava:'heart',devotional:'book',community:'chat',store:'list',poojas:'diya',panchang:'calendar',astrology:'stars',library:'book',daan:'heart',consult:'chat',jaap:'mala',requests:'list'}
 const paths = {
@@ -129,10 +129,33 @@ function poojas() {
   $('select[name=category]').onchange = filter
   filter()
 }
-function panchang() {
+async function updateSolar(version,city='',date='') {
+  const target=$('#solar')
+  try {
+    const series=await api('solar?'+new URLSearchParams({city,date}))
+    if (version!==renderNumber||target!==$('#solar')) return
+    target.innerHTML='<h2>Daylight timings</h2><form id="solar-form" class="pair">'+
+      select('city','City',series.cities)+input('date','Date',{type:'date',value:series.day,min:'1900-01-01',max:'2100-12-31'})+
+      button('Show timings','type="submit"','secondary')+'</form>'+
+      '<div class="grid section">'+[['Sunrise',series.sunrise],['Solar noon',series.solarNoon],['Sunset',series.sunset]].map(([label,value])=>
+        '<article class="card info"><h3>'+label+'</h3><strong>'+value+' IST</strong></article>').join('')+
+      '</div><p>Estimated timings for the city center using NOAA solar equations.</p>'
+    const form=$('#solar-form')
+    form.elements.city.value=series.city
+    form.onsubmit=event=>{event.preventDefault();updateSolar(version,form.elements.city.value,form.elements.date.value)}
+  } catch(error) {
+    if (version!==renderNumber||target!==$('#solar')) return
+    let status=$('.solar-error',target)
+    if (!status) {status=document.createElement('p');status.className='solar-error';target.append(status)}
+    status.textContent=error.message
+  }
+}
+function panchang(version) {
   main.innerHTML = heading('VEDIC CALENDAR','Panchang & festivals','Explore the Hindu months and request date- and city-specific Panchang details.')+
-    '<div class="callout"><div><h2>Daily Panchang for Ujjain or your city</h2><p>Submit a date and city for manual review. Live Panchang calculations are unavailable in this preview.</p></div>'+button('Request Panchang','data-astrology="Daily Panchang"')+'</div>'+
+    '<section class="card info" id="solar"><p>Loading daylight timings…</p></section>'+
+    '<div class="callout section"><div><h2>Daily Panchang for Ujjain or your city</h2><p>Submit a date and city for manual review. Live Panchang calculations are unavailable in this preview.</p></div>'+button('Request Panchang','data-astrology="Daily Panchang"')+'</div>'+
     '<h2 class="section">Hindu festival calendar</h2><p>Gregorian month ranges are approximate. Observance dates vary by year and location.</p><div class="grid">'+catalog.calendar.map(row=>'<article class="card info"><h3>'+escape(row.name)+'</h3><p>'+escape(row.festival)+'</p><p>'+escape(row.practice)+'</p></article>').join('')+'</div>'
+  updateSolar(version)
 }
 function servicePage(kind) {
   const isDaan = kind==='daan'
@@ -199,17 +222,17 @@ function requestId() {
   const hex = Array.from(bytes, byte => byte.toString(16).padStart(2,'0')).join('')
   return [hex.slice(0,8),hex.slice(8,12),hex.slice(12,16),hex.slice(16,20),hex.slice(20)].join('-')
 }
-function requestForm(kind, service) {
-  if (!user) return auth('login',()=>requestForm(kind,service))
+function requestForm(kind, service, event) {
+  if (!user) return auth('login',()=>requestForm(kind,service,event))
   if (user.role!=='devotee') return inform('Sign in with a devotee account to submit a request.')
   const id = requestId()
   const ritual = kind==='pooja' ? catalog.rituals.find(item=>item.id===service) : null
-  let fields = input('name','Full name',{value:user.name})
+  let fields = (event?'<p>'+escape(event.title+' · '+event.day)+'</p>':'')+input('name','Full name',{value:user.name})
   if (ritual) fields += select('mode','Booking mode',[['proxy','Pooja on your behalf'],['visit','In-person visit']])+
-    '<div class="pair">'+input('date','Preferred date',{type:'date',value:today(),min:today()})+select('language','Priest language',['Hindi','English','Sanskrit'])+'</div>'+
+    '<div class="pair">'+input('date','Preferred date',{type:'date',value:event?.day||today(),min:today()})+select('language','Priest language',['Hindi','English','Sanskrit'])+'</div>'+
     '<div class="pair">'+input('gotra','Gotra',{required:false})+input('family','Additional family names',{required:false})+input('nakshatra','Nakshatra',{required:false})+input('rashi','Rashi',{required:false})+'</div>'+
     area('sankalp','Sankalp or intention')+'<div id="delivery-options"><label class="tick"><input name="deliver" type="checkbox"> Send free Prasad to an address in India</label><div id="shipping" hidden>'+input('pincode','Indian PIN code',{required:false})+area('address','Delivery address',false)+'</div></div><div id="quote" class="quote"></div>'
-  if (kind==='chadhava') fields += select('temple','Temple',devotion.temples.map(temple=>[temple.id,temple.name]))+
+  if (kind==='chadhava') fields += (event?'':select('temple','Temple',devotion.temples.map(temple=>[temple.id,temple.name])))+
     input('gotra','Gotra',{required:false})+area('sankalp','Sankalp or intention')
   if (kind==='store') fields += input('amount','Quantity',{type:'number',min:'1',max:'20',value:'1'})+area('note','Requirements',false)
   if (kind==='daan') fields += input('amount','Pledge amount in INR',{type:'number',min:'1',max:'100000'})+area('note','Note',false)
@@ -224,6 +247,7 @@ function requestForm(kind, service) {
   }
   if (kind==='support') fields+=input('subject','Subject')+area('note','How can we help?')
   open(ritual?.name || service || 'Contact support',formBody(fields,'Submit request'),()=>{
+    if (event&&ritual) $('input[name=date]',modal).readOnly=true
     if (ritual) {
       const mode = $('select[name=mode]',modal)
       const delivery = $('input[name=deliver]',modal)
@@ -243,14 +267,14 @@ function requestForm(kind, service) {
       mode.onchange = delivery.onchange = updateQuote
       updateQuote()
     }
-    submitForm(values=>api('requests','POST',{id,kind,service,...values,deliver:values.deliver==='on',amount:Number(values.amount)}),()=>{
+    submitForm(values=>api('requests','POST',{id,kind,service,...values,campaign:event?.id,deliver:values.deliver==='on',amount:Number(values.amount)}),()=>{
       dialog.close()
       inform('Request submitted. Reference '+short(id)+'.')
       location.hash='requests'
     })
   })
 }
-const detailLabels = {temple:'Temple',quantity:'Quantity',name:'Devotee',mode:'Mode',date:'Requested date',gotra:'Gotra',family:'Family',nakshatra:'Nakshatra',rashi:'Rashi',sankalp:'Sankalp',language:'Priest language',pincode:'PIN code',address:'Address',fee:'Ritual estimate',delivery:'Delivery estimate',total:'Total estimate',amount:'Pledged amount',note:'Note',channel:'Format',city:'City',birthDate:'Birth date',birthTime:'Birth time',secondName:'Second name',secondCity:'Second city',secondDate:'Second birth date',secondTime:'Second birth time',confirmedDate:'Confirmed date',confirmedTime:'Confirmed time (IST)',awb:'Courier AWB',result:'Staff response'}
+const detailLabels = {event:'Temple event',temple:'Temple',quantity:'Quantity',name:'Devotee',mode:'Mode',date:'Requested date',gotra:'Gotra',family:'Family',nakshatra:'Nakshatra',rashi:'Rashi',sankalp:'Sankalp',language:'Priest language',pincode:'PIN code',address:'Address',fee:'Ritual estimate',delivery:'Delivery estimate',total:'Total estimate',amount:'Pledged amount',note:'Note',channel:'Format',city:'City',birthDate:'Birth date',birthTime:'Birth time',secondName:'Second name',secondCity:'Second city',secondDate:'Second birth date',secondTime:'Second birth time',confirmedDate:'Confirmed date',confirmedTime:'Confirmed time (IST)',awb:'Courier AWB',result:'Staff response'}
 const isClosed = row => ['Cancelled','Delivered','Completed','Resolved'].includes(row.status) || row.status==='Video ready'&&!row.details.deliver
 const actions = {
   pooja:{Requested:'Assign',Assigned:'Confirm Muhurat','Muhurat confirmed':'Start ritual','Ritual in progress':'Record ritual completion','Video ready':'Mark Prasad packed','Prasad packed':'Record dispatch',Dispatched:'Mark delivered'},
@@ -338,10 +362,15 @@ const devotionPages = {
   store:['Devotional store','Request availability and a quote for devotional essentials. Payment is handled outside this service.']
 }
 function contentCard(item) {
+  const mediaPath=item.url?new URL(item.url).pathname:''
+  const audio=item.category==='audio'&&/\.(mp3|m4a|ogg|wav)$/i.test(mediaPath)
+  const video=item.category==='darshan'&&/\.(mp4|webm)$/i.test(mediaPath)
+  const player=audio?'audio':video?'video':''
   const temple=devotion.temples.find(entry=>entry.id===item.temple)
   return '<article class="card info"><h3>'+escape(item.title)+'</h3>'+
     (item.day||temple?'<p class="eyebrow">'+escape([item.day,temple?.name].filter(Boolean).join(' · '))+'</p>':'')+
     '<p class="preserve-text">'+escape(item.text)+'</p>'+
+    (player?'<'+player+' class="devotional-player" controls preload="none" src="'+escape(item.url)+'"></'+player+'>':'')+
     (item.url?'<a class="secondary" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">Open '+escape(devotionTitles[item.category].toLowerCase())+'</a>':'')+'</article>'
 }
 function chooseMandir(model) {
@@ -373,7 +402,7 @@ async function moderate(id,state,target) {
   try { await api('community/'+id,'PATCH',{state});render() }
   catch(error){ inform(error.message);target.disabled=false }
 }
-async function devotionalPage(page,version) {
+async function devotionalPage(page,version,subpage) {
   const [title,description]=devotionPages[page]
   main.innerHTML=heading('AVANTIKA',title,description)+'<p id="devotion-content">Loading…</p>'
   try {
@@ -393,8 +422,24 @@ async function devotionalPage(page,version) {
         catch(error){inform(error.message);control.disabled=false}
       }
     } else if (page==='temples') {
-      target.outerHTML=grid(devotion.temples.map(item=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p class="eyebrow">'+escape(item.city+' · '+item.deity)+'</p><p>'+escape(item.description)+'</p>'+
-        devotion.content.filter(entry=>entry.category==='darshan'&&entry.temple===item.id).slice(0,1).map(contentCard).join('')+'</article>').join(''))
+      if (subpage) {
+        const temple=devotion.temples.find(item=>item.id===subpage)
+        const media=temple?devotion.content.filter(item=>item.temple===temple.id):[]
+        main.innerHTML=temple?heading(escape(temple.city+' · '+temple.deity),escape(temple.name),escape(temple.description))+
+          '<div class="actions">'+link('All temples','temples','secondary')+link('Temple events','events','secondary')+'</div>'+
+          '<section class="section"><h2>Darshan and readings</h2>'+(media.length?grid(media.map(contentCard).join('')):'<p>Temple media will appear here when operations publishes it.</p>')+'</section>':
+          heading('TEMPLE DIRECTORY','Temple unavailable','Choose a temple from the directory.')+link('All temples','temples')
+      } else {
+        target.outerHTML='<div class="filters"><label class="search">Search temples<input id="temple-search" placeholder="Name, city or deity"></label></div><div class="grid" id="temple-grid"></div>'
+        const filter=()=>{
+          const query=$('#temple-search').value.trim().toLowerCase()
+          $('#temple-grid').innerHTML=devotion.temples.filter(item=>[item.name,item.city,item.deity].some(value=>value.toLowerCase().includes(query))).map(item=>
+            '<article class="card info"><h3>'+escape(item.name)+'</h3><p class="eyebrow">'+escape(item.city+' · '+item.deity)+'</p><p>'+escape(item.description)+'</p>'+
+            link('View temple','temples/'+item.id,'secondary')+'</article>').join('')||'<p>No temples match.</p>'
+        }
+        $('#temple-search').oninput=filter
+        filter()
+      }
     } else if (['chadhava','store'].includes(page)) {
       target.outerHTML=grid(devotion[page].map(item=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+
         button(page==='chadhava'?'Request offering':'Request quote','data-'+page+'="'+escape(item.id)+'"','secondary')+'</article>').join(''))
@@ -415,6 +460,140 @@ async function devotionalPage(page,version) {
     if (version===renderNumber) $('#devotion-content').textContent=error.message
   }
 }
+function productForm(product={}) {
+  open(product.id?'Edit product':'Add product',formBody(
+    input('id','Product ID',{value:product.id||'',hint:'Lowercase letters, numbers and hyphens.'})+
+    input('name','Name',{value:product.name||''})+input('description','Description',{value:product.description||''})+
+    input('price','Price in INR',{type:'number',min:'1',max:'100000',value:product.price||''})+
+    input('stock','Quantity in stock',{type:'number',min:'0',max:'100000',value:product.stock??''})+
+    '<label class="tick"><input type="checkbox" name="active" '+(product.active?'checked':'')+'> Publish listing</label>',
+    'Save product'),()=> {
+      if (product.id) $('input[name=id]',modal).readOnly=true
+      submitForm(values=>api('shop/products','PUT',{...values,price:Number(values.price),stock:Number(values.stock),active:values.active==='on'}),
+        ()=>{dialog.close();render()})
+    })
+}
+function quantityForm(product) {
+  open(product.name,formBody(input('quantity','Quantity',{type:'number',min:'0',max:String(Math.min(20,product.stock)),value:product.quantity??1,hint:'Use 0 to remove this product.'}),'Save to cart'),()=>{
+    submitForm(values=>api('shop/cart','PUT',{product:product.id,quantity:Number(values.quantity)}),()=>{
+      dialog.close();inform('Cart updated.');render()
+    })
+  })
+}
+function checkout(total) {
+  const id=requestId()
+  open('Submit order',formBody(input('name','Recipient name',{value:user.name})+
+    area('address','Indian delivery address')+input('pin','PIN code')+
+    '<div class="quote"><strong>Items '+money(total)+'</strong><p>Operations confirms delivery and any charges. Payment is arranged separately.</p></div>','Submit order'),()=>{
+      submitForm(values=>api('shop/orders','POST',{id,total,...values}),()=>{
+        dialog.close();inform('Order submitted.');location.hash='orders'
+      })
+    })
+}
+function orderAction(order,action) {
+  const dispatch=order.status==='Confirmed'&&action==='advance'
+  open(action==='cancel'?'Cancel order':'Update order',
+    formBody(dispatch?input('tracking','HTTPS courier tracking link',{type:'url'}):'<p>Confirm this order update.</p>','Confirm'),
+    ()=>submitForm(values=>api('shop/orders/'+order.id,'PATCH',{expected:order.status,action,...values}),()=>{dialog.close();render()}))
+}
+async function shop(page,version) {
+  const labels={store:['Devotional store','Browse available products or ask about devotional essentials.'],
+    cart:['Cart','Review quantities and submit an Indian delivery address.'],orders:['Store orders','Follow confirmation, dispatch and delivery.']}
+  main.innerHTML=heading('AVANTIKA STORE',...labels[page])+'<p id="shop-panel">Loading…</p>'
+  try {
+    const path=page==='store'?'products':page
+    if (!user&&page!=='store') {
+      $('#shop-panel').outerHTML=button('Sign in','data-auth')
+      return
+    }
+    const result=await api('shop/'+path)
+    if (page==='store') devotion=await api('devotional')
+    if (version!==renderNumber) return
+    const panel=$('#shop-panel')
+    if (page==='store') {
+      const amount=item=>item.stock>0?money(item.price)+' · '+item.stock+' in stock':money(item.price)+' · Out of stock'
+      panel.outerHTML='<div class="actions">'+
+        (user?.role==='admin'?button('Add product','id="add-product"')+link('Orders','orders','secondary'):
+          link('View cart','cart','secondary')+link('My orders','orders','secondary'))+'</div>'+
+        '<div class="grid section">'+result.products.map((item,index)=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p><p>'+
+          escape(amount(item)+(item.active?'':' · Unpublished'))+'</p>'+
+          (user?.role==='admin'?button('Edit product','data-product="'+index+'"','secondary'):
+            item.stock>0?button('Add to cart','data-product="'+index+'"','secondary'):'')+'</article>').join('')+'</div>'+
+        '<section class="section"><h2>Request a quote</h2><div class="grid">'+devotion.store.map(item=>
+          '<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+
+          button('Request quote','data-store="'+escape(item.id)+'"','secondary')+'</article>').join('')+'</div></section>'
+      if (user?.role==='admin') $('#add-product').onclick=()=>productForm()
+      for (const control of main.querySelectorAll('[data-product]')) control.onclick=()=>{
+        const product=result.products[Number(control.dataset.product)]
+        if (user?.role==='admin') productForm(product)
+        else if (user) quantityForm(product)
+        else auth('login',()=>quantityForm(product))
+      }
+    } else if (page==='cart') {
+      const total=result.items.reduce((sum,row)=>sum+row.price*row.quantity,0)
+      const ready=result.items.length>0&&result.items.every(row=>row.active&&row.stock>=row.quantity)
+      panel.outerHTML='<div class="grid">'+result.items.map((item,i)=>
+        '<article class="info card"><h3>'+escape(item.name)+'</h3><p>'+item.quantity+' × '+money(item.price)+'</p>'+
+        (!item.active||item.stock<item.quantity?'<p>Requested quantity unavailable.</p>':'')+
+        button('Edit quantity','data-cart-item="'+i+'"','secondary')+'</article>').join('')+'</div>'+
+        (!result.items.length?'<p>Your cart is empty.</p>':'<p>Items total '+money(total)+'</p>')+
+        (ready?button('Checkout','id="checkout"'):link('Browse store','store','secondary'))
+      for (const control of main.querySelectorAll('[data-cart-item]')) control.onclick=()=>quantityForm(result.items[Number(control.dataset.cartItem)])
+      if (ready) $('#checkout').onclick=()=>checkout(total)
+    } else {
+      panel.outerHTML='<div class="grid">'+result.orders.map((order,i)=>{
+        const cancel=['Submitted','Confirmed'].includes(order.status)
+        const advance=user.role==='admin'&&['Submitted','Confirmed','Dispatched'].includes(order.status)
+        return '<article class="info card"><h3>'+short(order.id)+' · '+escape(order.status)+'</h3><p>'+escape(order.name)+' · '+money(order.total)+'</p><p>'+escape(order.address)+' · '+escape(order.pin)+'</p><ul>'+
+          order.items.map(item=>'<li>'+escape(item.name)+' × '+item.quantity+'</li>').join('')+'</ul><div class="actions">'+
+          (advance?button({Submitted:'Confirm order',Confirmed:'Record dispatch',Dispatched:'Mark delivered'}[order.status],'data-order="'+i+'" data-action="advance"'):'')+
+          (cancel?button('Cancel order','data-order="'+i+'" data-action="cancel"','secondary'):'')+
+          (order.tracking?'<a class="secondary" href="'+escape(order.tracking)+'" target="_blank" rel="noopener noreferrer">Track delivery</a>':'')+'</div></article>'
+      }).join('')+'</div>'+(result.orders.length?'':'<p>No store orders yet.</p>')
+      for (const control of main.querySelectorAll('[data-order]')) control.onclick=()=>orderAction(result.orders[Number(control.dataset.order)],control.dataset.action)
+    }
+  } catch(error) {
+    if (version===renderNumber) $('#shop-panel').textContent=error.message
+  }
+}
+
+function publishEvent() {
+  const choices=kind=>kind==='pooja'?catalog.rituals:devotion.chadhava
+  const options=kind=>select('service','Ritual',choices(kind).map(x=>[x.id,x.name]))
+  open('Publish a temple event',formBody(input('title','Event name')+area('description','Description')+
+    select('kind','Service',[['pooja','Pooja'],['chadhava','Chadhava']])+'<div id="ritual-option">'+options('pooja')+'</div>'+
+    select('temple','Temple',devotion.temples.map(x=>[x.id,x.name]))+input('day','Event date',{type:'date',value:today(),min:today()}),'Publish'),()=>{
+      $('select[name=kind]',modal).onchange=event=>{$('#ritual-option',modal).innerHTML=options(event.target.value)}
+      submitForm(values=>api('events','POST',values),()=>{dialog.close();render()})
+    })
+}
+async function ritualEvents(version) {
+  main.innerHTML=heading('TEMPLE SERVICES','Upcoming temple events','Find dated pujas and Chadhava published by operations.')+'<p id="events-panel">Loading…</p>'
+  try {
+    const [data,details]=await Promise.all([api('events'),api('devotional')])
+    if (version!==renderNumber) return
+    devotion=details
+    $('#events-panel').outerHTML=(user?.role==='admin'?button('Publish event','id="publish-event"'):'')+
+      '<div class="grid section">'+data.events.map((event,i)=>{
+        const temple=devotion.temples.find(x=>x.id===event.temple)
+        return '<article class="info card"><h3>'+escape(event.title)+'</h3><p class="eyebrow">'+escape(event.day+' · '+(temple?.name||''))+'</p>'+
+          '<p>'+escape(event.description)+'</p>'+
+          (user?.role==='admin'?button(event.active?'Unpublish':'Republish','data-event="'+i+'"','secondary'):
+            button('Request participation','data-event="'+i+'"','secondary'))+'</article>'
+      }).join('')+'</div>'+(data.events.length?'':'<p>No temple events are scheduled yet.</p>')
+    if (user?.role==='admin') $('#publish-event').onclick=publishEvent
+    for (const control of main.querySelectorAll('[data-event]')) control.onclick=async()=>{
+      const event=data.events[Number(control.dataset.event)]
+      if (user?.role!=='admin') return requestForm(event.kind,event.service,event)
+      control.disabled=true
+      try {await api('events/'+event.id,'PATCH',{active:!event.active});render()}
+      catch(error){inform(error.message);control.disabled=false}
+    }
+  } catch(error) {
+    if (version===renderNumber) $('#events-panel').textContent=error.message
+  }
+}
+
 function render() {
   const version=++renderNumber
   const [page,subpage]=(location.hash.slice(1)||'home').split('/')
@@ -423,13 +602,15 @@ function render() {
   $('#account').textContent=user?'Account':'Sign in'
   if (!page||page==='home') home()
   else if (page==='poojas') poojas()
-  else if (page==='panchang') panchang()
+  else if (page==='panchang') panchang(version)
   else if (['astrology','daan','consult'].includes(page)) servicePage(page)
   else if (page==='library') library(subpage)
   else if (page==='jaap') jaap()
   else if (page==='requests') requests(version)
   else if (page==='support') support()
-  else if (['mandir','temples','chadhava','devotional','community','store'].includes(page)) devotionalPage(page,version)
+  else if (page==='events') ritualEvents(version)
+  else if (['store','cart','orders'].includes(page)) shop(page,version)
+  else if (['mandir','temples','chadhava','devotional','community'].includes(page)) devotionalPage(page,version,subpage)
   else main.innerHTML=heading('AVANTIKA','Page unavailable','Return home to find available services.')+link('Home','home')
 }
 main.addEventListener('click',event=>{

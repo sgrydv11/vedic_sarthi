@@ -1,4 +1,6 @@
 import { devotionalApi, topics } from './devotional.mjs'
+import { retailApi } from './retail.mjs'
+import { solarCities, solarTimes } from './solar.mjs'
 const hex = bytes => Array.from(bytes,byte=>byte.toString(16).padStart(2,'0')).join('')
 const random = bytes => hex(crypto.getRandomValues(new Uint8Array(bytes)))
 const randomUUID = () => crypto.randomUUID()
@@ -187,6 +189,7 @@ export function createApplication({db,catalog,staffCode={},google,verifyLegacy,s
     await setSession(res,user)
     send(res,{user:view(user)})
   }
+  const retail = retailApi(db,{send,read,field,href,fail})
   const devotional = devotionalApi(db,{send,read,field,date,href,fail,today,randomUUID})
   return async (req,res) => {
     res.setHeader('X-Content-Type-Options','nosniff')
@@ -231,6 +234,37 @@ export function createApplication({db,catalog,staffCode={},google,verifyLegacy,s
         if (!inserted.changes) fail(409,'This email already has an account.')
         return await establish(res,account)
       }
+      if (path==='/api/events' && method==='GET') {
+        const events=user?.role==='admin'?await db.prepare('SELECT * FROM ritual_events ORDER BY day LIMIT 200').all():
+          await db.prepare('SELECT * FROM ritual_events WHERE active=1 AND day>=? ORDER BY day LIMIT 100').all(today())
+        return send(res,{events})
+      }
+      if (path==='/api/events' && method==='POST') {
+        if (user?.role!=='admin') fail(403,'Operations access is required.')
+        const values=await read(req)
+        const {kind,service,temple}=values
+        const options=kind==='pooja'?catalog.rituals:kind==='chadhava'?topics.chadhava:[]
+        if (!options.some(item=>item.id===service)||!topics.temples.some(item=>item.id===temple)) fail(400,'Choose a supported ritual and temple.')
+        const id=randomUUID()
+        await db.prepare('INSERT INTO ritual_events(id,kind,service,temple,day,title,description) VALUES (?,?,?,?,?,?,?)')
+          .run(id,kind,service,temple,date(values,'day',true),field(values,'title',100,true),field(values,'description',900,true))
+        return send(res,{id},201)
+      }
+      if (path.startsWith('/api/events/') && method==='PATCH') {
+        if (user?.role!=='admin') fail(403,'Operations access is required.')
+        const {active}=await read(req)
+        if (typeof active!=='boolean') fail(400,'Choose whether the event is active.')
+        const result=await db.prepare('UPDATE ritual_events SET active=? WHERE id=?').run(active?1:0,path.split('/').at(-1))
+        if (!result.changes) fail(404,'Event not found.')
+        return send(res,{active})
+      }
+      if (path==='/api/solar' && method==='GET') {
+        const city=url.searchParams.get('city')||'Ujjain'
+        const day=date({day:url.searchParams.get('date')||today()},'day')
+        if (!Object.hasOwn(solarCities,city)||day<'1900-01-01'||day>'2100-12-31') fail(400,'Choose a supported city and a date from 1900 through 2100.')
+        return send(res,{...solarTimes(city,day),cities:Object.keys(solarCities)})
+      }
+      if (await retail(req,res,path,user)) return
       if (await devotional(req,res,path,user)) return
       if (!user) fail(401,'Sign in to continue.')
       if (path === '/api/requests' && method === 'GET') {
@@ -255,7 +289,20 @@ export function createApplication({db,catalog,staffCode={},google,verifyLegacy,s
         const existing = await db.prepare('SELECT * FROM requests WHERE id=?').get(id)
         if (existing?.owner === user.id) return send(res,requestView(existing))
         if (existing) fail(409,'Request ID is already in use.')
+        const campaign=field(input,'campaign',36)
+        let event
+        if (campaign) {
+          event=await db.prepare('SELECT * FROM ritual_events WHERE id=? AND active=1 AND day>=?').get(campaign,today())
+          if (!event||event.kind!==kind||event.service!==input.service) fail(409,'This event is unavailable.')
+          input.date=event.day
+          input.temple=event.temple
+        }
         const [title,details] = booking(catalog,kind,input)
+        if (event) {
+          details.event=event.title
+          details.date=event.day
+          details.temple=topics.temples.find(item=>item.id===event.temple).name
+        }
         const created = new Date().toISOString()
         const history = [{status:'Requested',date:created}]
         const inserted=await db.prepare('INSERT INTO requests VALUES (?,?,NULL,?,?,?,?,?,?) ON CONFLICT(id) DO NOTHING').run(id,user.id,kind,title,'Requested',JSON.stringify(details),JSON.stringify(history),created)

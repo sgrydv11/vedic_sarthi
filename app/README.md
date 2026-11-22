@@ -95,3 +95,11 @@ The same request and devotional routes run on desktop or Android. The PC server 
 The Android app opens the hosted HTTPS site on a fresh install and offers **Use hosted site**, a local Wi-Fi server, or **Use offline** under **Connection**. An existing installation may remember its earlier Wi-Fi setting.
 
 Operations can publish recordings, readings, Panchang notes, horoscopes and upcoming observances from **Devotional Library**, and review pending posts from **Community**. Dated material is editorial until a verified data source is connected. Chadhava and store requests appear in the staff queue and can receive a recorded outcome or proof link.
+
+## Temple events and store orders
+
+Operations publishes dated pooja and Chadhava events from **Events**. A request from a dated event saves its ritual, temple and date in the devotee request. Operations can take an event off the public listing without deleting existing requests.
+
+From **Store**, Operations can add and edit product IDs, prices, stock and publication status. Devotees can save a cart and submit an order with an Indian delivery address. Submission atomically reserves stock and saves product names and prices. Cancellation before dispatch restores stock. Operations confirms shipping and records the tracking link. The order flow collects no online payment. Pricing and inventory appear once Operations publishes a real listing.
+
+Panchang includes estimated sunrise, solar noon and sunset for six Indian cities. The estimates use NOAA solar position equations. Lunar Panchang and birth chart results remain staff review workflows.
