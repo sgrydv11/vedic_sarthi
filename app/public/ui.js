@@ -61,8 +61,8 @@ function select(name,label,options) {
     return '<option value="'+escape(value)+'">'+escape(text)+'</option>'
   }).join('')+'</select></label>'
 }
-function submitForm(task, complete) {
-  const form = $('form',modal)
+function submitForm(task, complete, root=modal) {
+  const form = $('form',root)
   form.onsubmit = async event => {
     event.preventDefault()
     const submit = $('button[type=submit]',form)
@@ -96,7 +96,7 @@ function auth(mode='login', continuation) {
       })
     })
 }
-const ritualSummary = item => '<article class="ritual card"><div class="ritual-art '+(['shiva','mangal','river'][catalog.rituals.indexOf(item)%3])+'"><span class="tag">'+escape(item.category)+'</span><span class="ritual-glyph" aria-hidden="true">'+icon(['diya','sun','stars'][catalog.rituals.indexOf(item)%3])+'</span></div><div class="ritual-body"><h3>'+escape(item.name)+'</h3><p class="location">'+icon('pin')+escape(item.place)+'</p>'+(item.description?'<p>'+escape(item.description)+'</p>':'')+'<div class="ritual-action"><span>'+(item.fee===null?'Quote on request':money(item.fee))+'</span>'+button('Request pooja','data-pooja="'+item.id+'"','secondary')+'</div></div></article>'
+const ritualSummary = item => '<article class="ritual card"><div class="ritual-art '+(['shiva','mangal','river'][catalog.rituals.indexOf(item)%3])+'"><span class="tag">'+escape(item.category)+'</span><span class="ritual-glyph" aria-hidden="true">'+icon(['diya','sun','stars'][catalog.rituals.indexOf(item)%3])+'</span></div><div class="ritual-body"><h3>'+escape(item.name)+'</h3><p class="location">'+icon('pin')+escape(item.place)+'</p>'+(item.description?'<p>'+escape(item.description)+'</p>':'')+'<div class="ritual-action"><span>'+(item.fee===null?'Quote on request':money(item.fee))+'</span>'+link('View pooja','poojas/'+item.id,'secondary')+'</div></div></article>'
 const pandits = [
   {name:'Param Pujya Vishal Rawal Ji',knownAs:'Bittu Bhaiya',photo:'vishal-rawal',topics:'Vedic pooja · Sankalp',
     intro:'Meet Vishal Rawal Ji, known as Bittu Bhaiya. Devotees can request guidance on preparing their Sankalp and planning a pooja.'},
@@ -157,21 +157,46 @@ function panchang(version) {
     '<h2 class="section">Hindu festival calendar</h2><p>Gregorian month ranges are approximate. Observance dates vary by year and location.</p><div class="grid">'+catalog.calendar.map(row=>'<article class="card info"><h3>'+escape(row.name)+'</h3><p>'+escape(row.festival)+'</p><p>'+escape(row.practice)+'</p></article>').join('')+'</div>'
   updateSolar(version)
 }
-function servicePage(kind) {
+function servicePage(kind,subpage,step) {
   const isDaan = kind==='daan'
   const isAstro = kind==='astrology'
   const items = isDaan ? catalog.daan : catalog[isAstro?'astrology':'consult'].map(name=>({name}))
+  if (subpage) {
+    const item=items.find(entry=>slug(entry.name)===subpage)
+    if (!item||(step&&step!=='book')) return missingPage(kind,'All services')
+    const label=isDaan?'Daan':isAstro?'Astrology':'Consultations'
+    const route=kind+'/'+subpage
+    const type=isDaan?'daan':isAstro?'astrology':'consultation'
+    const summary=isDaan?'Record a pledge for operations to review. The site collects no online donation.':
+      isAstro?'Send your details for a Pandit to review. Results appear in My Requests when staff complete the review.':
+      'Send a preferred date and format. Operations can confirm the appointment and share a meeting link.'
+    const chain=[[label,kind],[item.name,step?route:null]]
+    if (step) return bookingPage(chain,item.name,summary,type,item.name)
+    main.innerHTML=breadcrumbs(chain)+heading(label,escape(item.name),escape(item.description||summary))+
+      '<section class="card info detail-body"><h2>What happens after you submit</h2><p>'+escape(summary)+'</p>'+
+      link(isDaan?'Create pledge':'Continue to request',route+'/book')+'</section>'
+    return
+  }
   main.innerHTML = heading(isDaan?'SACRED GIVING':isAstro?'VEDIC ASTROLOGY':'ACHARYA CONSULTATIONS',isDaan?'Daan & Gau Seva':isAstro?'Astrology':'Request a consultation',
     isDaan?'Choose a cause and submit a pledge for manual fulfillment. This preview collects no donation funds.':isAstro?'Submit details for manual review by a Pandit. Automated charts, scores and transit calculations are unavailable in this preview.':'Choose a topic, consultation format and preferred date. Staff can schedule your request in the operations portal.')+
     '<div class="grid">'+items.map(item=>'<article class="card info"><span class="feature-icon">'+icon(symbols[kind])+'</span><h3>'+escape(item.name)+'</h3>'+
-    (item.description?'<p>'+escape(item.description)+'</p>':'')+button(isDaan?'Create pledge':'Request '+(isAstro?'review':'consultation'),'data-'+kind+'="'+escape(item.name)+'"','secondary')+'</article>').join('')+'</div>'+(!isDaan&&!isAstro?panditProfiles():'')
+    (item.description?'<p>'+escape(item.description)+'</p>':'')+link('View details',kind+'/'+slug(item.name),'secondary')+'</article>').join('')+'</div>'+(!isDaan&&!isAstro?panditProfiles():'')
 }
-function library(subpage) {
+function library(subpage,article) {
   const types = [['all','All guides'],['home','Home puja'],['vrat','Vrat'],['karmkand','Karmkand'],['pilgrimage','Pilgrimage']]
   const category = types.find(([id])=>subpage===id)?.[1] || 'All guides'
+  if (article) {
+    const guide=catalog.guides.find(item=>slug(item.name)===article&&(category==='All guides'||item.category===category))
+    if (!guide) return missingPage('library','All guides')
+    main.innerHTML=breadcrumbs([['Ritual library','library'],[category,'library/'+subpage],[guide.name]])+
+      heading(escape(guide.category),escape(guide.name),'')+
+      '<article class="card info detail-body">'+guideBody(guide)+'</article>'
+    wireChecklist(guide,main)
+    return
+  }
   main.innerHTML = heading('PRACTICE & TRADITION','Ritual library','Follow a home puja, prepare for a family ceremony or plan a visit to Ujjain.')+
     '<nav class="tabs" aria-label="Guide categories">'+types.map(([id,label])=>'<a class="'+(label===category?'selected':'')+'" href="#library/'+id+'">'+label+'</a>').join('')+'</nav><div class="grid">'+catalog.guides
-      .map((guide,i)=>({...guide,i})).filter(g=>category==='All guides'||g.category===category).map(g=>'<article class="card info"><span class="eyebrow">'+g.category+'</span><h3>'+g.name+'</h3><p>'+g.steps[0]+'</p>'+button('Read guide','data-guide="'+g.i+'"','secondary')+'</article>').join('')+'</div>'
+      .filter(g=>category==='All guides'||g.category===category).map(g=>'<article class="card info"><span class="eyebrow">'+g.category+'</span><h3>'+g.name+'</h3><p>'+g.steps[0]+'</p>'+link('Read guide','library/'+(subpage||'all')+'/'+slug(g.name),'secondary')+'</article>').join('')+'</div>'
 }
 function localRead(key, fallback) {
   try { return JSON.parse(localStorage.getItem('avantika:'+key)) ?? fallback } catch { return fallback }
@@ -179,14 +204,14 @@ function localRead(key, fallback) {
 function localWrite(key,value) {
   try { localStorage.setItem('avantika:'+key,JSON.stringify(value)) } catch {}
 }
-function readGuide(index) {
-  const g = catalog.guides[index]
-  const key = 'guide:'+g.name
-  const checked = localRead(key,[])
-  open(g.name,'<p class="eyebrow">'+g.category+'</p>'+(g.materials.length?'<h3>Samagri checklist</h3><fieldset class="checklist">'+g.materials.map((item,i)=>'<label><input type="checkbox" value="'+i+'" '+(checked.includes(i)?'checked':'')+'>'+escape(item)+'</label>').join('')+'</fieldset>':'')+
-    '<h3>Guide</h3><ol class="steps">'+g.steps.map(step=>'<li>'+escape(step)+'</li>').join('')+'</ol>',()=>{
-      $('.checklist',modal)?.addEventListener('change',()=>localWrite(key,[...modal.querySelectorAll(':checked')].map(box=>Number(box.value))))
-    })
+function guideBody(guide) {
+  const checked=localRead('guide:'+guide.name,[])
+  return (guide.materials.length?'<h2>Samagri checklist</h2><fieldset class="checklist">'+guide.materials.map((item,i)=>
+    '<label><input type="checkbox" value="'+i+'" '+(checked.includes(i)?'checked':'')+'>'+escape(item)+'</label>').join('')+'</fieldset>':'')+
+    '<h2>Guide</h2><ol class="steps">'+guide.steps.map(step=>'<li>'+escape(step)+'</li>').join('')+'</ol>'
+}
+function wireChecklist(guide,root) {
+  $('.checklist',root)?.addEventListener('change',()=>localWrite('guide:'+guide.name,[...root.querySelectorAll('.checklist :checked')].map(box=>Number(box.value))))
 }
 const mantras = [
   ['Om Namah Shivaya','ॐ नमः शिवाय','Om Namaḥ Śivāya'],
@@ -222,15 +247,26 @@ function requestId() {
   const hex = Array.from(bytes, byte => byte.toString(16).padStart(2,'0')).join('')
   return [hex.slice(0,8),hex.slice(8,12),hex.slice(12,16),hex.slice(16,20),hex.slice(20)].join('-')
 }
-function requestForm(kind, service, event) {
-  if (!user) return auth('login',()=>requestForm(kind,service,event))
-  if (user.role!=='devotee') return inform('Sign in with a devotee account to submit a request.')
+function requestForm(kind, service, event, inline=false) {
+  if (!user) {
+    if (inline) { $('#booking-form').innerHTML=button('Sign in to continue','data-auth'); return }
+    return auth('login',()=>requestForm(kind,service,event))
+  }
+  if (user.role!=='devotee') {
+    const message='Sign in with a devotee account to submit a request.'
+    if (inline) $('#booking-form').textContent=message
+    else inform(message)
+    return
+  }
   const id = requestId()
   const ritual = kind==='pooja' ? catalog.rituals.find(item=>item.id===service) : null
   let fields = (event?'<p>'+escape(event.title+' · '+event.day)+'</p>':'')+input('name','Full name',{value:user.name})
+  if (['pooja','chadhava'].includes(kind)) fields+='<div class="pair">'+
+    select('participants','Participation',['Individual','Family'])+
+    '<div id="family-fields" hidden>'+input('family','Additional family names',{required:false})+'</div></div>'
   if (ritual) fields += select('mode','Booking mode',[['proxy','Pooja on your behalf'],['visit','In-person visit']])+
     '<div class="pair">'+input('date','Preferred date',{type:'date',value:event?.day||today(),min:today()})+select('language','Priest language',['Hindi','English','Sanskrit'])+'</div>'+
-    '<div class="pair">'+input('gotra','Gotra',{required:false})+input('family','Additional family names',{required:false})+input('nakshatra','Nakshatra',{required:false})+input('rashi','Rashi',{required:false})+'</div>'+
+    '<div class="pair">'+input('gotra','Gotra',{required:false})+input('nakshatra','Nakshatra',{required:false})+input('rashi','Rashi',{required:false})+'</div>'+
     area('sankalp','Sankalp or intention')+'<div id="delivery-options"><label class="tick"><input name="deliver" type="checkbox"> Send free Prasad to an address in India</label><div id="shipping" hidden>'+input('pincode','Indian PIN code',{required:false})+area('address','Delivery address',false)+'</div></div><div id="quote" class="quote"></div>'
   if (kind==='chadhava') fields += (event?'':select('temple','Temple',devotion.temples.map(temple=>[temple.id,temple.name])))+
     input('gotra','Gotra',{required:false})+area('sankalp','Sankalp or intention')
@@ -246,21 +282,33 @@ function requestForm(kind, service, event) {
     fields+=area('note','Context for the Pandit',false)
   }
   if (kind==='support') fields+=input('subject','Subject')+area('note','How can we help?')
-  open(ritual?.name || service || 'Contact support',formBody(fields,'Submit request'),()=>{
-    if (event&&ritual) $('input[name=date]',modal).readOnly=true
+  const body=formBody(fields,'Submit request')
+  const wire=root=>{
+    const participation=$('select[name=participants]',root)
+    if (participation) {
+      const family=$('#family-fields',root)
+      const field=$('input',family)
+      participation.onchange=()=>{
+        field.required=participation.value==='Family'
+        family.hidden=!field.required
+        field.disabled=!field.required
+      }
+      participation.onchange()
+    }
+    if (event&&ritual) $('input[name=date]',root).readOnly=true
     if (ritual) {
-      const mode = $('select[name=mode]',modal)
-      const delivery = $('input[name=deliver]',modal)
+      const mode = $('select[name=mode]',root)
+      const delivery = $('input[name=deliver]',root)
       const updateQuote = () => {
         const proxy = mode.value==='proxy'
         const ship = proxy && delivery.checked
-        $('#delivery-options').hidden = !proxy
-        $('#shipping').hidden = !ship
-        $('input[name=pincode]',modal).required = ship
-        $('textarea[name=address]',modal).required = ship
+        $('#delivery-options',root).hidden = !proxy
+        $('#shipping',root).hidden = !ship
+        $('input[name=pincode]',root).required = ship
+        $('textarea[name=address]',root).required = ship
         const fee = ritual.fee
         const line = (label,value)=>'<div><span>'+label+'</span><strong>'+value+'</strong></div>'
-        $('#quote').innerHTML = line('Ritual fee',fee===null?'Quote on request':money(fee))+
+        $('#quote',root).innerHTML = line('Ritual fee',fee===null?'Quote on request':money(fee))+
           (proxy?line('Ritual video','Free')+line('Prasad',ship?'Free':'Not requested'):'')+line('Delivery estimate',money(ship?99:0))+
           line('Estimated total',fee===null?'Quote on request':money(fee+(ship?99:0)))+'<p>Prices are preview estimates. No payment is collected. Staff confirm the venue, availability and delivery.</p>'
       }
@@ -268,13 +316,15 @@ function requestForm(kind, service, event) {
       updateQuote()
     }
     submitForm(values=>api('requests','POST',{id,kind,service,...values,campaign:event?.id,deliver:values.deliver==='on',amount:Number(values.amount)}),()=>{
-      dialog.close()
+      if (!inline) dialog.close()
       inform('Request submitted. Reference '+short(id)+'.')
-      location.hash='requests'
-    })
-  })
+      location.hash='requests/'+id
+    },root)
+  }
+  if (inline) { const root=$('#booking-form'); root.innerHTML=body; wire(root) }
+  else open(ritual?.name || service || 'Contact support',body,()=>wire(modal))
 }
-const detailLabels = {event:'Temple event',temple:'Temple',quantity:'Quantity',name:'Devotee',mode:'Mode',date:'Requested date',gotra:'Gotra',family:'Family',nakshatra:'Nakshatra',rashi:'Rashi',sankalp:'Sankalp',language:'Priest language',pincode:'PIN code',address:'Address',fee:'Ritual estimate',delivery:'Delivery estimate',total:'Total estimate',amount:'Pledged amount',note:'Note',channel:'Format',city:'City',birthDate:'Birth date',birthTime:'Birth time',secondName:'Second name',secondCity:'Second city',secondDate:'Second birth date',secondTime:'Second birth time',confirmedDate:'Confirmed date',confirmedTime:'Confirmed time (IST)',awb:'Courier AWB',result:'Staff response'}
+const detailLabels = {event:'Temple event',temple:'Temple',quantity:'Quantity',name:'Devotee',mode:'Mode',date:'Requested date',gotra:'Gotra',family:'Family members',participants:'Participation',nakshatra:'Nakshatra',rashi:'Rashi',sankalp:'Sankalp',language:'Priest language',pincode:'PIN code',address:'Address',fee:'Ritual estimate',delivery:'Delivery estimate',total:'Total estimate',amount:'Pledged amount',note:'Note',channel:'Format',city:'City',birthDate:'Birth date',birthTime:'Birth time',secondName:'Second name',secondCity:'Second city',secondDate:'Second birth date',secondTime:'Second birth time',confirmedDate:'Confirmed date',confirmedTime:'Confirmed time (IST)',awb:'Courier AWB',result:'Staff response'}
 const isClosed = row => ['Cancelled','Delivered','Completed','Resolved'].includes(row.status) || row.status==='Video ready'&&!row.details.deliver
 const actions = {
   pooja:{Requested:'Assign',Assigned:'Confirm Muhurat','Muhurat confirmed':'Start ritual','Ritual in progress':'Record ritual completion','Video ready':'Mark Prasad packed','Prasad packed':'Record dispatch',Dispatched:'Mark delivered'},
@@ -285,7 +335,7 @@ const actions = {
   astrology:{Requested:'Assign',Assigned:'Share reviewed result'},
   support:{Requested:'Resolve ticket'}
 }
-function requestCard(row) {
+function requestCard(row,expanded=false) {
   const {details} = row
   const entries = Object.entries(detailLabels).filter(([key])=>typeof details[key]==='number'||details[key])
   const staff = user.role!=='devotee'
@@ -294,14 +344,14 @@ function requestCard(row) {
   const action = row.status==='Requested'&&user.role==='pandit'?'Claim request':actions[row.kind][row.status]
   const formatValue = (key,value) => ['fee','delivery','total','amount'].includes(key)?money(value):key==='mode'?(value==='proxy'?'Pooja on your behalf':'In-person visit'):value
   return '<article class="card request"><div class="section-top"><div><p class="eyebrow">'+names[row.kind]+' · '+short(row.id)+'</p><h3>'+escape(row.title)+'</h3></div><span class="pill">'+row.status+'</span></div>'+
-    '<p>Submitted '+formatDate(row.created)+'</p><details><summary>Request details and timeline</summary><dl>'+entries.map(([key,label])=>'<dt>'+label+'</dt><dd>'+escape(formatValue(key,details[key]))+'</dd>').join('')+'</dl><ol class="steps">'+row.history.map(event=>'<li>'+escape(event.status)+' <small>'+formatDate(event.date)+'</small></li>').join('')+'</ol></details>'+
-    '<div class="actions">'+[['video','Watch ritual video'],['tracking','Track Prasad'],['proof','Open supporting material'],['meeting','Join consultation']].filter(([key])=>details[key]).map(([key,label])=>'<a class="secondary" href="'+escape(details[key])+'" target="_blank" rel="noopener noreferrer">'+label+'</a>').join('')+
+    '<p>Submitted '+formatDate(row.created)+'</p><details '+(expanded?'open':'')+'><summary>Request details and timeline</summary><dl>'+entries.map(([key,label])=>'<dt>'+label+'</dt><dd>'+escape(formatValue(key,details[key]))+'</dd>').join('')+'</dl><ol class="steps">'+row.history.map(event=>'<li>'+escape(event.status)+' <small>'+formatDate(event.date)+'</small></li>').join('')+'</ol></details>'+
+    '<div class="actions">'+(expanded?'':link('Open request','requests/'+row.id,'secondary'))+[['video','Watch ritual video'],['tracking','Track Prasad'],['proof','Open supporting material'],['meeting','Join consultation']].filter(([key])=>details[key]).map(([key,label])=>'<a class="secondary" href="'+escape(details[key])+'" target="_blank" rel="noopener noreferrer">'+label+'</a>').join('')+
     (actionable?button(action,'data-transition="'+row.id+'"'):'')+(cancellable?button('Cancel request','data-cancel="'+row.id+'"','secondary'):'')+'</div></article>'
 }
 let queue = []
 let staff = []
 let renderNumber = 0
-async function requests(version) {
+async function requests(version,id) {
   if (!user) {
     main.innerHTML=heading('YOUR ACCOUNT','My requests','Sign in to track poojas, pledges, consultations and support requests.')+button('Sign in','data-auth')
     return
@@ -314,7 +364,14 @@ async function requests(version) {
     if (renderNumber!==version) return
     queue=data.requests
     staff=data.staff
-    main.lastElementChild.outerHTML = queue.length ? '<div class="request-grid">'+queue.map(requestCard).join('')+'</div>' : '<div class="card info"><p>No requests yet.</p>'+(isStaff?'':link('Explore poojas','poojas'))+'</div>'
+    if (id) {
+      const row=queue.find(item=>item.id===id)
+      if (!row) return missingPage('requests','All requests')
+      main.innerHTML=breadcrumbs([['My requests','requests'],[short(row.id)]])+heading('REQUEST TRACKING',escape(row.title),'Reference '+short(row.id))+
+        '<div class="detail-body">'+requestCard(row,true)+'</div>'
+      return
+    }
+    main.lastElementChild.outerHTML = queue.length ? '<div class="request-grid">'+queue.map(row=>requestCard(row)).join('')+'</div>' : '<div class="card info"><p>No requests yet.</p>'+(isStaff?'':link('Explore poojas','poojas'))+'</div>'
   } catch (e) { if (renderNumber===version) main.lastElementChild.textContent=e.message }
 }
 function changeRequest(id,cancel) {
@@ -402,7 +459,7 @@ async function moderate(id,state,target) {
   try { await api('community/'+id,'PATCH',{state});render() }
   catch(error){ inform(error.message);target.disabled=false }
 }
-async function devotionalPage(page,version,subpage) {
+async function devotionalPage(page,version,subpage,step) {
   const [title,description]=devotionPages[page]
   main.innerHTML=heading('AVANTIKA',title,description)+'<p id="devotion-content">Loading…</p>'
   try {
@@ -425,10 +482,23 @@ async function devotionalPage(page,version,subpage) {
       if (subpage) {
         const temple=devotion.temples.find(item=>item.id===subpage)
         const media=temple?devotion.content.filter(item=>item.temple===temple.id):[]
-        main.innerHTML=temple?heading(escape(temple.city+' · '+temple.deity),escape(temple.name),escape(temple.description))+
-          '<div class="actions">'+link('All temples','temples','secondary')+link('Temple events','events','secondary')+'</div>'+
-          '<section class="section"><h2>Darshan and readings</h2>'+(media.length?grid(media.map(contentCard).join('')):'<p>Temple media will appear here when operations publishes it.</p>')+'</section>':
-          heading('TEMPLE DIRECTORY','Temple unavailable','Choose a temple from the directory.')+link('All temples','temples')
+        if (!temple||(step&&!['darshan','events'].includes(step))) return missingPage('temples','All temples')
+        const route='temples/'+temple.id
+        const chain=[['Temples','temples'],[temple.name,step?route:null]]
+        if (step==='events') {
+          const {events}=await api('events')
+          if (version!==renderNumber) return
+          const available=events.filter(event=>event.temple===temple.id&&event.active&&event.day>=today())
+          main.innerHTML=breadcrumbs([...chain,['Events']])+heading('TEMPLE EVENTS',escape(temple.name),'Upcoming events at this temple.')+
+            (available.length?grid(available.map(event=>'<article class="card info"><h3>'+escape(event.title)+'</h3><p>'+escape(event.day)+'</p>'+
+              link('View event','events/'+event.id,'secondary')+'</article>').join('')):'<p>No events are scheduled here yet.</p>')
+          return
+        }
+        main.innerHTML=breadcrumbs(step?[...chain,['Darshan']]:chain)+heading(escape(temple.city+' · '+temple.deity),
+          escape(step?'Darshan at '+temple.name:temple.name),escape(temple.description))+
+          (step?'<section class="section"><h2>Darshan and readings</h2>'+
+            (media.length?grid(media.map(contentCard).join('')):'<p>Temple media will appear here when operations publishes it.</p>')+'</section>':
+            '<div class="actions">'+link('Darshan and readings',route+'/darshan')+link('Temple events',route+'/events','secondary')+'</div>')
       } else {
         target.outerHTML='<div class="filters"><label class="search">Search temples<input id="temple-search" placeholder="Name, city or deity"></label></div><div class="grid" id="temple-grid"></div>'
         const filter=()=>{
@@ -440,9 +510,11 @@ async function devotionalPage(page,version,subpage) {
         $('#temple-search').oninput=filter
         filter()
       }
-    } else if (['chadhava','store'].includes(page)) {
+    } else if (page==='chadhava') {
+      if (subpage) return offeringDetail(subpage,step)
+
       target.outerHTML=grid(devotion[page].map(item=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+
-        button(page==='chadhava'?'Request offering':'Request quote','data-'+page+'="'+escape(item.id)+'"','secondary')+'</article>').join(''))
+        link('View offering','chadhava/'+item.id,'secondary')+'</article>').join(''))
     } else if (page==='community') {
       target.outerHTML=button('Share a reflection','data-community-post')+'<div class="grid section">'+(panel.posts.map(post=>
         '<article class="card info"><h3>'+escape(post.title)+'</h3><p class="eyebrow">'+escape(post.author+' · '+post.state)+'</p><p class="preserve-text">'+escape(post.text)+'</p>'+
@@ -480,15 +552,14 @@ function quantityForm(product) {
     })
   })
 }
-function checkout(total) {
+function checkout(total,root) {
   const id=requestId()
-  open('Submit order',formBody(input('name','Recipient name',{value:user.name})+
+  root.innerHTML=formBody(input('name','Recipient name',{value:user.name})+
     area('address','Indian delivery address')+input('pin','PIN code')+
-    '<div class="quote"><strong>Items '+money(total)+'</strong><p>Operations confirms delivery and any charges. Payment is arranged separately.</p></div>','Submit order'),()=>{
-      submitForm(values=>api('shop/orders','POST',{id,total,...values}),()=>{
-        dialog.close();inform('Order submitted.');location.hash='orders'
-      })
-    })
+    '<div class="quote"><strong>Items '+money(total)+'</strong><p>Operations confirms delivery and any charges. Payment is arranged separately.</p></div>','Submit order')
+  submitForm(values=>api('shop/orders','POST',{id,total,...values}),()=>{
+    inform('Order submitted.');location.hash='orders/'+id
+  },root)
 }
 function orderAction(order,action) {
   const dispatch=order.status==='Confirmed'&&action==='advance'
@@ -496,7 +567,7 @@ function orderAction(order,action) {
     formBody(dispatch?input('tracking','HTTPS courier tracking link',{type:'url'}):'<p>Confirm this order update.</p>','Confirm'),
     ()=>submitForm(values=>api('shop/orders/'+order.id,'PATCH',{expected:order.status,action,...values}),()=>{dialog.close();render()}))
 }
-async function shop(page,version) {
+async function shop(page,version,subpage) {
   const labels={store:['Devotional store','Browse available products or ask about devotional essentials.'],
     cart:['Cart','Review quantities and submit an Indian delivery address.'],orders:['Store orders','Follow confirmation, dispatch and delivery.']}
   main.innerHTML=heading('AVANTIKA STORE',...labels[page])+'<p id="shop-panel">Loading…</p>'
@@ -511,17 +582,41 @@ async function shop(page,version) {
     if (version!==renderNumber) return
     const panel=$('#shop-panel')
     if (page==='store') {
+      if (subpage) return productDetail(result.products.find(item=>item.id===subpage))
       const amount=item=>item.stock>0?money(item.price)+' · '+item.stock+' in stock':money(item.price)+' · Out of stock'
       panel.outerHTML='<div class="actions">'+
         (user?.role==='admin'?button('Add product','id="add-product"')+link('Orders','orders','secondary'):
           link('View cart','cart','secondary')+link('My orders','orders','secondary'))+'</div>'+
-        '<div class="grid section">'+result.products.map((item,index)=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p><p>'+
+        (result.products.length?'<div class="filters section">'+input('productQuery','Search products')+
+          select('productSort','Sort by',[['name','Name'],['low','Price low to high'],['high','Price high to low']])+
+          '<label class="tick"><input type="checkbox" id="only-stock"> In stock</label></div>':'<p>No products are listed for direct order yet.</p>')+
+        '<div class="grid section" id="product-grid">'+result.products.map((item,index)=>'<article class="card info" data-listing="'+index+'"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p><p>'+
           escape(amount(item)+(item.active?'':' · Unpublished'))+'</p>'+
           (user?.role==='admin'?button('Edit product','data-product="'+index+'"','secondary'):
-            item.stock>0?button('Add to cart','data-product="'+index+'"','secondary'):'')+'</article>').join('')+'</div>'+
+            link('View product','store/'+item.id,'secondary'))+'</article>').join('')+'</div>'+
         '<section class="section"><h2>Request a quote</h2><div class="grid">'+devotion.store.map(item=>
           '<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+
           button('Request quote','data-store="'+escape(item.id)+'"','secondary')+'</article>').join('')+'</div></section>'
+      if (result.products.length) {
+        const filter=$('input[name=productQuery]')
+        const sort=$('select[name=productSort]')
+        const inStock=$('#only-stock')
+        const grid=$('#product-grid')
+        const cards=[...grid.children]
+        const update=()=>{
+          const query=filter.value.trim().toLowerCase()
+          const order=[...cards].sort((left,right)=>{
+            const a=result.products[Number(left.dataset.listing)], b=result.products[Number(right.dataset.listing)]
+            return sort.value==='low'?a.price-b.price:sort.value==='high'?b.price-a.price:a.name.localeCompare(b.name)
+          })
+          for (const card of order) {
+            const item=result.products[Number(card.dataset.listing)]
+            card.hidden=!([item.name,item.description].some(value=>value.toLowerCase().includes(query))&&(!inStock.checked||item.stock>0))
+            grid.append(card)
+          }
+        }
+        filter.oninput=sort.onchange=inStock.onchange=update
+      }
       if (user?.role==='admin') $('#add-product').onclick=()=>productForm()
       for (const control of main.querySelectorAll('[data-product]')) control.onclick=()=>{
         const product=result.products[Number(control.dataset.product)]
@@ -532,25 +627,34 @@ async function shop(page,version) {
     } else if (page==='cart') {
       const total=result.items.reduce((sum,row)=>sum+row.price*row.quantity,0)
       const ready=result.items.length>0&&result.items.every(row=>row.active&&row.stock>=row.quantity)
+      if (subpage==='checkout') {
+        main.innerHTML=breadcrumbs([['Store','store'],['Cart','cart'],['Checkout']])+heading('AVANTIKA STORE','Checkout','Review your cart and provide an Indian delivery address.')+
+          '<section class="card info detail-body"><ul>'+result.items.map(item=>'<li>'+escape(item.name)+' × '+item.quantity+'</li>').join('')+'</ul>'+
+          (ready?'<div id="checkout-form"></div>':'<p>Update your cart before submitting an order.</p>'+link('Back to cart','cart','secondary'))+'</section>'
+        if (ready) checkout(total,$('#checkout-form'))
+        return
+      }
       panel.outerHTML='<div class="grid">'+result.items.map((item,i)=>
         '<article class="info card"><h3>'+escape(item.name)+'</h3><p>'+item.quantity+' × '+money(item.price)+'</p>'+
         (!item.active||item.stock<item.quantity?'<p>Requested quantity unavailable.</p>':'')+
         button('Edit quantity','data-cart-item="'+i+'"','secondary')+'</article>').join('')+'</div>'+
         (!result.items.length?'<p>Your cart is empty.</p>':'<p>Items total '+money(total)+'</p>')+
-        (ready?button('Checkout','id="checkout"'):link('Browse store','store','secondary'))
+        (ready?link('Checkout','cart/checkout'):link('Browse store','store','secondary'))
       for (const control of main.querySelectorAll('[data-cart-item]')) control.onclick=()=>quantityForm(result.items[Number(control.dataset.cartItem)])
-      if (ready) $('#checkout').onclick=()=>checkout(total)
     } else {
-      panel.outerHTML='<div class="grid">'+result.orders.map((order,i)=>{
+      const orders=subpage?result.orders.filter(order=>order.id===subpage):result.orders
+      if (subpage&&!orders.length) return missingPage('orders','All store orders')
+      panel.outerHTML=(subpage?breadcrumbs([['Store','store'],['Orders','orders'],[short(subpage)]]):'')+
+        '<div class="grid section">'+orders.map((order,i)=>{
         const cancel=['Submitted','Confirmed'].includes(order.status)
         const advance=user.role==='admin'&&['Submitted','Confirmed','Dispatched'].includes(order.status)
         return '<article class="info card"><h3>'+short(order.id)+' · '+escape(order.status)+'</h3><p>'+escape(order.name)+' · '+money(order.total)+'</p><p>'+escape(order.address)+' · '+escape(order.pin)+'</p><ul>'+
           order.items.map(item=>'<li>'+escape(item.name)+' × '+item.quantity+'</li>').join('')+'</ul><div class="actions">'+
-          (advance?button({Submitted:'Confirm order',Confirmed:'Record dispatch',Dispatched:'Mark delivered'}[order.status],'data-order="'+i+'" data-action="advance"'):'')+
+          (subpage?'':link('Open order','orders/'+order.id,'secondary'))+(advance?button({Submitted:'Confirm order',Confirmed:'Record dispatch',Dispatched:'Mark delivered'}[order.status],'data-order="'+i+'" data-action="advance"'):'')+
           (cancel?button('Cancel order','data-order="'+i+'" data-action="cancel"','secondary'):'')+
           (order.tracking?'<a class="secondary" href="'+escape(order.tracking)+'" target="_blank" rel="noopener noreferrer">Track delivery</a>':'')+'</div></article>'
       }).join('')+'</div>'+(result.orders.length?'':'<p>No store orders yet.</p>')
-      for (const control of main.querySelectorAll('[data-order]')) control.onclick=()=>orderAction(result.orders[Number(control.dataset.order)],control.dataset.action)
+      for (const control of main.querySelectorAll('[data-order]')) control.onclick=()=>orderAction(orders[Number(control.dataset.order)],control.dataset.action)
     }
   } catch(error) {
     if (version===renderNumber) $('#shop-panel').textContent=error.message
@@ -567,19 +671,20 @@ function publishEvent() {
       submitForm(values=>api('events','POST',values),()=>{dialog.close();render()})
     })
 }
-async function ritualEvents(version) {
+async function ritualEvents(version,subpage,step) {
   main.innerHTML=heading('TEMPLE SERVICES','Upcoming temple events','Find dated pujas and Chadhava published by operations.')+'<p id="events-panel">Loading…</p>'
   try {
     const [data,details]=await Promise.all([api('events'),api('devotional')])
     if (version!==renderNumber) return
     devotion=details
+    if (subpage) return eventDetail(data.events.find(event=>event.id===subpage),step)
     $('#events-panel').outerHTML=(user?.role==='admin'?button('Publish event','id="publish-event"'):'')+
       '<div class="grid section">'+data.events.map((event,i)=>{
         const temple=devotion.temples.find(x=>x.id===event.temple)
         return '<article class="info card"><h3>'+escape(event.title)+'</h3><p class="eyebrow">'+escape(event.day+' · '+(temple?.name||''))+'</p>'+
           '<p>'+escape(event.description)+'</p>'+
           (user?.role==='admin'?button(event.active?'Unpublish':'Republish','data-event="'+i+'"','secondary'):
-            button('Request participation','data-event="'+i+'"','secondary'))+'</article>'
+            link('View event','events/'+event.id,'secondary'))+'</article>'
       }).join('')+'</div>'+(data.events.length?'':'<p>No temple events are scheduled yet.</p>')
     if (user?.role==='admin') $('#publish-event').onclick=publishEvent
     for (const control of main.querySelectorAll('[data-event]')) control.onclick=async()=>{
@@ -594,23 +699,90 @@ async function ritualEvents(version) {
   }
 }
 
+function slug(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+}
+function breadcrumbs(items) {
+  return '<nav class="breadcrumbs" aria-label="Breadcrumb"><ol>'+items.map(([label,path])=>
+    '<li>'+(path?link(escape(label),path,'breadcrumb-link'):'<span aria-current="page">'+escape(label)+'</span>')+'</li>').join('')+'</ol></nav>'
+}
+function missingPage(path,label) {
+  main.innerHTML=heading('AVANTIKA','Page unavailable','This item may have moved or been taken off the listing.')+link(label,path,'secondary')
+}
+function bookingPage(crumbs,title,summary,kind,service,event) {
+  main.innerHTML=breadcrumbs([...crumbs,['Request']])+heading('SERVICE REQUEST',escape(title),escape(summary))+
+    '<section id="booking-form" class="card info detail-body"></section>'
+  requestForm(kind,service,event,true)
+}
+function ritualDetail(id,step) {
+  const ritual=catalog.rituals.find(item=>item.id===id)
+  if (!ritual||(step&&step!=='book')) return missingPage('poojas','All poojas')
+  const route='poojas/'+ritual.id
+  const chain=[['Poojas','poojas'],[ritual.name,step?route:null]]
+  if (step) return bookingPage(chain,'Request '+ritual.name,'Choose a preferred date and tell the Pandit Ji whose name and intention to include.','pooja',ritual.id)
+  const fee=ritual.fee===null?'Quote on request':money(ritual.fee)+' estimated ritual fee'
+  main.innerHTML=breadcrumbs(chain)+heading(escape(ritual.category),escape(ritual.name),escape(ritual.description||'Discuss preparations for this ritual with an Avantika Pandit Ji.'))+
+    '<section class="card info detail-body"><h2>Where it is performed</h2><p>'+escape(ritual.place)+'</p><p><strong>'+escape(fee)+'</strong></p>'+
+    '<h2>What you can request</h2><p>Choose an in-person visit or ask for a ritual on your behalf. For a remote request, operations can share a ritual video and arrange optional Prasad delivery within India.</p>'+
+    '<div class="actions">'+link('Request pooja',route+'/book')+link('See dated events','events','secondary')+'</div></section>'+
+    '<section class="section detail-body"><h2>Before you submit</h2><ul><li>Have the devotee name and Sankalp ready. Add Gotra or family names where applicable.</li>'+
+    '<li>Operations confirms the date, location and any delivery charges. Follow updates in My Requests.</li></ul>'+link('Get help','support','secondary')+'</section>'
+}
+function offeringDetail(id,step) {
+  const offering=devotion.chadhava.find(item=>item.id===id)
+  if (!offering||(step&&step!=='book')) return missingPage('chadhava','All offerings')
+  const route='chadhava/'+offering.id
+  const chain=[['Chadhava','chadhava'],[offering.name,step?route:null]]
+  if (step) return bookingPage(chain,'Request '+offering.name,'Choose a temple and share the name, Gotra if applicable, and Sankalp.','chadhava',offering.id)
+  main.innerHTML=breadcrumbs(chain)+heading('TEMPLE OFFERING',escape(offering.name),escape(offering.description))+
+    '<section class="card info detail-body"><h2>How it works</h2><ol class="steps"><li>Select a temple and submit your intention.</li><li>Operations reviews availability with the Pandit Ji.</li>'+
+    '<li>Check My Requests for fulfillment updates and any evidence shared by staff.</li></ol>'+
+    '<div class="actions">'+link('Request offering',route+'/book')+link('Explore temples','temples','secondary')+'</div></section>'
+}
+function eventDetail(event,step) {
+  if (!event||(step&&step!=='book')) return missingPage('events','All events')
+  const route='events/'+event.id
+  const temple=devotion.temples.find(item=>item.id===event.temple)
+  const chain=[['Temple events','events'],[event.title,step?route:null]]
+  const summary=event.day+(temple?' · '+temple.name:'')
+  if (step) {
+    if (!event.active||event.day<today()) return missingPage('events','All events')
+    return bookingPage(chain,event.title,summary,event.kind,event.service,event)
+  }
+  main.innerHTML=breadcrumbs(chain)+heading(escape(summary),escape(event.title),escape(event.description))+
+    '<section class="card info detail-body"><h2>Participation</h2><p>The event fixes the temple and date for your request. Operations reviews participation and records updates in your account.</p><div class="actions">'+
+    (event.active&&event.day>=today()?link('Request participation',route+'/book'):'<p>Participation has closed.</p>')+
+    (temple?link('Visit temple profile','temples/'+temple.id,'secondary'):'')+'</div></section>'
+}
+function productDetail(item) {
+  if (!item) return missingPage('store','Back to store')
+  main.innerHTML=breadcrumbs([['Store','store'],[item.name]])+heading('DEVOTIONAL STORE',escape(item.name),escape(item.description))+
+    '<section class="card info detail-body"><h2>'+money(item.price)+'</h2><p>'+
+    (item.active&&item.stock>0?item.stock+' in stock':'Unavailable')+'</p><p>Operations confirms delivery and any charges after you submit your order.</p><div class="actions">'+
+    (user?.role==='admin'?button('Edit product','id="product-action"'):item.active&&item.stock>0?button('Add to cart','id="product-action"'):'')+
+    link('View cart','cart','secondary')+'</div></section>'
+  const action=$('#product-action')
+  if (action) action.onclick=()=>user?.role==='admin'?productForm(item):user?quantityForm(item):auth('login',()=>quantityForm(item))
+}
+
 function render() {
   const version=++renderNumber
-  const [page,subpage]=(location.hash.slice(1)||'home').split('/')
+  const [page,subpage,step,extra]=(location.hash.slice(1)||'home').split('/')
+  if (extra) return missingPage('home','Home')
   const items=user&&user.role!=='devotee'?[...nav,['requests','Dashboard']]:nav
   $('#nav').innerHTML=items.map(([path,label])=>'<a href="#'+path+'" '+(page===path?'aria-current="page"':'')+'>'+label+'</a>').join('')
   $('#account').textContent=user?'Account':'Sign in'
   if (!page||page==='home') home()
-  else if (page==='poojas') poojas()
+  else if (page==='poojas') subpage?ritualDetail(subpage,step):poojas()
   else if (page==='panchang') panchang(version)
-  else if (['astrology','daan','consult'].includes(page)) servicePage(page)
-  else if (page==='library') library(subpage)
+  else if (['astrology','daan','consult'].includes(page)) servicePage(page,subpage,step)
+  else if (page==='library') library(subpage,step)
   else if (page==='jaap') jaap()
-  else if (page==='requests') requests(version)
+  else if (page==='requests') requests(version,subpage)
   else if (page==='support') support()
-  else if (page==='events') ritualEvents(version)
-  else if (['store','cart','orders'].includes(page)) shop(page,version)
-  else if (['mandir','temples','chadhava','devotional','community'].includes(page)) devotionalPage(page,version,subpage)
+  else if (page==='events') ritualEvents(version,subpage,step)
+  else if (['store','cart','orders'].includes(page)) shop(page,version,subpage)
+  else if (['mandir','temples','chadhava','devotional','community'].includes(page)) devotionalPage(page,version,subpage,step)
   else main.innerHTML=heading('AVANTIKA','Page unavailable','Return home to find available services.')+link('Home','home')
 }
 main.addEventListener('click',event=>{
@@ -623,7 +795,6 @@ main.addEventListener('click',event=>{
   else if (data.astrology) requestForm('astrology',data.astrology)
   else if ('support' in data) requestForm('support')
   else if ('auth' in data) auth()
-  else if ('guide' in data) readGuide(Number(data.guide))
   else if (data.chadhava || data.store) requestForm(data.chadhava?'chadhava':'store',data.chadhava||data.store)
   else if ('publishContent' in data) publishContent()
   else if ('communityPost' in data) submitCommunity()
@@ -631,7 +802,7 @@ main.addEventListener('click',event=>{
   else if (data.transition||data.cancel) changeRequest(data.transition||data.cancel,Boolean(data.cancel))
 })
 $('#account').onclick = account
-addEventListener('hashchange',()=>{ render(); window.scrollTo(0,0) })
+addEventListener('hashchange',()=>{ if (dialog.open) dialog.close(); render(); window.scrollTo(0,0) })
 try {
   const [data,session]=await Promise.all([fetch('/catalog.json').then(response=>response.json()),api('session')])
   catalog=data

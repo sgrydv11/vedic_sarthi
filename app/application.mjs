@@ -82,6 +82,14 @@ const view = ({id,name,email,role}) => ({id,name,email,role})
 const requestView = row => ({...row, details:JSON.parse(row.details),history:JSON.parse(row.history)})
 function booking(catalog, kind, input) {
   const name = field(input,'name',100,true)
+  let participation
+  if (['pooja','chadhava'].includes(kind)) {
+    const family=field(input,'family',250)
+    const participants=field(input,'participants',20)||(family?'Family':'Individual')
+    if (!['Individual','Family'].includes(participants)) fail(400,'Choose individual or family participation.')
+    if (participants==='Family'&&!family) fail(400,'Enter the names of the additional family members.')
+    participation={participants,family}
+  }
   if (kind === 'pooja') {
     const ritual = catalog.rituals.find(item => item.id === input.service)
     if (!ritual) fail(400,'Choose a ritual.')
@@ -91,7 +99,7 @@ function booking(catalog, kind, input) {
     if (deliver && !/^[1-9]\d{5}$/.test(pincode)) fail(400,'Enter a six-digit Indian PIN code.')
     const delivery = deliver ? 99 : 0
     return [ritual.name, {name,mode:input.mode,date:date(input,'date',true),gotra:field(input,'gotra',80),
-      family:field(input,'family',250),nakshatra:field(input,'nakshatra',80),rashi:field(input,'rashi',80),
+      ...participation,nakshatra:field(input,'nakshatra',80),rashi:field(input,'rashi',80),
       sankalp:field(input,'sankalp',1000,true),language:field(input,'language',30,true), deliver,pincode,
       address:deliver ? field(input,'address',450,true) : '',fee:ritual.fee,delivery,total:ritual.fee === null ? null : ritual.fee + delivery}]
   }
@@ -102,7 +110,7 @@ function booking(catalog, kind, input) {
     if (kind === 'chadhava') {
       const temple = topics.temples.find(entry=>entry.id===input.temple)
       if (!temple) fail(400,'Choose a temple.')
-      details.temple = temple.name
+      Object.assign(details,participation,{temple:temple.name})
       details.gotra = field(input,'gotra',80)
       details.sankalp = field(input,'sankalp',1000,true)
     } else {

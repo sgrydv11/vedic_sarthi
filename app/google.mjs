@@ -1,7 +1,7 @@
 import { randomBytes, createHash } from 'node:crypto'
 
 const callback = '/api/login/google/callback'
-const safeRoute = value => /^[a-z]+(?:\/[a-z]+)?$/.test(value || '') ? value : 'home'
+const safeRoute = value => /^[a-z][a-z0-9-]*(?:\/[a-z0-9-]+){0,2}$/.test(value || '') ? value : 'home'
 const random = () => randomBytes(32).toString('base64url')
 
 export function googleAuth(db, createAccount) {

@@ -138,3 +138,9 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--wine);flex:none}
 .preserve-text{white-space:pre-wrap;overflow-wrap:anywhere}
 @media(min-width:821px){header nav{flex-wrap:wrap;justify-content:center;gap:2px 13px}}
 .devotional-player{display:block;width:100%;max-height:300px;margin:10px 0}
+.breadcrumbs{margin-top:20px;color:var(--muted)}
+.breadcrumbs ol{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.breadcrumbs li+li::before{content:"/";margin-right:8px}
+.breadcrumb-link{color:var(--wine);text-decoration:underline}
+.detail-body{max-width:790px}
+.breadcrumbs+.page-heading{padding-top:23px}
