@@ -1,0 +1,557 @@
+{
+  "rituals": [
+    {
+      "id": "rudrabhishek",
+      "name": "Rudrabhishek",
+      "place": "Mahakaleshwar (Ujjain), Omkareshwar (MP), Kashi Vishwanath",
+      "category": "Shiva worship",
+      "fee": 2100,
+      "description": "Ceremonial abhishek of the Shivling with Panchamrit and water."
+    },
+    {
+      "id": "mangal-bhaat-puja",
+      "name": "Mangal Bhaat Puja",
+      "place": "Mangalnath & Angareshwar Temples (Ujjain)",
+      "category": "Graha Shanti",
+      "fee": 1600,
+      "description": "Traditional offering of cooked rice at Mangalnath or Angareshwar."
+    },
+    {
+      "id": "kaal-sarp-dosh-puja",
+      "name": "Kaal Sarp Dosh Puja",
+      "place": "Ram Ghat & Siddhavat (Ujjain), Trimbakeshwar (Maharashtra)",
+      "category": "Graha Shanti",
+      "fee": 3100,
+      "description": "A traditional ceremony at the Shipra ghats."
+    },
+    {
+      "id": "navagraha-shanti-puja",
+      "name": "Navagraha Shanti Puja",
+      "place": "Navagraha Shani Mandir (Ujjain), Kumbakonam (Tamil Nadu)",
+      "category": "Graha Shanti",
+      "fee": 2500,
+      "description": "A ceremony honoring the nine Grahas."
+    },
+    {
+      "id": "mahamrityunjaya-jaap",
+      "name": "Mahamrityunjaya Jaap",
+      "place": "Mahakaleshwar Authorized Ashrams (Ujjain)",
+      "category": "Shiva worship",
+      "fee": 15000,
+      "description": "Priest-led recitation of the Mahamrityunjaya mantra."
+    },
+    {
+      "id": "rahu-ketu-shanti-puja",
+      "name": "Rahu-Ketu Shanti Puja",
+      "place": "Rahu Temple & Ram Ghat (Ujjain), Srikalahasti (AP)",
+      "category": "Graha Shanti",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "shani-shanti-sade-sati",
+      "name": "Shani Shanti / Sade Sati",
+      "place": "Triveni Shani Temple (Ujjain), Shani Mandir (Morena, MP)",
+      "category": "Graha Shanti",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "guru-chandal-dosh-puja",
+      "name": "Guru Chandal Dosh Puja",
+      "place": "Ujjain Authorized Ashrams & Varanasi",
+      "category": "Graha Shanti",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "grahan-dosh-puja",
+      "name": "Grahan Dosh Puja",
+      "place": "Shipra River Ghats (Ujjain) & Haridwar",
+      "category": "Graha Shanti",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "pitra-dosh-nivaran-puja",
+      "name": "Pitra Dosh Nivaran Puja",
+      "place": "Siddhavat Ghat (Ujjain), Gaya (Bihar)",
+      "category": "Graha Shanti",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "gandmool-nakshatra-shanti",
+      "name": "Gandmool / Nakshatra Shanti",
+      "place": "Ujjain & Local Family Temples",
+      "category": "Graha Shanti",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "laghu-rudra-maha-rudra",
+      "name": "Laghu Rudra & Maha Rudra",
+      "place": "Mahakaleshwar & Omkareshwar",
+      "category": "Shiva worship",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "panchamrit-abhishek",
+      "name": "Panchamrit Abhishek",
+      "place": "All Jyotirlingas & Shiva Temples",
+      "category": "Shiva worship",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "narayan-bali-nag-bali",
+      "name": "Narayan Bali & Nag Bali",
+      "place": "Siddhavat & Ram Ghat (Ujjain), Trimbakeshwar",
+      "category": "Ancestral rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "pind-daan-tarpan",
+      "name": "Pind Daan & Tarpan",
+      "place": "Siddhavat (Ujjain), Gaya (Bihar), Prayagraj",
+      "category": "Ancestral rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "tripindi-shradh",
+      "name": "Tripindi Shradh",
+      "place": "Ujjain, Varanasi, Haridwar",
+      "category": "Ancestral rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "rin-mukti-puja",
+      "name": "Rin Mukti Puja",
+      "place": "Rinmukteshwar Mahadev Temple (Ujjain)",
+      "category": "Prosperity",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "kanakadhara-shri-suktam",
+      "name": "Kanakadhara & Shri Suktam",
+      "place": "Harsiddhi Temple (Ujjain), Kolhapur, Tirupati",
+      "category": "Prosperity",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "kuber-puja",
+      "name": "Kuber Puja",
+      "place": "Ujjain & Home/Office Altars",
+      "category": "Prosperity",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "baglamukhi-havan",
+      "name": "Baglamukhi Havan",
+      "place": "Baglamukhi Mata (Nalkheda & Datia, MP)",
+      "category": "Prosperity",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "saraswati-vidyarambh",
+      "name": "Saraswati / Vidyarambh",
+      "place": "Sharda Devi Temple (Maihar, MP), Sringeri",
+      "category": "Prosperity",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "ganpati-atharvashirsha",
+      "name": "Ganpati Atharvashirsha",
+      "place": "Chintaman Ganesh Temple (Ujjain), Siddhivinayak",
+      "category": "Devotional rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "sundarkand-hanuman-path",
+      "name": "Sundarkand & Hanuman Path",
+      "place": "Jam Sawli Hanuman (Chhindwara, MP), Ujjain",
+      "category": "Devotional rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "durga-saptashati-chandi",
+      "name": "Durga Saptashati (Chandi)",
+      "place": "Harsiddhi Temple (Ujjain), Maihar (MP)",
+      "category": "Devotional rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "santan-gopal-puja",
+      "name": "Santan Gopal Puja",
+      "place": "Gopal Mandir (Ujjain), Mathura & Vrindavan",
+      "category": "Devotional rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "katyayani-puja",
+      "name": "Katyayani Puja",
+      "place": "Vrindavan & Ujjain Temples",
+      "category": "Devotional rites",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "satyanarayan-katha",
+      "name": "Satyanarayan Katha",
+      "place": "Homes & Local Temples Across India",
+      "category": "Karmkand",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "griha-pravesh-vastu-shanti",
+      "name": "Griha Pravesh & Vastu Shanti",
+      "place": "New Residences",
+      "category": "Karmkand",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "bhoomi-pujan",
+      "name": "Bhoomi Pujan",
+      "place": "Construction Sites",
+      "category": "Karmkand",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "vivah-samskara",
+      "name": "Vivah Samskara",
+      "place": "Wedding Venues & Temples",
+      "category": "Karmkand",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "childhood-samskaras",
+      "name": "Childhood Samskaras",
+      "place": "Homes, River Ghats & Family Temples",
+      "category": "Karmkand",
+      "fee": null,
+      "description": ""
+    },
+    {
+      "id": "mundan",
+      "name": "Mundan",
+      "place": "Family venue or local temple",
+      "category": "Karmkand",
+      "fee": null,
+      "description": "First ceremonial haircut."
+    },
+    {
+      "id": "namakaran",
+      "name": "Namakaran",
+      "place": "Family venue or local temple",
+      "category": "Karmkand",
+      "fee": null,
+      "description": "Naming ceremony."
+    },
+    {
+      "id": "annaprashan",
+      "name": "Annaprashan",
+      "place": "Family venue or local temple",
+      "category": "Karmkand",
+      "fee": null,
+      "description": "First ceremonial feeding."
+    },
+    {
+      "id": "upanayana",
+      "name": "Upanayana",
+      "place": "Family venue or local temple",
+      "category": "Karmkand",
+      "fee": null,
+      "description": "Sacred thread ceremony."
+    },
+    {
+      "id": "vahan-puja",
+      "name": "Vahan Puja",
+      "place": "Family venue or local temple",
+      "category": "Karmkand",
+      "fee": null,
+      "description": "Blessing for a new vehicle."
+    }
+  ],
+  "calendar": [
+    {
+      "name": "Chaitra (Mar – Apr)",
+      "festival": "Chaitra Navratri, Gudi Padwa, Ram Navami, Hanuman Jayanti",
+      "practice": "Durga Saptashati Path, Chandi Yagya, Ram Raksha Stotra, Sundarkand"
+    },
+    {
+      "name": "Vaishakha (Apr – May)",
+      "festival": "Akshaya Tritiya, Parashurama Jayanti, Narasimha Jayanti",
+      "practice": "Vishnu Sahasranama, Lakshmi-Narayan Puja, Tulsi & Jal Daan"
+    },
+    {
+      "name": "Jyeshtha (May – Jun)",
+      "festival": "Ganga Dussehra, Nirjala Ekadashi, Vat Savitri Vrat",
+      "practice": "Ganga Puja, Rudrabhishek, Water & Fan (Pankha) Daan"
+    },
+    {
+      "name": "Ashadha (Jun – Jul)",
+      "festival": "Devshayani Ekadashi, Guru Purnima, Gupt Navratri",
+      "practice": "Guru Puja, Vyasa Vandana, Vishnu Mantra Jaap, Shakti Sadhana"
+    },
+    {
+      "name": "Shravana / Sawan (Jul – Aug)",
+      "festival": "Sawan Somwar, Nag Panchami, Raksha Bandhan, Hariyali Teej",
+      "practice": "Rudrabhishek, Laghu/Maha Rudra, Kaal Sarp & Nag Dosh Puja, Mahamrityunjaya Jaap"
+    },
+    {
+      "name": "Bhadrapada (Aug – Sep)",
+      "festival": "Krishna Janmashtami, Hartalika Teej, Ganesh Chaturthi, Anant Chaturdashi",
+      "practice": "Bal Gopal Abhishek, Ganpati Atharvashirsha, Santan Gopal Mantra"
+    },
+    {
+      "name": "Ashwin (Sep – Oct)",
+      "festival": "Pitru Paksha (Shradh), Sharadiya Navratri, Vijayadashami (Dussehra)",
+      "practice": "Tarpan, Pind Daan, Narayan Bali (Pitru Karma); Shatchandi Yagya, Devi Kavach"
+    },
+    {
+      "name": "Kartik (Oct – Nov)",
+      "festival": "Karwa Chauth, Dhanteras, Diwali, Govardhan Puja, Devuthani Ekadashi",
+      "practice": "Shri Suktam Havan, Mahalakshmi-Kuber Puja, Deepdaan, Tulsi Vivah"
+    },
+    {
+      "name": "Margashirsha (Nov – Dec)",
+      "festival": "Mokshada Ekadashi, Gita Jayanti, Kalabhairav Ashtami",
+      "practice": "Bhagavad Gita Parayan, Om Namo Bhagavate Vasudevaya, Kalabhairav Puja"
+    },
+    {
+      "name": "Pausha (Dec – Jan)",
+      "festival": "Pausha Amavasya, Makar Sankranti (transition)",
+      "practice": "Surya Arghya, Aditya Hridaya Stotra, Til-Gud Daan, Pitru Tarpan"
+    },
+    {
+      "name": "Magha (Jan – Feb)",
+      "festival": "Mauni Amavasya, Vasant Panchami, Magha Purnima, Gupt Navratri",
+      "practice": "Saraswati Puja, Vidyarambh, Triveni/Shipra Holy Dip, Gayatri Havan"
+    },
+    {
+      "name": "Phalguna (Feb – Mar)",
+      "festival": "Maha Shivratri, Amalaki Ekadashi, Holika Dahan, Holi",
+      "practice": "Four-Prahar Rudrabhishek, Shiv Tandav Stotra, Holika Agni Parikrama"
+    }
+  ],
+  "guides": [
+    {
+      "name": "Diwali Puja",
+      "category": "Home puja",
+      "materials": [
+        "Diya",
+        "Flowers",
+        "Kalash",
+        "Lakshmi and Ganesha images",
+        "Prasad"
+      ],
+      "steps": [
+        "Prepare the altar.",
+        "Light a diya and make a Sankalp.",
+        "Worship Ganesha and make offerings to Lakshmi.",
+        "Conclude with aarti."
+      ]
+    },
+    {
+      "name": "Maha Shivratri",
+      "category": "Home puja",
+      "materials": [
+        "Shivling",
+        "Water",
+        "Bilva leaves",
+        "Diya"
+      ],
+      "steps": [
+        "Prepare the altar and state your Sankalp.",
+        "Offer water and chant Om Namah Shivaya.",
+        "Offer Bilva leaves and conclude with aarti."
+      ]
+    },
+    {
+      "name": "Krishna Janmashtami",
+      "category": "Home puja",
+      "materials": [
+        "Bal Gopal image",
+        "Tulsi",
+        "Panchamrit",
+        "Makhan mishri"
+      ],
+      "steps": [
+        "Prepare the altar or jhula.",
+        "Offer abhishek as customary.",
+        "Offer makhan mishri with Tulsi and sing a bhajan."
+      ]
+    },
+    {
+      "name": "Satyanarayan Katha",
+      "category": "Home puja",
+      "materials": [
+        "Vishnu image",
+        "Kalash",
+        "Tulsi",
+        "Fruit",
+        "Prasad"
+      ],
+      "steps": [
+        "Prepare the altar and make a Sankalp.",
+        "Make offerings to Vishnu.",
+        "Read the Katha and conclude with aarti."
+      ]
+    },
+    {
+      "name": "Ekadashi",
+      "category": "Vrat",
+      "materials": [],
+      "steps": [
+        "A Vishnu observance traditionally held twice each lunar month.",
+        "Dwadashi is the traditional day for Parana."
+      ]
+    },
+    {
+      "name": "Pradosh Vrat",
+      "category": "Vrat",
+      "materials": [],
+      "steps": [
+        "A Shiva observance associated with the thirteenth lunar day.",
+        "Evening worship traditionally concludes with a light meal."
+      ]
+    },
+    {
+      "name": "Navratri",
+      "category": "Vrat",
+      "materials": [],
+      "steps": [
+        "Nine nights honor forms of Devi.",
+        "Some traditions conclude with Kanya Puja on Ashtami or Navami."
+      ]
+    },
+    {
+      "name": "Vivah",
+      "category": "Karmkand",
+      "materials": [
+        "Garlands",
+        "Havan materials",
+        "Rice"
+      ],
+      "steps": [
+        "Discuss family customs with the officiating priest.",
+        "Plan the Mandap and Ganesh Puja.",
+        "Confirm the sequence for Panigrahana, Pheras and Saptapadi."
+      ]
+    },
+    {
+      "name": "Mundan",
+      "category": "Karmkand",
+      "materials": [
+        "Flowers",
+        "Fresh clothes"
+      ],
+      "steps": [
+        "Confirm the family customs and venue.",
+        "Arrange the ceremony with the priest and barber."
+      ]
+    },
+    {
+      "name": "Griha Pravesh",
+      "category": "Karmkand",
+      "materials": [
+        "Kalash",
+        "Flowers",
+        "Rice",
+        "Diya"
+      ],
+      "steps": [
+        "Prepare the entryway and altar.",
+        "Discuss Kalash entry, Ganesh worship and Vastu Shanti with your priest."
+      ]
+    },
+    {
+      "name": "Mahakal Darshan and Aarti",
+      "category": "Pilgrimage",
+      "materials": [],
+      "steps": [
+        "Mahakaleshwar is the Ujjain hub for Mahakal Darshan and Bhasma Aarti.",
+        "Confirm entry and booking rules with the temple before travel."
+      ]
+    },
+    {
+      "name": "Shipra Ghats and Siddhavat",
+      "category": "Pilgrimage",
+      "materials": [],
+      "steps": [
+        "Ram Ghat and Siddhavat are traditional sites for offerings on the Shipra.",
+        "Confirm the meeting point with your priest."
+      ]
+    },
+    {
+      "name": "Mangalnath",
+      "category": "Pilgrimage",
+      "materials": [],
+      "steps": [
+        "Mangalnath is associated with Mangal worship and Bhaat Puja.",
+        "Confirm arrangements directly with your priest."
+      ]
+    }
+  ],
+  "daan": [
+    {
+      "name": "Gau Seva",
+      "description": "Fodder and care for cattle."
+    },
+    {
+      "name": "Anna Daan",
+      "description": "Food for community service."
+    },
+    {
+      "name": "Til Daan",
+      "description": "Traditional sesame offering."
+    },
+    {
+      "name": "Rai / Sarson Daan",
+      "description": "Traditional mustard seed or oil offering."
+    },
+    {
+      "name": "Deep Daan",
+      "description": "Lamp offering at a temple or ghat."
+    },
+    {
+      "name": "Vastra and Paduka Daan",
+      "description": "Clothing, blankets or footwear."
+    },
+    {
+      "name": "Vidya and Aushadhi Daan",
+      "description": "Educational materials or medical aid."
+    }
+  ],
+  "consult": [
+    "Janam Kundli review",
+    "Career and business",
+    "Marriage and Kundli Milan",
+    "Vastu",
+    "Shubh Muhurat"
+  ],
+  "astrology": [
+    "Daily Panchang",
+    "Janam Kundli",
+    "Kundli Milan",
+    "Shubh Muhurat",
+    "Char Gochar"
+  ]
+}
