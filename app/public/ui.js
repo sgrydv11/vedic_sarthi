@@ -9,7 +9,7 @@ const formatDate = date => new Intl.DateTimeFormat('en-IN',{dateStyle:'medium',t
 const short = id => id.slice(0,8).toUpperCase()
 let user, catalog, googleSignIn
 let noticeTimer
-const nav = [['home','Home'],['poojas','Poojas'],['temples','Temples'],['chadhava','Chadhava & Daan'],['events','Events'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['consult','Consult']]
+const nav = [['home','Home'],['poojas','Poojas'],['temples','Temples'],['chadhava','Chadhava'],['events','Events'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['consult','Consult']]
 const names = {chadhava:'Chadhava',store:'Shop request',pooja:'Pooja',daan:'Daan',astrology:'Astrology',consultation:'Consultation',support:'Support'}
 const symbols = {mandir:'diya',temples:'pin',chadhava:'heart',devotional:'book',community:'chat',store:'list',poojas:'diya',panchang:'calendar',astrology:'stars',library:'book',daan:'heart',consult:'chat',jaap:'mala',requests:'list'}
 const paths = {
@@ -109,7 +109,7 @@ function panditProfiles() {
       '<div><h3>'+pandit.name+'</h3><p class="pandit-alias">'+pandit.knownAs+'</p><p class="eyebrow">'+pandit.topics+'</p><p>'+pandit.intro+'</p></div></article>').join('')+'</div></section>'
 }
 function home() {
-  const quick = [['poojas','Book a Pooja'],['panchang','Panchang'],['astrology','Kundli & Milan'],['jaap','Jaap Mala'],['library','Ritual Guides'],['consult','Consult an Acharya'],['requests','My Requests'],['mandir','My Mandir'],['temples','Temple Directory'],['chadhava','Chadhava & Daan'],['devotional','Devotional Library'],['community','Community'],['store','Store']]
+  const quick = [['poojas','Book a Pooja'],['panchang','Panchang'],['astrology','Kundli & Milan'],['jaap','Jaap Mala'],['library','Ritual Guides'],['consult','Consult an Acharya'],['requests','My Requests'],['mandir','My Mandir'],['temples','Temple Directory'],['chadhava','Chadhava'],['devotional','Devotional Library'],['community','Community'],['store','Store']]
   main.innerHTML = '<div class="welcome"><p>'+icon('pin')+' Ujjain, Madhya Pradesh</p><span>'+new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeZone:'Asia/Kolkata'}).format(new Date())+'</span></div>'+
     '<section class="hero"><div class="hero-copy"><p class="eyebrow">POOJA ON YOUR BEHALF</p><h1>Bring the sacred<br>closer to home.</h1><p>Request a pooja in Ujjain, follow your Sankalp from anywhere, and receive a complimentary ritual video.</p><div class="actions">'+link('Explore poojas','poojas','primary gold')+link('Plan a visit','library/pilgrimage','hero-link')+'</div></div><div class="hero-image" role="img" aria-label="Illustration of a sandstone temple at dawn"></div></section>'+
     '<div class="benefits"><span>'+icon('check')+' Complimentary ritual video</span><span>'+icon('check')+' Free Prasad</span><span>'+icon('check')+' Delivery within India</span></div>'+
@@ -171,7 +171,7 @@ function servicePage(kind,subpage,step) {
     const summary=isDaan?'Record a pledge for operations to review. The site collects no online donation.':
       isAstro?'Send your details for a Pandit to review. Results appear in My Requests when staff complete the review.':
       'Send a preferred date and format. Operations can confirm the appointment and share a meeting link.'
-    const chain=[[isDaan?'Chadhava & Daan':label,parent],[item.name,step?route:null]]
+    const chain=[[isDaan?'Chadhava':label,parent],[item.name,step?route:null]]
     if (step) return bookingPage(chain,item.name,summary,type,item.name)
     main.innerHTML=breadcrumbs(chain)+heading(label,escape(item.name),escape(item.description||summary))+
       '<section class="card info detail-body"><h2>What happens after you submit</h2><p>'+escape(summary)+'</p>'+
@@ -461,7 +461,7 @@ async function moderate(id,state,target) {
   catch(error){ inform(error.message);target.disabled=false }
 }
 async function devotionalPage(page,version,subpage,step) {
-  const [title,description]=page==='chadhava'?['Chadhava & Daan','Request a temple offering in your name or pledge support for Gau Seva and other causes.']:devotionPages[page]
+  const [title,description]=page==='chadhava'?['Chadhava','Request a temple offering in your name or pledge support for Gau Seva and other causes.']:devotionPages[page]
   main.innerHTML=heading('AVANTIKA',title,description)+'<p id="devotion-content">Loading…</p>'
   try {
     const result=await api('devotional')
@@ -754,7 +754,7 @@ function offeringDetail(id,step) {
   const offering=devotion.chadhava.find(item=>item.id===id)
   if (!offering||(step&&step!=='book')) return missingPage('chadhava','All offerings')
   const route='chadhava/'+offering.id
-  const chain=[['Chadhava & Daan','chadhava'],[offering.name,step?route:null]]
+  const chain=[['Chadhava','chadhava'],[offering.name,step?route:null]]
   if (step) return bookingPage(chain,'Request '+offering.name,'Choose a temple and share the name, Gotra if applicable, and Sankalp.','chadhava',offering.id)
   main.innerHTML=breadcrumbs(chain)+heading('TEMPLE OFFERING',escape(offering.name),escape(offering.description))+
     '<section class="card info detail-body"><h2>How it works</h2><ol class="steps"><li>Select a temple and submit your intention.</li><li>Operations reviews availability with the Pandit Ji.</li>'+
