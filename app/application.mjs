@@ -93,12 +93,15 @@ function booking(catalog, kind, input) {
   if (kind === 'pooja') {
     const ritual = catalog.rituals.find(item => item.id === input.service)
     if (!ritual) fail(400,'Choose a ritual.')
+    const venueId=field(input,'venue',50)
+    const venue=venueId&&topics.temples.find(temple=>temple.id===venueId&&temple.rituals.includes(ritual.id))
+    if (venueId&&!venue) fail(400,'This ritual is not listed for that temple.')
     if (!['proxy','visit'].includes(input.mode)) fail(400,'Choose a booking mode.')
     const deliver = input.mode === 'proxy' && input.deliver === true
     const pincode = deliver ? field(input,'pincode',6,true) : ''
     if (deliver && !/^[1-9]\d{5}$/.test(pincode)) fail(400,'Enter a six-digit Indian PIN code.')
     const delivery = deliver ? 99 : 0
-    return [ritual.name, {name,mode:input.mode,date:date(input,'date',true),gotra:field(input,'gotra',80),
+    return [ritual.name, {name,...(venue?{temple:venue.name}:{}),mode:input.mode,date:date(input,'date',true),gotra:field(input,'gotra',80),
       ...participation,nakshatra:field(input,'nakshatra',80),rashi:field(input,'rashi',80),
       sankalp:field(input,'sankalp',1000,true),language:field(input,'language',30,true), deliver,pincode,
       address:deliver ? field(input,'address',450,true) : '',fee:ritual.fee,delivery,total:ritual.fee === null ? null : ritual.fee + delivery}]

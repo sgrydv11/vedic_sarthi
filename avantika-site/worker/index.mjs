@@ -67,7 +67,7 @@ export default {
     const {encoded,type,download}=assets[url.pathname]
     const headers={
       'Content-Type':type,'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer',
-      'Content-Security-Policy':"default-src 'self'; media-src 'self' https:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+      'Content-Security-Policy':"default-src 'self'; img-src 'self' https://upload.wikimedia.org https://thumb.wikimedia.org; media-src 'self' https:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
     }
     if (download) headers['Content-Disposition']='attachment; filename="Avantika.apk"'
     return new Response(request.method==='HEAD'?null:Uint8Array.from(atob(encoded),c=>c.charCodeAt(0)),{headers})

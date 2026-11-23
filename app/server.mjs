@@ -41,7 +41,7 @@ const application = await createApplication({db,catalog,staffCode,google,verifyL
 const server = createServer((req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff')
   res.setHeader('Referrer-Policy','no-referrer')
-  res.setHeader('Content-Security-Policy',"default-src 'self'; media-src 'self' https:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")
+  res.setHeader('Content-Security-Policy',"default-src 'self'; img-src 'self' https://upload.wikimedia.org https://thumb.wikimedia.org; media-src 'self' https:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")
   if (!hosts.has(req.headers.host?.split(':')[0])) return res.writeHead(403).end('Use the local app address.')
   const path=new URL(req.url,'http://localhost').pathname
   const method=req.method

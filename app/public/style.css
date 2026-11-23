@@ -144,3 +144,9 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--wine);flex:none}
 .breadcrumb-link{color:var(--wine);text-decoration:underline}
 .detail-body{max-width:790px}
 .breadcrumbs+.page-heading{padding-top:23px}
+.temple-card{overflow:hidden}
+.temple-photo{margin:0;min-width:0}
+.temple-photo img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;background:var(--paper)}
+.temple-photo figcaption{padding:8px 0;font-size:.85rem;overflow-wrap:anywhere}
+.temple-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:700px){.temple-detail{grid-template-columns:1fr}}

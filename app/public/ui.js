@@ -248,7 +248,7 @@ function requestId() {
   const hex = Array.from(bytes, byte => byte.toString(16).padStart(2,'0')).join('')
   return [hex.slice(0,8),hex.slice(8,12),hex.slice(12,16),hex.slice(16,20),hex.slice(20)].join('-')
 }
-function requestForm(kind, service, event, inline=false) {
+function requestForm(kind, service, event, inline=false,venue) {
   if (!user) {
     if (inline) { $('#booking-form').innerHTML=button('Sign in to continue','data-auth'); return }
     return auth('login',()=>requestForm(kind,service,event))
@@ -316,7 +316,7 @@ function requestForm(kind, service, event, inline=false) {
       mode.onchange = delivery.onchange = updateQuote
       updateQuote()
     }
-    submitForm(values=>api('requests','POST',{id,kind,service,...values,campaign:event?.id,deliver:values.deliver==='on',amount:Number(values.amount)}),()=>{
+    submitForm(values=>api('requests','POST',{id,kind,service,...values,campaign:event?.id,venue:venue?.id,deliver:values.deliver==='on',amount:Number(values.amount)}),()=>{
       if (!inline) dialog.close()
       inform('Request submitted. Reference '+short(id)+'.')
       location.hash='requests/'+id
@@ -413,7 +413,7 @@ let devotion
 const devotionTitles = {darshan:'Darshan',audio:'Devotional audio',reading:'Readings',panchang:'Panchang notes',horoscope:'Horoscope',event:'Upcoming observances'}
 const devotionPages = {
   mandir:['My Mandir','Choose a deity and keep a private record of your virtual offerings.'],
-  temples:['Explore temples','Visit the Ujjain and Madhya Pradesh temple directory.'],
+  temples:['Explore temples across India','Find temples by state, city or deity. Read their stories and see related poojas.'],
   chadhava:['Chadhava','Request an offering in your name. Operations confirms availability and records fulfillment.'],
   devotional:['Devotional library','Read guides and explore darshan, devotional audio and dated updates published by operations.'],
   community:['Community','Share a devotional reflection. Operations reviews each post before it is public.'],
@@ -460,6 +460,16 @@ async function moderate(id,state,target) {
   try { await api('community/'+id,'PATCH',{state});render() }
   catch(error){ inform(error.message);target.disabled=false }
 }
+function externalTempleLink(label,url) {
+  return '<a class="breadcrumb-link" href="'+escape(url)+'" target="_blank" rel="noopener noreferrer">'+escape(label)+'</a>'
+}
+function templePhoto(temple,detail=false) {
+  if (!temple.photo) return detail?'<p class="card info">A verified photograph is not available for this listing.</p>':''
+  const photo=temple.photo
+  return '<figure class="temple-photo"><img src="'+escape(photo.url)+'" alt="'+escape(temple.name)+'" loading="lazy" width="480" height="320">'+
+    (detail?'<figcaption>'+externalTempleLink('Photo source',photo.source)+(photo.credit?' · '+escape(photo.credit):'')+
+      (photo.licenseUrl?' · '+externalTempleLink(photo.license,photo.licenseUrl):' · '+escape(photo.license))+'</figcaption>':'')+'</figure>'
+}
 async function devotionalPage(page,version,subpage,step) {
   const [title,description]=page==='chadhava'?['Chadhava','Request a temple offering in your name or pledge support for Gau Seva and other causes.']:devotionPages[page]
   main.innerHTML=heading('AVANTIKA',title,description)+'<p id="devotion-content">Loading…</p>'
@@ -483,9 +493,11 @@ async function devotionalPage(page,version,subpage,step) {
       if (subpage) {
         const temple=devotion.temples.find(item=>item.id===subpage)
         const media=temple?devotion.content.filter(item=>item.temple===temple.id):[]
-        if (!temple||(step&&!['darshan','events'].includes(step))) return missingPage('temples','All temples')
+        const ritual=temple?.rituals.includes(step)?catalog.rituals.find(item=>item.id===step):null
+        if (!temple||(step&&!ritual&&!['darshan','events','poojas'].includes(step))) return missingPage('temples','All temples')
         const route='temples/'+temple.id
         const chain=[['Temples','temples'],[temple.name,step?route:null]]
+        if (ritual) return bookingPage([...chain,['Poojas',route+'/poojas']],ritual.name,'Request '+ritual.name+' at '+temple.name+'. Operations will confirm arrangements.','pooja',ritual.id,null,temple)
         if (step==='events') {
           const {events}=await api('events')
           if (version!==renderNumber) return
@@ -495,20 +507,40 @@ async function devotionalPage(page,version,subpage,step) {
               link('View event','events/'+event.id,'secondary')+'</article>').join('')):'<p>No events are scheduled here yet.</p>')
           return
         }
-        main.innerHTML=breadcrumbs(step?[...chain,['Darshan']]:chain)+heading(escape(temple.city+' · '+temple.deity),
-          escape(step?'Darshan at '+temple.name:temple.name),escape(temple.description))+
+        if (step==='poojas') {
+          const rituals=catalog.rituals.filter(item=>temple.rituals.includes(item.id))
+          main.innerHTML=breadcrumbs([...chain,['Poojas']])+heading('TEMPLE POOJAS',escape(temple.name),'Request a listed pooja for this temple. Operations confirms availability.')+
+            (rituals.length?grid(rituals.map(item=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+
+              link('Request pooja',route+'/'+item.id,'secondary')+'</article>').join('')):'<p>No poojas are listed for this temple yet.</p>')
+          return
+        }
+        main.innerHTML=breadcrumbs(step?[...chain,['Darshan']]:chain)+heading(escape(temple.city+' · '+temple.state),
+          escape(step?'Darshan at '+temple.name:temple.name),'')+
           (step?'<section class="section"><h2>Darshan and readings</h2>'+
             (media.length?grid(media.map(contentCard).join('')):'<p>Temple media will appear here when operations publishes it.</p>')+'</section>':
-            '<div class="actions">'+link('Darshan and readings',route+'/darshan')+link('Temple events',route+'/events','secondary')+'</div>')
+            '<div class="temple-detail">'+templePhoto(temple,true)+'<section class="card info"><p class="eyebrow">'+escape(temple.deity)+'</p><h2>Story and significance</h2>'+
+            '<p>'+escape(temple.description)+'</p>'+(temple.practices.length?'<h3>Traditions and observances</h3><ul>'+
+            temple.practices.map(item=>'<li>'+escape(item)+'</li>').join('')+'</ul>':'')+(temple.address?'<h3>Address</h3><p>'+escape(temple.address)+'</p>':'')+
+            '<div class="actions">'+(temple.rituals.length?link('Temple poojas',route+'/poojas'):'')+link('Darshan and readings',route+'/darshan','secondary')+
+            link('Temple events',route+'/events','secondary')+'</div>'+
+            '<div class="actions">'+(temple.guide?'<span>Source: Madhya Pradesh temple guide</span>':'')+
+            (temple.directorySource?externalTempleLink('Sri Mandir listing',temple.directorySource):'')+
+            (temple.reference?externalTempleLink('Official reference',temple.reference):temple.wiki?externalTempleLink('Temple reference','https://en.wikipedia.org/wiki/'+encodeURIComponent(temple.wiki.replaceAll(' ','_'))):'')+'</div></section></div>')
       } else {
-        target.outerHTML='<div class="filters"><label class="search">Search temples<input id="temple-search" placeholder="Name, city or deity"></label></div><div class="grid" id="temple-grid"></div>'
+        const states=[...new Set(devotion.temples.map(item=>item.state))].sort()
+        target.outerHTML='<div class="filters"><label>Search temples<input id="temple-search" placeholder="Name, city or deity"></label>'+
+          select('templeState','State or territory',[['','All states'],...states])+'</div><p id="temple-count" role="status"></p><div class="grid" id="temple-grid"></div>'
         const filter=()=>{
           const query=$('#temple-search').value.trim().toLowerCase()
-          $('#temple-grid').innerHTML=devotion.temples.filter(item=>[item.name,item.city,item.deity].some(value=>value.toLowerCase().includes(query))).map(item=>
-            '<article class="card info"><h3>'+escape(item.name)+'</h3><p class="eyebrow">'+escape(item.city+' · '+item.deity)+'</p><p>'+escape(item.description)+'</p>'+
-            link('View temple','temples/'+item.id,'secondary')+'</article>').join('')||'<p>No temples match.</p>'
+          const state=$('select[name=templeState]').value
+          const shown=devotion.temples.filter(item=>(!state||item.state===state)&&[item.name,item.city,item.deity,item.state].some(value=>value.toLowerCase().includes(query)))
+          $('#temple-count').textContent=shown.length+' '+(shown.length===1?'place':'places')
+          $('#temple-grid').innerHTML=shown.map(item=>
+            '<article class="card temple-card">'+templePhoto(item)+'<div class="info"><h3>'+escape(item.name)+'</h3><p class="eyebrow">'+escape(item.city+' · '+item.state)+'</p>'+
+            '<p>'+escape(item.description)+'</p><div class="actions">'+link('View temple','temples/'+item.id,'secondary')+
+            (item.rituals.length?link('Temple poojas','temples/'+item.id+'/poojas','secondary'):'')+'</div></div></article>').join('')||'<p>No temples match.</p>'
         }
-        $('#temple-search').oninput=filter
+        $('#temple-search').oninput=$('select[name=templeState]').onchange=filter
         filter()
       }
     } else if (page==='chadhava') {
@@ -731,10 +763,10 @@ function breadcrumbs(items) {
 function missingPage(path,label) {
   main.innerHTML=heading('AVANTIKA','Page unavailable','This item may have moved or been taken off the listing.')+link(label,path,'secondary')
 }
-function bookingPage(crumbs,title,summary,kind,service,event) {
+function bookingPage(crumbs,title,summary,kind,service,event,venue) {
   main.innerHTML=breadcrumbs([...crumbs,['Request']])+heading('SERVICE REQUEST',escape(title),escape(summary))+
     '<section id="booking-form" class="card info detail-body"></section>'
-  requestForm(kind,service,event,true)
+  requestForm(kind,service,event,true,venue)
 }
 function ritualDetail(id,step) {
   const ritual=catalog.rituals.find(item=>item.id===id)

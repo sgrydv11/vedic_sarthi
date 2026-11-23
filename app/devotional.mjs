@@ -1,14 +1,10 @@
+import { templeDirectory } from './temples.mjs'
+import { templePhotos } from './temple-photos.mjs'
 export const deities = ['Shiva','Ganesha','Vishnu','Durga','Hanuman','Krishna']
 export const offerings = ['Flowers','Diya','Prasad']
 export const sections = ['darshan','audio','reading','panchang','horoscope','event']
 export const topics = {
-  temples: [
-    {id:'mahakal',name:'Shri Mahakaleshwar',city:'Ujjain',description:'Jyotirlinga and the center of Mahakal worship in Avantika.',deity:'Shiva'},
-    {id:'mangalnath',name:'Mangalnath Temple',city:'Ujjain',description:'Traditional site for Mangal Bhaat Puja.',deity:'Shiva'},
-    {id:'harsiddhi',name:'Harsiddhi Temple',city:'Ujjain',description:'A Devi temple near the Mahakal precinct.',deity:'Durga'},
-    {id:'gopal',name:'Gopal Mandir',city:'Ujjain',description:'A temple dedicated to Krishna in the old city.',deity:'Krishna'},
-    {id:'omkareshwar',name:'Shri Omkareshwar',city:'Mandhata',description:'A Jyotirlinga on the Narmada.',deity:'Shiva'}
-  ],
+  temples: templeDirectory.map(temple=>({...temple,photo:templePhotos[temple.id]||null})),
   chadhava: [
     {id:'flower',name:'Flower offering',description:'Request a flower offering in your name.'},
     {id:'lamp',name:'Deep offering',description:'Request a diya offering with your Sankalp.'},
