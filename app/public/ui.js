@@ -9,7 +9,7 @@ const formatDate = date => new Intl.DateTimeFormat('en-IN',{dateStyle:'medium',t
 const short = id => id.slice(0,8).toUpperCase()
 let user, catalog, googleSignIn
 let noticeTimer
-const nav = [['home','Home'],['poojas','Poojas'],['temples','Temples'],['chadhava','Chadhava'],['events','Events'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['daan','Daan'],['consult','Consult']]
+const nav = [['home','Home'],['poojas','Poojas'],['temples','Temples'],['chadhava','Chadhava & Daan'],['events','Events'],['panchang','Panchang'],['astrology','Astrology'],['library','Library'],['consult','Consult']]
 const names = {chadhava:'Chadhava',store:'Shop request',pooja:'Pooja',daan:'Daan',astrology:'Astrology',consultation:'Consultation',support:'Support'}
 const symbols = {mandir:'diya',temples:'pin',chadhava:'heart',devotional:'book',community:'chat',store:'list',poojas:'diya',panchang:'calendar',astrology:'stars',library:'book',daan:'heart',consult:'chat',jaap:'mala',requests:'list'}
 const paths = {
@@ -109,7 +109,7 @@ function panditProfiles() {
       '<div><h3>'+pandit.name+'</h3><p class="pandit-alias">'+pandit.knownAs+'</p><p class="eyebrow">'+pandit.topics+'</p><p>'+pandit.intro+'</p></div></article>').join('')+'</div></section>'
 }
 function home() {
-  const quick = [['poojas','Book a Pooja'],['panchang','Panchang'],['astrology','Kundli & Milan'],['daan','Gau Seva & Daan'],['jaap','Jaap Mala'],['library','Ritual Guides'],['consult','Consult an Acharya'],['requests','My Requests'],['mandir','My Mandir'],['temples','Temple Directory'],['chadhava','Chadhava'],['devotional','Devotional Library'],['community','Community'],['store','Store']]
+  const quick = [['poojas','Book a Pooja'],['panchang','Panchang'],['astrology','Kundli & Milan'],['jaap','Jaap Mala'],['library','Ritual Guides'],['consult','Consult an Acharya'],['requests','My Requests'],['mandir','My Mandir'],['temples','Temple Directory'],['chadhava','Chadhava & Daan'],['devotional','Devotional Library'],['community','Community'],['store','Store']]
   main.innerHTML = '<div class="welcome"><p>'+icon('pin')+' Ujjain, Madhya Pradesh</p><span>'+new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeZone:'Asia/Kolkata'}).format(new Date())+'</span></div>'+
     '<section class="hero"><div class="hero-copy"><p class="eyebrow">POOJA ON YOUR BEHALF</p><h1>Bring the sacred<br>closer to home.</h1><p>Request a pooja in Ujjain, follow your Sankalp from anywhere, and receive a complimentary ritual video.</p><div class="actions">'+link('Explore poojas','poojas','primary gold')+link('Plan a visit','library/pilgrimage','hero-link')+'</div></div><div class="hero-image" role="img" aria-label="Illustration of a sandstone temple at dawn"></div></section>'+
     '<div class="benefits"><span>'+icon('check')+' Complimentary ritual video</span><span>'+icon('check')+' Free Prasad</span><span>'+icon('check')+' Delivery within India</span></div>'+
@@ -163,14 +163,15 @@ function servicePage(kind,subpage,step) {
   const items = isDaan ? catalog.daan : catalog[isAstro?'astrology':'consult'].map(name=>({name}))
   if (subpage) {
     const item=items.find(entry=>slug(entry.name)===subpage)
-    if (!item||(step&&step!=='book')) return missingPage(kind,'All services')
+    if (!item||(step&&step!=='book')) return missingPage(isDaan?'chadhava':kind,'All services')
     const label=isDaan?'Daan':isAstro?'Astrology':'Consultations'
-    const route=kind+'/'+subpage
+    const parent=isDaan?'chadhava':kind
+    const route=isDaan?'chadhava/daan-'+subpage:kind+'/'+subpage
     const type=isDaan?'daan':isAstro?'astrology':'consultation'
     const summary=isDaan?'Record a pledge for operations to review. The site collects no online donation.':
       isAstro?'Send your details for a Pandit to review. Results appear in My Requests when staff complete the review.':
       'Send a preferred date and format. Operations can confirm the appointment and share a meeting link.'
-    const chain=[[label,kind],[item.name,step?route:null]]
+    const chain=[[isDaan?'Chadhava & Daan':label,parent],[item.name,step?route:null]]
     if (step) return bookingPage(chain,item.name,summary,type,item.name)
     main.innerHTML=breadcrumbs(chain)+heading(label,escape(item.name),escape(item.description||summary))+
       '<section class="card info detail-body"><h2>What happens after you submit</h2><p>'+escape(summary)+'</p>'+
@@ -460,7 +461,7 @@ async function moderate(id,state,target) {
   catch(error){ inform(error.message);target.disabled=false }
 }
 async function devotionalPage(page,version,subpage,step) {
-  const [title,description]=devotionPages[page]
+  const [title,description]=page==='chadhava'?['Chadhava & Daan','Request a temple offering in your name or pledge support for Gau Seva and other causes.']:devotionPages[page]
   main.innerHTML=heading('AVANTIKA',title,description)+'<p id="devotion-content">Loading…</p>'
   try {
     const result=await api('devotional')
@@ -511,10 +512,31 @@ async function devotionalPage(page,version,subpage,step) {
         filter()
       }
     } else if (page==='chadhava') {
+      if (subpage?.startsWith('daan-')) return servicePage('daan',subpage.slice(5),step)
       if (subpage) return offeringDetail(subpage,step)
-
-      target.outerHTML=grid(devotion[page].map(item=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+
-        link('View offering','chadhava/'+item.id,'secondary')+'</article>').join(''))
+      const {events}=await api('events')
+      if (version!==renderNumber) return
+      const scheduled=events.filter(event=>event.kind==='chadhava'&&event.active&&event.day>=today())
+      const headingLinks='<nav class="tabs" aria-label="Giving sections">'+
+        [['offerings','Temple offerings'],['daan','Daan & Gau Seva'],['how','How it works']].map(([id,label])=>button(label,'data-giving-section="'+id+'"','secondary')).join('')+'</nav>'
+      const card=(item,path,label)=>'<article class="card info"><h3>'+escape(item.name)+'</h3><p>'+escape(item.description)+'</p>'+link(label,path,'secondary')+'</article>'
+      target.outerHTML=headingLinks+
+        '<section id="giving-offerings" class="section"><h2>Upcoming temple offerings</h2>'+
+        (scheduled.length?grid(scheduled.map(event=>{
+          const temple=devotion.temples.find(item=>item.id===event.temple)
+          return card({name:event.title,description:[event.day,temple?.name,event.description].filter(Boolean).join(' · ')},'events/'+event.id,'View event')
+        }).join('')):'<p>No dated offerings are scheduled. You can still request an offering below.</p>')+
+        '<h2 class="section">Request a temple offering</h2>'+grid(devotion.chadhava.map(item=>card(item,'chadhava/'+item.id,'View offering')).join(''))+'</section>'+
+        '<section id="giving-daan" class="section"><h2>Daan & Gau Seva</h2><p>Choose a cause and record a pledge for Operations to review.</p>'+
+        grid(catalog.daan.map(item=>card(item,'chadhava/daan-'+slug(item.name),'View cause')).join(''))+'</section>'+
+        '<section id="giving-how" class="section detail-body"><h2>How it works</h2><ol class="steps"><li>Choose an offering, event, or cause.</li>'+
+        '<li>Add the participant names and Sankalp for a temple offering, or enter a pledge amount for Daan.</li>'+
+        '<li>Follow staff review, fulfillment updates and any evidence in My Requests.</li></ol>'+
+        '<div class="actions">'+link('My requests','requests')+link('Get help','support','secondary')+'</div>'+
+        '<h2 class="section">Common questions</h2><details><summary>Can I include my family?</summary><p>Yes. Choose Family on a temple offering and add the additional names.</p></details>'+
+        '<details><summary>Where will I see fulfillment evidence?</summary><p>Open the request in your account. Staff can attach a supporting link after fulfillment.</p></details>'+
+        '<details><summary>Can I pay or donate online?</summary><p>This page records offering requests and Daan pledges. Operations handles payment separately.</p></details></section>'
+      for (const control of main.querySelectorAll('[data-giving-section]')) control.onclick=()=>document.getElementById('giving-'+control.dataset.givingSection)?.scrollIntoView()
     } else if (page==='community') {
       target.outerHTML=button('Share a reflection','data-community-post')+'<div class="grid section">'+(panel.posts.map(post=>
         '<article class="card info"><h3>'+escape(post.title)+'</h3><p class="eyebrow">'+escape(post.author+' · '+post.state)+'</p><p class="preserve-text">'+escape(post.text)+'</p>'+
@@ -732,7 +754,7 @@ function offeringDetail(id,step) {
   const offering=devotion.chadhava.find(item=>item.id===id)
   if (!offering||(step&&step!=='book')) return missingPage('chadhava','All offerings')
   const route='chadhava/'+offering.id
-  const chain=[['Chadhava','chadhava'],[offering.name,step?route:null]]
+  const chain=[['Chadhava & Daan','chadhava'],[offering.name,step?route:null]]
   if (step) return bookingPage(chain,'Request '+offering.name,'Choose a temple and share the name, Gotra if applicable, and Sankalp.','chadhava',offering.id)
   main.innerHTML=breadcrumbs(chain)+heading('TEMPLE OFFERING',escape(offering.name),escape(offering.description))+
     '<section class="card info detail-body"><h2>How it works</h2><ol class="steps"><li>Select a temple and submit your intention.</li><li>Operations reviews availability with the Pandit Ji.</li>'+
@@ -767,7 +789,12 @@ function productDetail(item) {
 
 function render() {
   const version=++renderNumber
-  const [page,subpage,step,extra]=(location.hash.slice(1)||'home').split('/')
+  let [page,subpage,step,extra]=(location.hash.slice(1)||'home').split('/')
+  if (page==='daan'&&!extra) {
+    subpage=subpage?'daan-'+subpage:undefined
+    page='chadhava'
+    history.replaceState(history.state,'','#'+[page,subpage,step].filter(Boolean).join('/'))
+  }
   if (extra) return missingPage('home','Home')
   const items=user&&user.role!=='devotee'?[...nav,['requests','Dashboard']]:nav
   $('#nav').innerHTML=items.map(([path,label])=>'<a href="#'+path+'" '+(page===path?'aria-current="page"':'')+'>'+label+'</a>').join('')
@@ -775,7 +802,7 @@ function render() {
   if (!page||page==='home') home()
   else if (page==='poojas') subpage?ritualDetail(subpage,step):poojas()
   else if (page==='panchang') panchang(version)
-  else if (['astrology','daan','consult'].includes(page)) servicePage(page,subpage,step)
+  else if (['astrology','consult'].includes(page)) servicePage(page,subpage,step)
   else if (page==='library') library(subpage,step)
   else if (page==='jaap') jaap()
   else if (page==='requests') requests(version,subpage)
