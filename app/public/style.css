@@ -170,3 +170,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--wine);flex:none}
 #panchang-error:empty{display:none}
 @media(max-width:720px){.panchang-controls,.panchang-columns{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.panchang-columns{grid-template-columns:1fr}.panchang-slots li{flex-wrap:wrap}}
+.prayer-search{display:block;max-width:28rem;margin-block:1rem}
+.prayer-search input{width:100%}
+.prayer-text{font-size:1.2rem;line-height:1.9;overflow-wrap:anywhere}
+.prayer-text p{margin-block:0 1rem}

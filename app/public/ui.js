@@ -166,7 +166,46 @@ function servicePage(kind,subpage,step) {
     '<div class="grid">'+items.map(item=>'<article class="card info"><span class="feature-icon">'+icon(symbols[kind])+'</span><h3>'+escape(item.name)+'</h3>'+
     (item.description?'<p>'+escape(item.description)+'</p>':'')+link('View details',kind+'/'+slug(item.name),'secondary')+'</article>').join('')+'</div>'+(!isDaan&&!isAstro?panditProfiles():'')
 }
+const prayerTypes = [['mantra','Mantra'],['aarti','Aarti'],['chalisa','Chalisa']]
+function libraryTabs(active) {
+  const sections=[['all','Ritual guides'],...prayerTypes]
+  return '<nav class="tabs" aria-label="Library sections">'+sections.map(([id,label])=>
+    '<a href="#library/'+id+'"'+(id===active?' class="selected" aria-current="page"':'')+'>'+label+'</a>').join('')+'</nav>'
+}
+function prayerLibrary(category, article) {
+  const label=prayerTypes.find(([id])=>category===id)[1]
+  const entries=(catalog.prayers||[]).filter(item=>item.category===category)
+  const path='library/'+category
+  if (article) {
+    const entry=entries.find(item=>item.id===article)
+    if (!entry) return missingPage(path,'All '+label+' entries')
+    const text=entry.verses?.length
+      ? '<section class="prayer-text" lang="hi" aria-label="Devotional text in Devanagari">'+entry.verses.map(verse=>'<p>'+escape(verse).replaceAll('\n','<br>')+'</p>').join('')+'</section>'
+      : ''
+    const source=entry.source?'<p><a class="secondary" href="'+escape(entry.source)+'" target="_blank" rel="noopener noreferrer">Read at Sri Mandir ↗</a></p>':''
+    main.innerHTML=breadcrumbs([['Library','library'],[label,path],[entry.title]])+
+      heading(label,escape(entry.title),escape(entry.summary||''))+
+      '<article class="card info detail-body">'+text+source+'</article>'
+    return
+  }
+  main.innerHTML=heading('DEVOTIONAL LIBRARY',label,'')+libraryTabs(category)+
+    '<label class="prayer-search">Search '+label+'<input id="prayer-search" type="search" placeholder="Search by title"></label>'+
+    '<p id="prayer-count" role="status"></p><div id="prayer-list" class="grid"></div>'
+  const search=$('#prayer-search')
+  const show=()=>{
+    const query=search.value.normalize('NFKC').toLowerCase().trim()
+    const matches=entries.filter(item=>[item.title,item.hindi,item.id].filter(Boolean).some(value=>value.normalize('NFKC').toLowerCase().includes(query)))
+    $('#prayer-count').textContent=matches.length+' '+(matches.length===1?'entry':'entries')
+    $('#prayer-list').innerHTML=matches.length?matches.map(item=>
+      '<article class="card info"><h3>'+escape(item.title)+'</h3>'+
+      (item.hindi?'<p lang="hi">'+escape(item.hindi)+'</p>':'')+
+      link('Read '+label,path+'/'+item.id,'secondary')+'</article>').join(''):'<p>No entries match your search.</p>'
+  }
+  search.addEventListener('input',show)
+  show()
+}
 function library(subpage,article) {
+  if (prayerTypes.some(([id])=>id===subpage)) return prayerLibrary(subpage,article)
   const types = [['all','All guides'],['home','Home puja'],['vrat','Vrat'],['karmkand','Karmkand'],['pilgrimage','Pilgrimage']]
   const category = types.find(([id])=>subpage===id)?.[1] || 'All guides'
   if (article) {
@@ -178,7 +217,7 @@ function library(subpage,article) {
     wireChecklist(guide,main)
     return
   }
-  main.innerHTML = heading('PRACTICE & TRADITION','Ritual library','Follow a home puja, prepare for a family ceremony or plan a visit to Ujjain.')+
+  main.innerHTML = heading('PRACTICE & TRADITION','Library','Read devotional prayers and guides for home puja, vrat, ceremonies and pilgrimage.')+libraryTabs('all')+
     '<nav class="tabs" aria-label="Guide categories">'+types.map(([id,label])=>'<a class="'+(label===category?'selected':'')+'" href="#library/'+id+'">'+label+'</a>').join('')+'</nav><div class="grid">'+catalog.guides
       .filter(g=>category==='All guides'||g.category===category).map(g=>'<article class="card info"><span class="eyebrow">'+g.category+'</span><h3>'+g.name+'</h3><p>'+g.steps[0]+'</p>'+link('Read guide','library/'+(subpage||'all')+'/'+slug(g.name),'secondary')+'</article>').join('')+'</div>'
 }
