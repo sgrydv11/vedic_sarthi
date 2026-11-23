@@ -559,13 +559,15 @@
       "id": "chhath-puja-mantra",
       "category": "mantra",
       "title": "Chhath Puja Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/chhath-puja-mantra"
+      "summary": "Chhath worship centers on offering water to the setting and rising Sun. The salutation below can accompany an offering to Surya. Families also sing regional songs in honor of Chhathi Maiya.",
+      "verses": [
+        "ॐ सूर्याय नमः॥"
+      ]
     },
     {
       "id": "devi-durga-ke-mantra-aarth-or-labh",
       "category": "mantra",
       "title": "Durga Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/devi-durga-ke-mantra-aarth-or-labh",
       "hindi": "दुर्गा मंत्र",
       "summary": "A salutation to Durga in her form as bestower of refuge.",
       "verses": [
@@ -576,7 +578,6 @@
       "id": "kali-mantra-mantra",
       "category": "mantra",
       "title": "Kali Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/kali-mantra-mantra",
       "hindi": "काली मंत्र",
       "summary": "A short salutation to the goddess Kali.",
       "verses": [
@@ -587,7 +588,6 @@
       "id": "shree-agani-mantra",
       "category": "mantra",
       "title": "Agni Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/shree-agani-mantra",
       "hindi": "अग्नि मंत्र",
       "summary": "The opening verse of the Rigveda calls on Agni as the priest of the sacrifice.",
       "verses": [
@@ -598,7 +598,6 @@
       "id": "hanuman-ji-ke-mantra-aarth-or-labh",
       "category": "mantra",
       "title": "Hanuman Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/hanuman-ji-ke-mantra-aarth-or-labh",
       "hindi": "हनुमान मंत्र",
       "summary": "A short salutation to Hanuman.",
       "verses": [
@@ -609,13 +608,15 @@
       "id": "brihaspati-grah",
       "category": "mantra",
       "title": "Brihaspati Grah Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/brihaspati-grah"
+      "summary": "Brihaspati is the preceptor of the devas and is associated with Jupiter. A simple name invocation is commonly used in Thursday worship.",
+      "verses": [
+        "ॐ बृहस्पतये नमः॥"
+      ]
     },
     {
       "id": "shiv-mantra-aarth-or-labh",
       "category": "mantra",
       "title": "Shiva Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/shiv-mantra-aarth-or-labh",
       "hindi": "शिव मंत्र",
       "summary": "The Panchakshari salutation to Shiva is often recited with Om at the beginning.",
       "verses": [
@@ -626,13 +627,15 @@
       "id": "rudra-mantra",
       "category": "mantra",
       "title": "Rudra Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/rudra-mantra"
+      "summary": "Rudra is invoked in the Yajurveda’s Shri Rudram. Its Namakam section offers repeated salutations to Rudra in many forms.",
+      "verses": [
+        "नमस्ते रुद्र मन्यव उतोत इषवे नमः। उत ते धन्वने नमो बाहुभ्यामुत ते नमः॥"
+      ]
     },
     {
       "id": "sri-lakshmi-mata-ke-mantra",
       "category": "mantra",
       "title": "Laxmi Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/sri-lakshmi-mata-ke-mantra",
       "hindi": "लक्ष्मी मंत्र",
       "summary": "A short salutation to Mahalakshmi.",
       "verses": [
@@ -643,13 +646,12 @@
       "id": "govardhan-mantra",
       "category": "mantra",
       "title": "Govardhan Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/govardhan-mantra"
+      "summary": "Govardhan worship recalls Krishna lifting the hill to shelter the people of Braj. The offering of Annakut, a presentation of many foods, is central to many observances."
     },
     {
       "id": "ganesh-ji-ke-mantra",
       "category": "mantra",
       "title": "Ganesha Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/ganesh-ji-ke-mantra",
       "hindi": "गणेश मंत्र",
       "summary": "A short invocation to Ganapati, often recited at the start of worship.",
       "verses": [
@@ -660,85 +662,111 @@
       "id": "radha-mantra",
       "category": "mantra",
       "title": "Radha Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/radha-mantra"
+      "summary": "Radha is honored in Braj traditions for her devotion to Krishna. The repeated name Radhe is an accessible form of remembrance.",
+      "verses": [
+        "राधे राधे॥"
+      ]
     },
     {
       "id": "narayan-mantra",
       "category": "mantra",
       "title": "Narayan Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/narayan-mantra"
+      "summary": "Narayana worship often uses the eight-syllable salutation below. It is widely associated with Vaishnava devotional practice.",
+      "verses": [
+        "ॐ नमो नारायणाय॥"
+      ]
     },
     {
       "id": "maha-rudra-abhishek",
       "category": "mantra",
       "title": "Maha Rudrabhishek Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/maha-rudra-abhishek"
+      "summary": "Maha Rudrabhishek combines ritual bathing of a Shiva linga with recitation from the Shri Rudram. A formal service may also include the Chamakam and follow the temple’s recitation sequence."
     },
     {
       "id": "shakti-mantra",
       "category": "mantra",
       "title": "Shakti Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/shakti-mantra"
+      "summary": "Shakti names the divine power honored through many forms of the Goddess. The Devi Mahatmya repeatedly salutes her as present in living beings."
     },
     {
       "id": "hanuman-moola-mantra-and-benefits",
       "category": "mantra",
       "title": "Hanuman Moola Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/hanuman-moola-mantra-and-benefits"
+      "summary": "A moola mantra is a principal invocation in a particular tradition. The short name salutation below is one commonly used form of remembrance for Hanuman.",
+      "verses": [
+        "ॐ हनुमते नमः॥"
+      ]
     },
     {
       "id": "krishna-mantra",
       "category": "mantra",
       "title": "Krishna Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/krishna-mantra"
+      "summary": "Krishna is remembered in worship through his names, including Govinda and Gopala. The following short invocation addresses him directly.",
+      "verses": [
+        "ॐ नमो भगवते वासुदेवाय॥"
+      ]
     },
     {
       "id": "dhanwantari-mantra",
       "category": "mantra",
       "title": "Dhanvantari Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/dhanwantari-mantra"
+      "summary": "Dhanvantari is associated with Ayurveda and the appearance of amrita during the churning of the ocean. This name salutation can be used in devotional worship.",
+      "verses": [
+        "ॐ धन्वन्तरये नमः॥"
+      ]
     },
     {
       "id": "sita-mantra",
       "category": "mantra",
       "title": "Sita Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/sita-mantra"
+      "summary": "Sita is honored in Ramayana traditions for resolve, dignity and devotion. Devotees often remember her together with Rama.",
+      "verses": [
+        "ॐ सीतायै नमः॥"
+      ]
     },
     {
       "id": "ram-mantra",
       "category": "mantra",
       "title": "Ram Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/ram-mantra"
+      "summary": "Rama’s name is repeated in many bhakti traditions. The short salutation below can be used for quiet repetition before or after puja.",
+      "verses": [
+        "ॐ श्रीरामाय नमः॥"
+      ]
     },
     {
       "id": "tulsi-mantra",
       "category": "mantra",
       "title": "Tulsi Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/tulsi-mantra"
+      "summary": "Tulsi is sacred in many Vaishnava homes. Daily worship may include watering the plant and reciting a salutation to its personified form.",
+      "verses": [
+        "ॐ तुलस्यै नमः॥"
+      ]
     },
     {
       "id": "annapurna-mantra",
       "category": "mantra",
       "title": "Annapurna Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/annapurna-mantra"
+      "summary": "Annapurna represents the nourishment that sustains life. Her remembrance before a meal expresses gratitude for food and for those who provide it.",
+      "verses": [
+        "ॐ अन्नपूर्णायै नमः॥"
+      ]
     },
     {
       "id": "navgrah-mantra-or-unke-laabh",
       "category": "mantra",
       "title": "Navagraha Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/navgrah-mantra-or-unke-laabh"
+      "summary": "Navagraha worship honors nine celestial figures, including the Sun and Moon and the lunar nodes Rahu and Ketu. Individual invocations and a collective hymn serve different parts of the ritual."
     },
     {
       "id": "12-rashi-ke-mantra-or-unke-laabh",
       "category": "mantra",
       "title": "Mantras of the 12 Zodiac Signs",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/12-rashi-ke-mantra-or-unke-laabh"
+      "summary": "The twelve rashis are zodiac signs used in Jyotisha. Traditions may assign invocations according to a sign’s ruling graha or according to a separate devotional lineage, so the correspondences can vary."
     },
     {
       "id": "gayatri-mantra",
       "category": "mantra",
       "title": "Gayatri Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/gayatri-mantra",
       "hindi": "गायत्री मंत्र",
       "summary": "A Vedic invocation to Savitr that asks for illumination of the mind.",
       "verses": [
@@ -749,7 +777,6 @@
       "id": "saraswati-maa-ke-mantra-aarth-or-labh",
       "category": "mantra",
       "title": "Saraswati Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/saraswati-maa-ke-mantra-aarth-or-labh",
       "hindi": "सरस्वती मंत्र",
       "summary": "An invocation to Saraswati, traditionally associated with learning and the arts.",
       "verses": [
@@ -760,25 +787,30 @@
       "id": "janeu-mantra",
       "category": "mantra",
       "title": "Janeu Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/janeu-mantra"
+      "summary": "The janeu is the sacred thread associated with upanayana in several Hindu traditions. Prayers for receiving or renewing it are taught according to family and Vedic lineage."
     },
     {
       "id": "padhai-me-man-lagane-ka-mantra",
       "category": "mantra",
       "title": "Mantra to Focus on Studies",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/padhai-me-man-lagane-ka-mantra"
+      "summary": "A brief Saraswati invocation can serve as a devotional opening before reading or study. It honors the goddess associated with speech, music and learning.",
+      "verses": [
+        "ॐ ऐं सरस्वत्यै नमः॥"
+      ]
     },
     {
       "id": "vaidik-mantra",
       "category": "mantra",
       "title": "Vedic Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/vaidik-mantra"
+      "summary": "Vedic mantras include hymns, sacrificial formulas and sung verses. Their recitation preserves accent and meter. The opening verse of the Rigveda invokes Agni.",
+      "verses": [
+        "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजम्। होतारं रत्नधातमम्॥"
+      ]
     },
     {
       "id": "vishnu-ji-ke-mantra",
       "category": "mantra",
       "title": "Vishnu Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/vishnu-ji-ke-mantra",
       "hindi": "विष्णु मंत्र",
       "summary": "A devotional invocation to Narayana.",
       "verses": [
@@ -789,49 +821,69 @@
       "id": "shanidev-ke-mantra-aarth-or-labh",
       "category": "mantra",
       "title": "Shani Dev Mantras",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/shanidev-ke-mantra-aarth-or-labh"
+      "summary": "Shani is associated with Saturn and with the moral consequences of action in Jyotisha. Saturday is a common occasion for devotional remembrance.",
+      "verses": [
+        "ॐ शनैश्चराय नमः॥"
+      ]
     },
     {
       "id": "garuda-mantra",
       "category": "mantra",
       "title": "Garuda Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/garuda-mantra"
+      "summary": "Garuda is Vishnu’s mount and appears as a powerful bird in the epics and Puranas. In temples he is often depicted facing Vishnu’s shrine.",
+      "verses": [
+        "ॐ गरुडाय नमः॥"
+      ]
     },
     {
       "id": "brahma-mantra",
       "category": "mantra",
       "title": "Brahma Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/brahma-mantra"
+      "summary": "Brahma is associated with creation and is often depicted with four faces, corresponding to the four Vedas.",
+      "verses": [
+        "ॐ ब्रह्मणे नमः॥"
+      ]
     },
     {
       "id": "prithvi-mantra",
       "category": "mantra",
       "title": "Prithvi Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/prithvi-mantra"
+      "summary": "Prithvi is the personified Earth. The Earth hymn of the Atharvaveda describes a reciprocal bond between Earth and the beings she supports.",
+      "verses": [
+        "माता भूमिः पुत्रोऽहं पृथिव्याः॥"
+      ]
     },
     {
       "id": "surya-mantra",
       "category": "mantra",
       "title": "Surya Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/surya-mantra"
+      "summary": "Surya is honored as the visible Sun. In many homes, worship includes an east-facing offering of water at sunrise.",
+      "verses": [
+        "ॐ सूर्याय नमः॥"
+      ]
     },
     {
       "id": "nandikeshwar-mantra",
       "category": "mantra",
       "title": "Nandi Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/nandikeshwar-mantra"
+      "summary": "Nandi is the bull and attendant of Shiva, often shown facing the linga from the temple’s entrance axis. His still posture is a familiar image of attentive devotion.",
+      "verses": [
+        "ॐ नन्दिकेश्वराय नमः॥"
+      ]
     },
     {
       "id": "sri-narsingh-mantra",
       "category": "mantra",
       "title": "Narsimha Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/sri-narsingh-mantra"
+      "summary": "Narasimha is Vishnu’s man-lion form. His story centers on the protection of Prahlada and the ending of Hiranyakashipu’s rule.",
+      "verses": [
+        "उग्रं वीरं महाविष्णुं ज्वलन्तं सर्वतोमुखम्। नृसिंहं भीषणं भद्रं मृत्योर्मृत्युं नमाम्यहम्॥"
+      ]
     },
     {
       "id": "mahamrityunjay-mantra",
       "category": "mantra",
       "title": "Maha Mrityunjay Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/mahamrityunjay-mantra",
       "hindi": "महामृत्युंजय मंत्र",
       "summary": "A verse addressed to Tryambaka, the three-eyed form of Shiva.",
       "verses": [
@@ -842,7 +894,10 @@
       "id": "maha-kaal-bhairav-beej-mantra",
       "category": "mantra",
       "title": "Maha Kaal Bhairav Beej Mantra",
-      "source": "https://www.srimandir.com/en/articles/mantra-aarth-or-unke-labh/maha-kaal-bhairav-beej-mantra"
+      "summary": "Kala Bhairava is a fierce form of Shiva, revered as a guardian in cities including Ujjain and Varanasi. Bija recitations can vary by lineage. A short name salutation is given below.",
+      "verses": [
+        "ॐ कालभैरवाय नमः॥"
+      ]
     },
     {
       "id": "hare-krishna-maha-mantra",
@@ -858,13 +913,12 @@
       "id": "bhai-dooj-aarti",
       "category": "aarti",
       "title": "Bhai Dooj Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/bhai-dooj-aarti"
+      "summary": "On Bhai Dooj, a sister may apply tilak and wave a lamp for her brother, praying for his well-being. The order of the lamp, sweets and gifts varies by household."
     },
     {
       "id": "om-jai-jagdish-hare",
       "category": "aarti",
       "title": "Om Jai Jagdish Hare Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/om-jai-jagdish-hare",
       "hindi": "ॐ जय जगदीश हरे",
       "summary": "A Hindi aarti traditionally attributed to Pandit Shraddharam Phillauri.",
       "verses": [
@@ -883,409 +937,408 @@
       "id": "ganesh-aarti",
       "category": "aarti",
       "title": "Ganesh Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/ganesh-aarti"
+      "summary": "Ganesh aarti is often sung after offerings of flowers and modak. Hindi and Marathi households commonly use different songs for the lamp offering."
     },
     {
       "id": "aarti-of-shri-brishapati-dev",
       "category": "aarti",
       "title": "Brihaspati Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-shri-brishapati-dev"
+      "summary": "Brihaspati is honored as the teacher of the devas. In Thursday household worship, the lamp offering often follows the vrat story."
     },
     {
       "id": "shri-shivratri-aarti",
       "category": "aarti",
       "title": "Shivratri Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shri-shivratri-aarti"
+      "summary": "Shivratri worship commonly includes bathing the Shiva linga and offering bilva leaves. A lamp may be waved after the offerings in each cycle of night worship."
     },
     {
       "id": "dhanteras-aarti",
       "category": "aarti",
       "title": "Dhanteras Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/dhanteras-aarti"
+      "summary": "Dhanteras opens the Diwali observances for many households. Families may honor Dhanvantari, Lakshmi or Kubera and light a separate lamp according to local custom."
     },
     {
       "id": "govardhan-puja-aarti",
       "category": "aarti",
       "title": "Govardhan Maharaj Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/govardhan-puja-aarti"
+      "summary": "This lamp offering honors Krishna as the protector of Govardhan. It often concludes worship around a symbolic hill and a display of Annakut offerings."
     },
     {
       "id": "aarti-of-mr-balaji",
       "category": "aarti",
       "title": "Balaji Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-mr-balaji"
+      "summary": "The name Balaji can refer to Venkateswara or to Hanuman at particular shrines. The words and sequence of an aarti depend on which shrine is being honored."
     },
     {
       "id": "aarti-of-dharmaraj-ji",
       "category": "aarti",
       "title": "Dharmaraj Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-dharmaraj-ji"
+      "summary": "Dharmaraj is associated with moral accounting and is often identified with Yama. His worship emphasizes responsibility for one’s actions."
     },
     {
       "id": "aarti-of-shri-lalita-mata",
       "category": "aarti",
       "title": "Lalita Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-shri-lalita-mata"
+      "summary": "Lalita is revered as Tripurasundari in Shri Vidya traditions. A lamp offering may follow the chanting of her names."
     },
     {
       "id": "aarti-shri-ramayana-ji",
       "category": "aarti",
       "title": "Ramayan Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-shri-ramayana-ji"
+      "summary": "Ramayan aarti honors the sacred narrative of Rama. It is often offered to the book when a household or community finishes a reading."
     },
     {
       "id": "sankata-mata-aarti",
       "category": "aarti",
       "title": "Sankata Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/sankata-mata-aarti"
+      "summary": "Sankata Mata is worshipped as a mother goddess in Varanasi. A lamp offering may follow prayers seeking strength through difficulties."
     },
     {
       "id": "aarti-of-ekadashi-mata",
       "category": "aarti",
       "title": "Ekadashi Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-ekadashi-mata"
+      "summary": "Ekadashi Mata personifies the fasting day observed twice in each lunar month. An aarti may be part of the evening worship of Vishnu on that day."
     },
     {
       "id": "baba-gorakhnath-aarti",
       "category": "aarti",
       "title": "Gorakhnath Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/baba-gorakhnath-aarti"
+      "summary": "Gorakhnath is revered as a teacher in the Nath tradition. The lamp offering honors the guru and the continuity of the teaching lineage."
     },
     {
       "id": "shri-siddhivinayak-aarti",
       "category": "aarti",
       "title": "Siddhivinayak Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shri-siddhivinayak-aarti"
+      "summary": "Siddhivinayak is a form of Ganesh. The title is especially associated with Mumbai’s Prabhadevi temple, while the form is also worshipped in homes."
     },
     {
       "id": "vishwakarma-aarti",
       "category": "aarti",
       "title": "Vishwakarma Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/vishwakarma-aarti"
+      "summary": "Vishwakarma is revered by artisans and workers as the divine craftsman. Tools and machinery are often cleaned and honored before the lamp offering."
     },
     {
       "id": "ahoi-mata-aarti",
       "category": "aarti",
       "title": "Ahoi Aarti in English",
-      "source": "https://www.srimandir.com/en/articles/aarti/ahoi-mata-aarti"
+      "summary": "Ahoi Ashtami is observed in many North Indian homes for the well-being of children. The lamp is offered to Ahoi Mata, often near a drawing used for the observance."
     },
     {
       "id": "aarti-of-bharat-mata",
       "category": "aarti",
       "title": "Bharat Mata Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-bharat-mata"
+      "summary": "Bharat Mata personifies India as a mother. This aarti belongs to civic and devotional observances centered on that figure."
     },
     {
       "id": "kartikeya-aarti",
       "category": "aarti",
       "title": "Kartikeya Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/kartikeya-aarti"
+      "summary": "Kartikeya is also worshipped as Skanda, Murugan and Subrahmanya. Regional traditions differ in the songs used for his lamp offering."
     },
     {
       "id": "shree-bhagwatgeeta-aarti",
       "category": "aarti",
       "title": "Bhagavad Gita Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shree-bhagwatgeeta-aarti"
+      "summary": "This aarti honors the dialogue between Krishna and Arjuna. A lamp may be offered to the book after a reading or at Gita Jayanti."
     },
     {
       "id": "datatachi-aarti",
       "category": "aarti",
       "title": "Dattachi Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/datatachi-aarti"
+      "summary": "Datta worship honors Dattatreya, the guru associated with Brahma, Vishnu and Shiva. Marathi aarti traditions often mark the conclusion of the daily worship."
     },
     {
       "id": "annapurna-aarti",
       "category": "aarti",
       "title": "Annapurna Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/annapurna-aarti"
+      "summary": "Annapurna’s lamp offering expresses gratitude for food. It may follow the presentation of cooked grains or other household offerings."
     },
     {
       "id": "aarti-of-shri-shakumbhari-devi-ji",
       "category": "aarti",
       "title": "Shakambhari Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-shri-shakumbhari-devi-ji"
+      "summary": "Shakambhari is revered as the Goddess who sustains life with plants and food. Vegetables and greens are appropriate symbols in her worship."
     },
     {
       "id": "narmada-maa-aarti",
       "category": "aarti",
       "title": "Narmada Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/narmada-maa-aarti"
+      "summary": "Narmada aarti honors the river as a goddess. Lamps are offered at ghats as part of communal worship along the river."
     },
     {
       "id": "aarti-of-shri-chintpurni-devi",
       "category": "aarti",
       "title": "Chintpurni Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-shri-chintpurni-devi"
+      "summary": "Chintpurni Devi is worshipped at a Shakti shrine in Himachal Pradesh. Devotees offer a lamp while praying for courage and relief from worry."
     },
     {
       "id": "sri-shantadrugchi-aarti",
       "category": "aarti",
       "title": "Shantadurga Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/sri-shantadrugchi-aarti"
+      "summary": "Shantadurga is revered in Goa, where tradition describes her as restoring harmony between Shiva and Vishnu."
     },
     {
       "id": "vaishno-mata-aarti",
       "category": "aarti",
       "title": "Vaishno Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/vaishno-mata-aarti"
+      "summary": "Vaishno Devi worship at the Trikuta hills honors the Mother Goddess. Temple aarti follows the shrine’s own schedule and liturgy."
     },
     {
       "id": "aarti-of-kaila-devi",
       "category": "aarti",
       "title": "Kaila Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-kaila-devi"
+      "summary": "Kaila Devi is honored at Karauli in Rajasthan. The lamp offering is part of a wider local tradition of family pilgrimage."
     },
     {
       "id": "aarti-of-sheetla-mata",
       "category": "aarti",
       "title": "Sheetla Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-sheetla-mata"
+      "summary": "Sheetla Mata is associated with cooling and care. Some observances offer food prepared the previous day, then conclude with a lamp."
     },
     {
       "id": "aarti-of-shri-jhulelal-ji-1",
       "category": "aarti",
       "title": "Jhulelal Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-shri-jhulelal-ji-1"
+      "summary": "Jhulelal is revered in Sindhi Hindu tradition and is closely associated with water. Worship is especially prominent during Cheti Chand."
     },
     {
       "id": "jagannath-ji-s-mangal-aarti",
       "category": "aarti",
       "title": "Jagannath Mangal Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/%20jagannath-ji-s-mangal-aarti"
+      "summary": "Mangal aarti is an early morning offering. In Jagannath worship it belongs to the opening sequence of the day."
     },
     {
       "id": "aarti-of-ganga-maai",
       "category": "aarti",
       "title": "Ganga Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-ganga-maai"
+      "summary": "Ganga aarti honors the Ganga as a sacred river. Public ceremonies often coordinate lamps, bells and sung invocations at the ghats."
     },
     {
       "id": "mata-parvati-s-aarti",
       "category": "aarti",
       "title": "Parvati Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/mata-parvati-s-aarti"
+      "summary": "Parvati’s aarti honors Shiva’s consort as a mother and source of strength. It may be sung in household worship or during festivals centered on the Goddess."
     },
     {
       "id": "aarti-of-sita-mata",
       "category": "aarti",
       "title": "Sita Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-sita-mata"
+      "summary": "Sita’s lamp offering honors her role in the Ramayana. Images of Sita and Rama are often worshipped together."
     },
     {
       "id": "aarti-of-shri-badrinathji-1",
       "category": "aarti",
       "title": "Badrinath Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-shri-badrinathji-1"
+      "summary": "Badrinath worship honors Narayana in the Garhwal Himalaya. Temple offerings mark distinct points in the daily schedule."
     },
     {
       "id": "bhairv-baba-s-aarti",
       "category": "aarti",
       "title": "Bhairav Baba Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/bhairv-baba-s-aarti"
+      "summary": "Bhairav is revered as a guardian, particularly in Ujjain and Kashi. The lamp offering typically follows the local shrine’s offerings and invocations."
     },
     {
       "id": "aarti-of-sant-tukaram",
       "category": "aarti",
       "title": "Tukaram Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-sant-tukaram"
+      "summary": "Tukaram is remembered for Marathi abhangs devoted to Vitthal. An aarti honors the saint within the Varkari tradition."
     },
     {
       "id": "gurudev-s-aarti",
       "category": "aarti",
       "title": "Gurudev Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/gurudev-s-aarti"
+      "summary": "A guru aarti directs gratitude toward a spiritual teacher and lineage. Its words depend on the community and the teacher being honored."
     },
     {
       "id": "baba-balak-nath-aarti",
       "category": "aarti",
       "title": "Balak Nath Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/baba-balak-nath-aarti"
+      "summary": "Baba Balak Nath is revered in Himachal Pradesh, notably at Deotsidh. Devotional songs and lamp offerings accompany pilgrimage."
     },
     {
       "id": "aarti-of-khatu-shyam-ji",
       "category": "aarti",
       "title": "Khatu Shyam Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-khatu-shyam-ji"
+      "summary": "Khatu Shyam is linked in tradition with Barbarika. The shrine at Khatu in Rajasthan is a major center of his worship."
     },
     {
       "id": "aarti-of-satyanarayan-ji",
       "category": "aarti",
       "title": "Satyanarayan Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-satyanarayan-ji"
+      "summary": "Satyanarayan aarti typically concludes the household katha and offering. Prasad is shared with those who heard the story."
     },
     {
       "id": "sri-gayatri-mata-ki-aarti",
       "category": "aarti",
       "title": "Gayatri Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/sri-gayatri-mata-ki-aarti"
+      "summary": "Gayatri is honored as a personification of the Vedic mantra. Aarti is a separate lamp offering that can follow the recitation."
     },
     {
       "id": "sri-ahoi-mata-ki-aarti",
       "category": "aarti",
       "title": "Ahoi Mata Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/sri-ahoi-mata-ki-aarti"
+      "summary": "The Ahoi Mata lamp offering often follows the Ahoi Ashtami story. Water, grain and a festival drawing feature in many household forms."
     },
     {
       "id": "shri-sai-baba-ki-aarti",
       "category": "aarti",
       "title": "Sai Baba Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shri-sai-baba-ki-aarti"
+      "summary": "Shirdi worship uses several daily aartis, including morning and evening services. Their sequence depends on the time of day."
     },
     {
       "id": "shukrwaar-aarti",
       "category": "aarti",
       "title": "Friday Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shukrwaar-aarti"
+      "summary": "Friday worship is associated with different goddesses in different households, including Lakshmi and Santoshi Mata. The specific song follows the deity being honored."
     },
     {
       "id": "shri-krishan-ki-aarti",
       "category": "aarti",
       "title": "Krishna Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shri-krishan-ki-aarti"
+      "summary": "Krishna aarti may follow offerings of butter, sweets or fruit. In temples that treat the deity as a royal guest, lamp offerings mark stages in the daily routine."
     },
     {
       "id": "shree-sharda-aarti",
       "category": "aarti",
       "title": "Sharada Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shree-sharda-aarti"
+      "summary": "Sharada is a form of Saraswati associated with learning. A lamp may be offered beside books, an instrument or an image of the goddess."
     },
     {
       "id": "bhagavad-geeta-aarti",
       "category": "aarti",
       "title": "Bhagavad Gita Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/bhagavad-geeta-aarti"
+      "summary": "A lamp offering to the Gita expresses respect for its teaching. It can follow recitation of a chapter or a complete reading."
     },
     {
       "id": "shree-kunjbihari-ji-ki-aarti",
       "category": "aarti",
       "title": "Kunj Bihari Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shree-kunjbihari-ji-ki-aarti"
+      "summary": "Kunj Bihari is a name of Krishna that evokes the groves of Vrindavan. The song is often used in Braj-style Krishna worship."
     },
     {
       "id": "shani-dev-ki-aarti",
       "category": "aarti",
       "title": "Shani Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shani-dev-ki-aarti"
+      "summary": "Shani worship is commonly observed on Saturdays. In many traditions a sesame-oil lamp accompanies the evening prayers."
     },
     {
       "id": "vishnu-aarti",
       "category": "aarti",
       "title": "Vishnu Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/vishnu-aarti"
+      "summary": "Vishnu aarti can close worship of Narayana or one of his forms. The lamp is normally offered after the food offering."
     },
     {
       "id": "saraswati-aarti",
       "category": "aarti",
       "title": "Saraswati Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/saraswati-aarti"
+      "summary": "Saraswati aarti honors the goddess of learning and the arts. It is commonly sung on Vasant Panchami or when books and instruments are placed before her."
     },
     {
       "id": "hanuman-ji-ki-aarti",
       "category": "aarti",
       "title": "Hanuman Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/hanuman-ji-ki-aarti"
+      "summary": "Hanuman aarti celebrates his service to Rama and his courage. It is commonly sung after Hanuman Chalisa or temple offerings."
     },
     {
       "id": "ram-aarti",
       "category": "aarti",
       "title": "Ram Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/ram-aarti"
+      "summary": "Rama aarti honors the king of Ayodhya, often together with Sita, Lakshmana and Hanuman. It is a familiar part of Ram Navami celebrations."
     },
     {
       "id": "kaali-mata-ki-aarti",
       "category": "aarti",
       "title": "Kaali Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/kaali-mata-ki-aarti"
+      "summary": "Kali aarti honors the fierce mother goddess. The lamp follows the schedule and customs of the form being worshipped."
     },
     {
       "id": "rani-sati-dadi-ji",
       "category": "aarti",
       "title": "Sati Dadi Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/rani-sati-dadi-ji"
+      "summary": "Rani Sati Dadi is revered in a regional devotional tradition centered on Jhunjhunu, Rajasthan. Devotees offer aarti at the shrine and in affiliated households."
     },
     {
       "id": "aarti-of-panch-parameshthi",
       "category": "aarti",
       "title": "Panch Parmeshthi Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-panch-parameshthi"
+      "summary": "In Jain worship, the Panch Parmeshthi are five classes of revered beings. The offering expresses respect for spiritual attainment and the path of discipline."
     },
     {
       "id": "chandra-dev-s-aarti",
       "category": "aarti",
       "title": "Chandra Dev Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/chandra-dev-s-aarti"
+      "summary": "Chandra is the Moon deity. Full-moon observances in some traditions pair viewing the Moon with prayers and a lamp offering."
     },
     {
       "id": "shri-nath-ji-s-evening-aarti",
       "category": "aarti",
       "title": "Nath Evening Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/shri-nath-ji-s-evening-aarti"
+      "summary": "In Nathdwara, evening worship of Shrinathji follows the rhythm of the deity’s daily services. Lamps may accompany the transition from daytime worship toward rest."
     },
     {
       "id": "mangal-aarti-of-shri-nath-ji",
       "category": "aarti",
       "title": "Nath Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/mangal-aarti-of-shri-nath-ji"
+      "summary": "This morning offering honors Shrinathji, a form of Krishna associated with Govardhan. It is part of the Pushtimarg tradition."
     },
     {
       "id": "jaarti-of-shri-jagannath-ji-1",
       "category": "aarti",
       "title": "Jagannath Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/jaarti-of-shri-jagannath-ji-1"
+      "summary": "Jagannath’s daily worship uses a sequence of services. This page concerns the general lamp offering, while Mangal Aarti refers specifically to the early morning service."
     },
     {
       "id": "suryadev-ki-aarti",
       "category": "aarti",
       "title": "Surya Dev Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/suryadev-ki-aarti"
+      "summary": "Surya aarti honors the Sun after a devotional offering. Water offered at sunrise is common in many forms of Surya worship."
     },
     {
       "id": "aarti-of-shri-jankinath-ji",
       "category": "aarti",
       "title": "Janakinath Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/aarti-of-shri-jankinath-ji"
+      "summary": "Janakinath means Lord of Janaki, a name for Rama in relation to Sita. The lamp offering honors them together."
     },
     {
       "id": "narsingh-aarti",
       "category": "aarti",
       "title": "Narsingh Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/narsingh-aarti"
+      "summary": "Narasimha aarti recalls Vishnu’s protection of Prahlada. The song commonly follows offerings on Narasimha Jayanti or at a shrine dedicated to this form."
     },
     {
       "id": "sri-santoshi-mata-aarti",
       "category": "aarti",
       "title": "Santoshi Mata Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/sri-santoshi-mata-aarti"
+      "summary": "Santoshi Mata is commonly worshipped on Fridays. A household vrat may conclude with a lamp offering and the sharing of prasad."
     },
     {
       "id": "ram-siya-ram-lyrics",
       "category": "aarti",
       "title": "Ram Siya Ram Aarti",
-      "source": "https://www.srimandir.com/en/articles/aarti/ram-siya-ram-lyrics"
+      "summary": "The repeated names Siya and Ram express devotion to Sita and Rama together. The refrain is used in devotional singing and may accompany a lamp offering."
     },
     {
       "id": "durga-chalisa",
       "category": "chalisa",
       "title": "Durga Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/durga-chalisa"
+      "summary": "Durga Chalisa praises the Goddess as protector and retells episodes associated with her victories. It is often recited during Navratri."
     },
     {
       "id": "surya-dev-chalisa",
       "category": "chalisa",
       "title": "Surya Dev Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/surya-dev-chalisa"
+      "summary": "Surya Chalisa honors the Sun and recalls his regular passage across the sky. Sunday and sunrise worship are common occasions for recitation."
     },
     {
       "id": "shree-vishnu-chalisa",
       "category": "chalisa",
       "title": "Vishnu Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/shree-vishnu-chalisa"
+      "summary": "Vishnu Chalisa praises Narayana as sustainer and remembers the forms through which he restores order."
     },
     {
       "id": "hanuman-chalisa",
       "category": "chalisa",
       "title": "Hanuman Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/hanuman-chalisa",
       "hindi": "हनुमान चालीसा",
       "summary": "Tulsidas’s Awadhi hymn to Hanuman. It opens with two dohas, followed by forty chaupais and a closing doha.",
       "verses": [
@@ -1338,91 +1391,91 @@
       "id": "shree-kali-mata-chalisa",
       "category": "chalisa",
       "title": "Kaali Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/shree-kali-mata-chalisa"
+      "summary": "Kali Chalisa addresses the Goddess in her fierce protective form. It is used in household and temple worship in several regional traditions."
     },
     {
       "id": "shree-navgrah-chalisa",
       "category": "chalisa",
       "title": "Navgrah Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/shree-navgrah-chalisa"
+      "summary": "Navagraha Chalisa addresses the nine grahas together. Its themes include time, planetary movement and the traditional interpretation of their influence."
     },
     {
       "id": "shiv-chalisa",
       "category": "chalisa",
       "title": "Shiv Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/shiv-chalisa"
+      "summary": "Shiv Chalisa praises Shiva through images such as the crescent Moon, the Ganga and Mount Kailash. Many devotees recite it on Mondays."
     },
     {
       "id": "sri-mahalakshmi-chalisa",
       "category": "chalisa",
       "title": "Mahalakshmi Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/sri-mahalakshmi-chalisa"
+      "summary": "Mahalakshmi Chalisa honors the Goddess as a source of abundance and well-being. It is often associated with Friday worship and Diwali."
     },
     {
       "id": "radha-chalisa",
       "category": "chalisa",
       "title": "Radha Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/radha-chalisa"
+      "summary": "Radha Chalisa praises Radha as a model of devotion. The language and imagery are rooted in the Krishna traditions of Braj."
     },
     {
       "id": "maa-parwati-chalisa",
       "category": "chalisa",
       "title": "Parvati Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/maa-parwati-chalisa"
+      "summary": "Parvati Chalisa praises the daughter of the mountain and consort of Shiva. It emphasizes her roles as ascetic, mother and protector."
     },
     {
       "id": "santoshi-mata-chalisa",
       "category": "chalisa",
       "title": "Santoshi Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/santoshi-mata-chalisa"
+      "summary": "Santoshi Chalisa honors the goddess of contentment. Devotees may recite it alongside the Friday vrat story."
     },
     {
       "id": "sri-tulsi-chalisa",
       "category": "chalisa",
       "title": "Tulsi Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/sri-tulsi-chalisa"
+      "summary": "Tulsi Chalisa honors the sacred basil plant as a goddess. It is associated with household Vaishnava worship and Tulsi Vivah."
     },
     {
       "id": "shri-chamunda-devi-chalisa",
       "category": "chalisa",
       "title": "Chamunda Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/shri-chamunda-devi-chalisa"
+      "summary": "Chamunda Chalisa invokes a fierce form of the Goddess named for her defeat of Chanda and Munda. This episode appears in the Devi Mahatmya."
     },
     {
       "id": "sri-ram-chalisa",
       "category": "chalisa",
       "title": "Ram Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/sri-ram-chalisa"
+      "summary": "Ram Chalisa summarizes qualities and episodes associated with Rama, including his regard for duty and his return to Ayodhya."
     },
     {
       "id": "saraswati-chalisa",
       "category": "chalisa",
       "title": "Saraswati Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/saraswati-chalisa"
+      "summary": "Saraswati Chalisa praises the goddess of learning, expression and music. Recitation is especially common around Vasant Panchami."
     },
     {
       "id": "sri-sheetla-chalisa",
       "category": "chalisa",
       "title": "Sheetla Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/sri-sheetla-chalisa"
+      "summary": "Sheetla Chalisa honors Sheetla Mata and reflects traditional themes of cooling and care that also appear in Sheetla Ashtami observances."
     },
     {
       "id": "sai-baba-chalisa",
       "category": "chalisa",
       "title": "Sai Baba Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/sai-baba-chalisa"
+      "summary": "Sai Baba Chalisa recalls devotional themes associated with Sai Baba of Shirdi, including charity, patience and regard for people of different faiths."
     },
     {
       "id": "bhairav-chalisa",
       "category": "chalisa",
       "title": "Bhairav Chalisa",
-      "source": "https://www.srimandir.com/en/articles/chalisa/bhairav-chalisa"
+      "summary": "Bhairav Chalisa praises Shiva’s fierce guardian form. Devotees commonly associate it with Bhairav Ashtami and shrine worship."
     },
     {
       "id": "hanuman-chalisa-story",
       "category": "chalisa",
       "title": "Hanuman Chalisa Story",
-      "source": "https://www.srimandir.com/en/articles/chalisa/hanuman-chalisa-story"
+      "summary": "The Hanuman Chalisa follows a sequence of praise, remembered deeds and petition. Its stories include Hanuman carrying Rama’s ring across the ocean to Sita and bringing the life-restoring herb for Lakshmana."
     }
   ]
 }

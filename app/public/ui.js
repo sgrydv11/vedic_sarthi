@@ -182,10 +182,10 @@ function prayerLibrary(category, article) {
     const text=entry.verses?.length
       ? '<section class="prayer-text" lang="hi" aria-label="Devotional text in Devanagari">'+entry.verses.map(verse=>'<p>'+escape(verse).replaceAll('\n','<br>')+'</p>').join('')+'</section>'
       : ''
-    const source=entry.source?'<p><a class="secondary" href="'+escape(entry.source)+'" target="_blank" rel="noopener noreferrer">Read at Sri Mandir ↗</a></p>':''
     main.innerHTML=breadcrumbs([['Library','library'],[label,path],[entry.title]])+
-      heading(label,escape(entry.title),escape(entry.summary||''))+
-      '<article class="card info detail-body">'+text+source+'</article>'
+      heading(label,escape(entry.title),'')+
+      '<article class="card info detail-body"><h2>About this '+label.toLowerCase()+'</h2><p>'+escape(entry.summary)+'</p>'+text+
+      (entry.id==='hanuman-chalisa-story'?link('Read Hanuman Chalisa',path+'/hanuman-chalisa','secondary'):'')+'</article>'
     return
   }
   main.innerHTML=heading('DEVOTIONAL LIBRARY',label,'')+libraryTabs(category)+
