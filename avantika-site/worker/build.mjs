@@ -3,6 +3,9 @@ const url = path => new URL(path,import.meta.url)
 const text = path => readFile(url(path),'utf8')
 const files = {
   '/':['index.html','text/html; charset=utf-8'],
+  '/panchang.js':['panchang.js','text/javascript; charset=utf-8'],
+  '/panchang-engine.js':['panchang-engine.js','text/javascript; charset=utf-8'],
+  '/panchang-licenses.txt':['panchang-licenses.txt','text/plain; charset=utf-8'],
   '/ui.js':['ui.js','text/javascript; charset=utf-8'],
   '/style.css':['style.css','text/css; charset=utf-8'],
   '/catalog.json':['catalog.json','application/json; charset=utf-8'],

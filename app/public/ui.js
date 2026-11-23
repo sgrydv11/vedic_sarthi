@@ -129,33 +129,16 @@ function poojas() {
   $('select[name=category]').onchange = filter
   filter()
 }
-async function updateSolar(version,city='',date='') {
-  const target=$('#solar')
-  try {
-    const series=await api('solar?'+new URLSearchParams({city,date}))
-    if (version!==renderNumber||target!==$('#solar')) return
-    target.innerHTML='<h2>Daylight timings</h2><form id="solar-form" class="pair">'+
-      select('city','City',series.cities)+input('date','Date',{type:'date',value:series.day,min:'1900-01-01',max:'2100-12-31'})+
-      button('Show timings','type="submit"','secondary')+'</form>'+
-      '<div class="grid section">'+[['Sunrise',series.sunrise],['Solar noon',series.solarNoon],['Sunset',series.sunset]].map(([label,value])=>
-        '<article class="card info"><h3>'+label+'</h3><strong>'+value+' IST</strong></article>').join('')+
-      '</div><p>Estimated timings for the city center using NOAA solar equations.</p>'
-    const form=$('#solar-form')
-    form.elements.city.value=series.city
-    form.onsubmit=event=>{event.preventDefault();updateSolar(version,form.elements.city.value,form.elements.date.value)}
-  } catch(error) {
-    if (version!==renderNumber||target!==$('#solar')) return
-    let status=$('.solar-error',target)
-    if (!status) {status=document.createElement('p');status.className='solar-error';target.append(status)}
-    status.textContent=error.message
-  }
-}
-function panchang(version) {
-  main.innerHTML = heading('VEDIC CALENDAR','Panchang & festivals','Explore the Hindu months and request date- and city-specific Panchang details.')+
-    '<section class="card info" id="solar"><p>Loading daylight timings…</p></section>'+
-    '<div class="callout section"><div><h2>Daily Panchang for Ujjain or your city</h2><p>Submit a date and city for manual review. Live Panchang calculations are unavailable in this preview.</p></div>'+button('Request Panchang','data-astrology="Daily Panchang"')+'</div>'+
-    '<h2 class="section">Hindu festival calendar</h2><p>Gregorian month ranges are approximate. Observance dates vary by year and location.</p><div class="grid">'+catalog.calendar.map(row=>'<article class="card info"><h3>'+escape(row.name)+'</h3><p>'+escape(row.festival)+'</p><p>'+escape(row.practice)+'</p></article>').join('')+'</div>'
-  updateSolar(version)
+function panchang(version,day,city) {
+  main.innerHTML = heading('VEDIC CALENDAR','Panchang & festivals','Explore the Hindu calendar and daily timings for your city.')+
+    '<section id="daily-panchang"><p role="status">Loading Panchang…</p></section>'+
+    '<div class="callout section"><div><h2>Ask a pandit about a date</h2></div>'+button('Request Panchang','data-astrology="Daily Panchang"')+'</div>'
+  const target=$('#daily-panchang')
+  import('./panchang.js').then(({mountPanchang})=>{
+    if (version===renderNumber && target.isConnected) mountPanchang(target,day,city)
+  }).catch(()=>{
+    if (target.isConnected) target.textContent='Panchang could not load. Reload the page to try again.'
+  })
 }
 function servicePage(kind,subpage,step) {
   const isDaan = kind==='daan'
@@ -833,7 +816,7 @@ function render() {
   $('#account').textContent=user?'Account':'Sign in'
   if (!page||page==='home') home()
   else if (page==='poojas') subpage?ritualDetail(subpage,step):poojas()
-  else if (page==='panchang') panchang(version)
+  else if (page==='panchang') panchang(version,subpage,step)
   else if (['astrology','consult'].includes(page)) servicePage(page,subpage,step)
   else if (page==='library') library(subpage,step)
   else if (page==='jaap') jaap()

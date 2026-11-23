@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@ishubhamx/panchangam-js": "3.0.0",
+    "esbuild": "0.27.4"
+  }
+}

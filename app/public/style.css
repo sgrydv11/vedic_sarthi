@@ -150,3 +150,23 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--wine);flex:none}
 .temple-photo figcaption{padding:8px 0;font-size:.85rem;overflow-wrap:anywhere}
 .temple-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
 @media(max-width:700px){.temple-detail{grid-template-columns:1fr}}
+.panchang-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;align-items:end;gap:.75rem}
+.panchang-controls label{min-width:0;margin:0}
+.panchang-controls select,.panchang-controls input{width:100%}
+.panchang-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.panchang-panel{margin-top:1rem}
+.panchang-panel h2{margin-top:0}
+.panchang-badges{display:flex;gap:.5rem;flex-wrap:wrap}
+.panchang-values{margin:0}
+.panchang-values>div,.panchang-slots li{display:flex;justify-content:space-between;gap:.75rem;border-top:1px solid var(--line);padding:.6rem 0}
+.panchang-values dd{margin:0;text-align:right;font-weight:600}
+.panchang-slots{padding:0;list-style:none}
+.panchang-rating{color:var(--muted)}
+.festival-entry{border-top:1px solid var(--line);padding:.75rem 0}
+.festival-entry summary{cursor:pointer;font-weight:650}
+.panchang-month-days{display:grid;grid-template-columns:repeat(auto-fit,minmax(7rem,1fr));gap:.5rem}
+.panchang-day{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:.25rem;min-width:0}
+.panchang-day[aria-pressed=true]{color:white;background:var(--wine)}
+#panchang-error:empty{display:none}
+@media(max-width:720px){.panchang-controls,.panchang-columns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.panchang-columns{grid-template-columns:1fr}.panchang-slots li{flex-wrap:wrap}}
