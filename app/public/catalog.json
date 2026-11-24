@@ -2761,6 +2761,328 @@
       "category": "chalisa",
       "title": "Hanuman Chalisa Story",
       "summary": "The Hanuman Chalisa follows a sequence of praise, remembered deeds and petition. Its stories include Hanuman carrying Rama’s ring across the ocean to Sita and bringing the life-restoring herb for Lakshmana."
+    },
+    {
+      "id": "jai-ambe-gauri",
+      "category": "aarti",
+      "title": "Jai Ambe Gauri",
+      "hindi": "जय अम्बे गौरी",
+      "summary": "A hymn to Durga commonly sung at Navratri worship."
+    },
+    {
+      "id": "om-jai-lakshmi-mata",
+      "category": "aarti",
+      "title": "Om Jai Lakshmi Mata",
+      "hindi": "ॐ जय लक्ष्मी माता",
+      "summary": "The lamp offering to Lakshmi often closes Diwali worship."
+    },
+    {
+      "id": "aarti-kije-shri-raghuvar-ji-ki",
+      "category": "aarti",
+      "title": "Raghuvar Aarti",
+      "hindi": "आरती कीजै श्री रघुवर जी की",
+      "summary": "A separate Rama aarti from the Vinay Patrika hymn already in the library."
+    },
+    {
+      "id": "tulsi-maharani-namo-namo",
+      "category": "aarti",
+      "title": "Tulsi Maharani Aarti",
+      "hindi": "तुलसी महारानी आरती",
+      "summary": "Tulsi worship is associated with Vaishnava households and Tulsi Vivah."
+    },
+    {
+      "id": "jai-jai-tulsi-mata",
+      "category": "aarti",
+      "title": "Jai Jai Tulsi Mata",
+      "hindi": "जय जय तुलसी माता",
+      "summary": "A second devotional song offered at the Tulsi plant."
+    },
+    {
+      "id": "om-jai-gangadhar",
+      "category": "aarti",
+      "title": "Gangadhar Aarti",
+      "hindi": "ॐ जय गंगाधर",
+      "summary": "Gangadhar recalls Shiva receiving the Ganga."
+    },
+    {
+      "id": "shendur-lal-chadhayo",
+      "category": "aarti",
+      "title": "Shendur Lal Chadhayo",
+      "hindi": "शेंदुर लाल चढ़ायो",
+      "summary": "This Ganesh aarti evokes the offering of vermilion."
+    },
+    {
+      "id": "sun-meri-devi-parvat-vasani",
+      "category": "aarti",
+      "title": "Vindhyeshwari Aarti",
+      "hindi": "विन्ध्येश्वरी आरती",
+      "summary": "The song honors the Goddess of the Vindhya hills."
+    },
+    {
+      "id": "aarti-shri-yugal-kishore-ki",
+      "category": "aarti",
+      "title": "Yugal Kishore Aarti",
+      "hindi": "युगल किशोर आरती",
+      "summary": "This Braj aarti addresses Radha and Krishna together."
+    },
+    {
+      "id": "bhagwat-bhagwan-ki-aarti",
+      "category": "aarti",
+      "title": "Bhagavatam Aarti",
+      "hindi": "श्रीमद्भागवत आरती",
+      "summary": "A lamp offering to the scripture at the end of Bhagavatam recitation."
+    },
+    {
+      "id": "gau-mata-aarti",
+      "category": "aarti",
+      "title": "Gau Mata Aarti",
+      "hindi": "गौ माता आरती",
+      "summary": "This lamp offering honors the cow in Hindu devotional practice."
+    },
+    {
+      "id": "bagalamukhi-aarti",
+      "category": "aarti",
+      "title": "Bagalamukhi Aarti",
+      "hindi": "बगलामुखी आरती",
+      "summary": "Bagalamukhi is honored among the ten Mahavidyas."
+    },
+    {
+      "id": "chitragupt-aarti",
+      "category": "aarti",
+      "title": "Chitragupt Aarti",
+      "hindi": "चित्रगुप्त आरती",
+      "summary": "Chitragupt is associated with keeping account of human actions."
+    },
+    {
+      "id": "banke-bihari-aarti",
+      "category": "aarti",
+      "title": "Banke Bihari Aarti",
+      "hindi": "बाँके बिहारी आरती",
+      "summary": "Banke Bihari worship centers on a form of Krishna revered in Vrindavan."
+    },
+    {
+      "id": "om-jai-yaksha-kuber-hare",
+      "category": "aarti",
+      "title": "Kubera Aarti",
+      "hindi": "कुबेर आरती",
+      "summary": "Kubera is traditionally associated with guardianship of wealth."
+    },
+    {
+      "id": "ganesh-chalisa",
+      "category": "chalisa",
+      "title": "Ganesh Chalisa",
+      "hindi": "गणेश चालीसा",
+      "summary": "A hymn of praise used in Ganesh worship."
+    },
+    {
+      "id": "shani-dev-chalisa",
+      "category": "chalisa",
+      "title": "Shani Dev Chalisa",
+      "hindi": "शनि देव चालीसा",
+      "summary": "A hymn associated with Saturday worship of Shani."
+    },
+    {
+      "id": "krishna-chalisa",
+      "category": "chalisa",
+      "title": "Krishna Chalisa",
+      "hindi": "कृष्ण चालीसा",
+      "summary": "A hymn recalling episodes from Krishna’s life."
+    },
+    {
+      "id": "khatu-shyam-chalisa",
+      "category": "chalisa",
+      "title": "Khatu Shyam Chalisa",
+      "hindi": "खाटू श्याम चालीसा",
+      "summary": "A hymn associated with Khatu Dham and the worship of Shyam."
+    },
+    {
+      "id": "vaishno-devi-chalisa",
+      "category": "chalisa",
+      "title": "Vaishno Devi Chalisa",
+      "hindi": "वैष्णो देवी चालीसा",
+      "summary": "A hymn to the Mother Goddess of the Trikuta shrine."
+    },
+    {
+      "id": "gayatri-chalisa",
+      "category": "chalisa",
+      "title": "Gayatri Chalisa",
+      "hindi": "गायत्री चालीसा",
+      "summary": "A hymn to Gayatri as a source of illumination and understanding."
+    },
+    {
+      "id": "ganga-chalisa",
+      "category": "chalisa",
+      "title": "Ganga Chalisa",
+      "hindi": "गंगा चालीसा",
+      "summary": "A hymn to the sacred river Ganga."
+    },
+    {
+      "id": "annapurna-chalisa",
+      "category": "chalisa",
+      "title": "Annapurna Chalisa",
+      "hindi": "अन्नपूर्णा चालीसा",
+      "summary": "A hymn to the goddess who personifies nourishment."
+    },
+    {
+      "id": "narasimha-chalisa",
+      "category": "chalisa",
+      "title": "Narasimha Chalisa",
+      "hindi": "नरसिंह चालीसा",
+      "summary": "A hymn to Vishnu’s man-lion form and his protection of Prahlada."
+    },
+    {
+      "id": "shri-shyam-chalisa",
+      "category": "chalisa",
+      "title": "Shri Shyam Chalisa",
+      "hindi": "श्री श्याम चालीसा",
+      "summary": "An additional version of the hymn to Shyam."
+    },
+    {
+      "id": "balaji-chalisa",
+      "category": "chalisa",
+      "title": "Mehandipur Balaji Chalisa",
+      "hindi": "मेहंदीपुर बालाजी चालीसा",
+      "summary": "A hymn associated with Hanuman worship at Mehandipur."
+    },
+    {
+      "id": "shakambhari-chalisa",
+      "category": "chalisa",
+      "title": "Shakambhari Chalisa",
+      "hindi": "शाकम्भरी चालीसा",
+      "summary": "A hymn to the Goddess in her nourishing form."
+    },
+    {
+      "id": "yamuna-chalisa",
+      "category": "chalisa",
+      "title": "Yamuna Chalisa",
+      "hindi": "यमुना चालीसा",
+      "summary": "A hymn honoring the Yamuna and her role in Braj worship."
+    },
+    {
+      "id": "kaila-devi-chalisa",
+      "category": "chalisa",
+      "title": "Kaila Devi Chalisa",
+      "hindi": "कैला देवी चालीसा",
+      "summary": "A hymn associated with the Kaila Devi shrine near Karauli."
+    },
+    {
+      "id": "brahma-chalisa",
+      "category": "chalisa",
+      "title": "Brahma Chalisa",
+      "hindi": "ब्रह्मा चालीसा",
+      "summary": "A hymn to Brahma, traditionally associated with creation."
+    },
+    {
+      "id": "jaharveer-chalisa",
+      "category": "chalisa",
+      "title": "Jaharveer Chalisa",
+      "hindi": "जाहरवीर चालीसा",
+      "summary": "A hymn honoring Goga Ji in regional devotional traditions."
+    },
+    {
+      "id": "sharda-chalisa",
+      "category": "chalisa",
+      "title": "Maihar Sharda Chalisa",
+      "hindi": "मैहर शारदा चालीसा",
+      "summary": "A hymn to the goddess worshipped at Maihar."
+    },
+    {
+      "id": "jhulelal-chalisa",
+      "category": "chalisa",
+      "title": "Jhulelal Chalisa",
+      "hindi": "झूलेलाल चालीसा",
+      "summary": "A hymn to Jhulelal in Sindhi Hindu worship."
+    },
+    {
+      "id": "narmada-chalisa",
+      "category": "chalisa",
+      "title": "Narmada Chalisa",
+      "hindi": "नर्मदा चालीसा",
+      "summary": "A hymn honoring the river also called Reva."
+    },
+    {
+      "id": "baglamukhi-chalisa",
+      "category": "chalisa",
+      "title": "Baglamukhi Chalisa",
+      "hindi": "बगलामुखी चालीसा",
+      "summary": "A devotional hymn to one of the ten Mahavidyas."
+    },
+    {
+      "id": "ramdev-chalisa",
+      "category": "chalisa",
+      "title": "Baba Ramdev Chalisa",
+      "hindi": "बाबा रामदेव चालीसा",
+      "summary": "A hymn to Ramdev Pir of Rajasthan."
+    },
+    {
+      "id": "lalita-chalisa",
+      "category": "chalisa",
+      "title": "Lalita Chalisa",
+      "hindi": "ललिता चालीसा",
+      "summary": "A hymn honoring the Goddess as Lalita Tripurasundari."
+    },
+    {
+      "id": "ravidas-chalisa",
+      "category": "chalisa",
+      "title": "Sant Ravidas Chalisa",
+      "hindi": "संत रविदास चालीसा",
+      "summary": "A hymn honoring the Bhakti poet-saint Ravidas."
+    },
+    {
+      "id": "pitar-chalisa",
+      "category": "chalisa",
+      "title": "Pitar Chalisa",
+      "hindi": "पितर चालीसा",
+      "summary": "A hymn of remembrance offered in honor of the ancestors."
+    },
+    {
+      "id": "kuber-chalisa",
+      "category": "chalisa",
+      "title": "Kubera Chalisa",
+      "hindi": "कुबेर चालीसा",
+      "summary": "A hymn to Kubera, traditionally guardian of wealth."
+    },
+    {
+      "id": "parshuram-chalisa",
+      "category": "chalisa",
+      "title": "Parshuram Chalisa",
+      "hindi": "परशुराम चालीसा",
+      "summary": "A hymn to Parashurama, an avatar of Vishnu."
+    },
+    {
+      "id": "chitragupt-chalisa",
+      "category": "chalisa",
+      "title": "Chitragupt Chalisa",
+      "hindi": "चित्रगुप्त चालीसा",
+      "summary": "A hymn to Chitragupt in worship concerned with righteous conduct."
+    },
+    {
+      "id": "giriraj-chalisa",
+      "category": "chalisa",
+      "title": "Giriraj Chalisa",
+      "hindi": "गिरिराज चालीसा",
+      "summary": "A hymn to Govardhan Hill in Braj."
+    },
+    {
+      "id": "goraksh-chalisa",
+      "category": "chalisa",
+      "title": "Gorakhnath Chalisa",
+      "hindi": "गोरखनाथ चालीसा",
+      "summary": "A hymn honoring the Nath teacher Gorakhnath."
+    },
+    {
+      "id": "sita-chalisa",
+      "category": "chalisa",
+      "title": "Sita Chalisa",
+      "hindi": "सीता चालीसा",
+      "summary": "A hymn praising Sita and recalling her role in the Ramayana."
+    },
+    {
+      "id": "vishwakarma-chalisa",
+      "category": "chalisa",
+      "title": "Vishwakarma Chalisa",
+      "hindi": "विश्वकर्मा चालीसा",
+      "summary": "A hymn to the divine artisan in craft and workshop traditions."
     }
   ]
 }

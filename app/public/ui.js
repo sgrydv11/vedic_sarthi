@@ -205,7 +205,7 @@ function servicePage(kind,subpage,step) {
 }
 const prayerTypes = [['mantra','Mantra'],['aarti','Aarti'],['chalisa','Chalisa']]
 function libraryTabs(active) {
-  const sections=[['all','Ritual guides'],...prayerTypes]
+  const sections=[['all','Ritual guides'],...prayerTypes,['scriptures','Granth']]
   return '<nav class="tabs" aria-label="Library sections">'+sections.map(([id,label])=>
     '<a href="#library/'+id+'"'+(id===active?' class="selected" aria-current="page"':'')+'>'+label+'</a>').join('')+'</nav>'
 }
@@ -257,7 +257,7 @@ function prayerLibrary(category, article) {
     '<label class="prayer-search">Search '+label+'<input id="prayer-search" type="search" placeholder="Search by title"></label>'+
     (category==='aarti'&&entries.some(item=>!item.verses?.length)?'<details class="festival-entry"><summary>Aartis awaiting complete lyrics · '+entries.filter(item=>!item.verses?.length).length+'</summary><ul>'+
       entries.filter(item=>!item.verses?.length).map(item=>'<li>'+link(escape(item.title),path+'/'+item.id,'breadcrumb-link')+'</li>').join('')+'</ul></details>':'')+
-    (category==='aarti'?select('aartiType','Composition',['All aartis','Traditional texts','Original Avantika compositions']):'')+
+    (category==='aarti'?select('aartiType','Composition',['All aartis','Traditional texts','Original Avantika compositions','Guides awaiting text']):'')+
     '<p id="prayer-count" role="status"></p><div id="prayer-list" class="grid"></div>'
   const search=$('#prayer-search')
   const aartiType=$('[name=aartiType]')
@@ -265,7 +265,7 @@ function prayerLibrary(category, article) {
     const query=search.value.normalize('NFKC').toLowerCase().trim()
     const original=$('#prayer-language').value==='hi'
     const matches=entries.filter(item=>
-      (!aartiType||aartiType.value==='All aartis'||(aartiType.value==='Original Avantika compositions')===(item.composition==='original'))&&
+      (!aartiType||aartiType.value==='All aartis'||aartiType.value===(!item.verses?.length?'Guides awaiting text':item.composition==='original'?'Original Avantika compositions':'Traditional texts'))&&
       [item.title,item.hindi,item.id].filter(Boolean).some(value=>value.normalize('NFKC').toLowerCase().includes(query)))
     $('#prayer-count').textContent=matches.length+' '+(matches.length===1?'entry':'entries')
     $('#prayer-list').innerHTML=matches.length?matches.map(item=>
@@ -278,7 +278,85 @@ function prayerLibrary(category, article) {
   wireLanguage(show)
   show()
 }
-function library(subpage,article) {
+const scriptures=[
+  ['bhagavad-gita','Bhagavad Gita','श्रीमद्भगवद्गीता','Krishna and Arjuna discuss action, knowledge, meditation and devotion at Kurukshetra.'],
+  ['sundarkand','Sundarkand','सुन्दरकाण्ड','The fifth book of the Ramcharitmanas follows Hanuman from the ocean crossing to his return with news of Sita.'],
+  ['durga-saptashati','Durga Saptashati','दुर्गा सप्तशती','The Devi Mahatmya in the Markandeya Purana tells how the Goddess confronts Madhu and Kaitabha, Mahishasura, and Shumbha and Nishumbha.'],
+  ['vishnu-sahasranama','Vishnu Sahasranama','विष्णु सहस्रनाम','In the Mahabharata, Bhishma answers Yudhishthira’s questions about worship and recites a thousand names of Vishnu.']
+]
+const gitaChapterNames=[
+  'Arjuna’s Grief','Knowledge of the Self','The Yoga of Action','Knowledge and Action','Renunciation','Meditation',
+  'Knowledge and Realization','The Imperishable Brahman','Royal Knowledge','Divine Manifestations','The Cosmic Form',
+  'Devotion','The Field and Its Knower','The Three Gunas','The Supreme Person','Divine and Demonic Qualities','Three Kinds of Faith','Liberation and Renunciation'
+]
+const scriptureGuides={
+  sundarkand:[
+    ['The ocean crossing','Hanuman accepts the mission to find Sita and crosses the ocean. His encounters along the way test his judgment as well as his strength.'],
+    ['Sita in the Ashoka grove','Hanuman finds Sita and presents Rama’s ring. She gives him a token to carry back to Rama.'],
+    ['Lanka and the return','After his capture, Hanuman escapes and sets parts of Lanka ablaze. He returns across the ocean with news of Sita.'],
+    ['Vibhishana and the ocean','Vibhishana leaves Ravana and seeks Rama’s refuge. Rama’s party reaches the ocean and prepares to cross.']
+  ],
+  'durga-saptashati':[
+    ['Chapter 1 · Madhu and Kaitabha','The sage Medhas recounts how Brahma praises the Goddess while Vishnu sleeps. Vishnu awakens and defeats the two adversaries.'],
+    ['Chapters 2–4 · Mahishasura','The gods’ energies unite in the Goddess. She defeats Mahishasura, after which the gods praise her.'],
+    ['Chapters 5–13 · Shumbha and Nishumbha','The Goddess confronts the brothers and their armies. The closing chapters return to King Suratha and the merchant Samadhi, who seek her blessing.']
+  ],
+  'vishnu-sahasranama':[
+    ['Setting','Yudhishthira asks Bhishma whom one should praise and worship and what practice leads beyond sorrow.'],
+    ['The names','The names reflect qualities, forms and deeds associated with Vishnu. Different commentators explain their roots and meanings in different ways.'],
+    ['Closing praise','The concluding verses describe the value of recitation and frame the hymn as a practice of remembrance and devotion.']
+  ]
+}
+async function scriptureLibrary(id,chapter) {
+  const path='library/scriptures'
+  if(!id){
+    main.innerHTML=heading('DEVOTIONAL LIBRARY','Granth','Read the Bhagavad Gita chapter by chapter and explore guides to other Hindu scriptures.')+libraryTabs('scriptures')+
+      '<div class="grid">'+scriptures.map(([key,title,hindi,summary])=>'<article class="card info"><h2>'+escape(title)+'</h2><p lang="hi">'+escape(hindi)+'</p><p>'+escape(summary)+'</p>'+
+       link(key==='bhagavad-gita'?'Read scripture':'Read guide',path+'/'+key,'secondary')+'</article>').join('')+'</div>'
+    return
+  }
+  const entry=scriptures.find(book=>book[0]===id)
+  if(!entry||(chapter&&(id!=='bhagavad-gita'||!/^([1-9]|1[0-8])$/.test(chapter))))return missingPage(path,'All scriptures')
+  const [,title,hindi,summary]=entry
+  const route=path+'/'+id
+  const number=Number(chapter||1)
+  main.innerHTML=breadcrumbs([['Library','library'],['Granth',path],[title]])+heading('GRANTH',title,summary)+
+    '<p lang="hi">'+escape(hindi)+'</p>'
+  if(id!=='bhagavad-gita'){
+    main.insertAdjacentHTML('beforeend','<article class="card info detail-body"><h2>Reading guide</h2>'+
+      scriptureGuides[id].map(([label,text])=>'<h3>'+escape(label)+'</h3><p>'+escape(text)+'</p>').join('')+'</article>')
+    return
+  }
+  main.insertAdjacentHTML('beforeend','<div class="filters">'+select('gitaChapter','Chapter',gitaChapterNames.map((name,i)=>[i+1,(i+1)+' · '+name]))+
+    prayerLanguage(localRead('prayer-script','hi')==='hi')+'</div>'+
+    '<div class="actions">'+(number>1?link('Previous chapter',route+'/'+(number-1),'secondary'):'')+
+    (number<18?link('Next chapter',route+'/'+(number+1),'secondary'):'')+'</div>'+
+    '<div id="gita-verses" class="card info detail-body"><p role="status">Loading chapter…</p></div>'+
+    '<p>This edition includes the opening question in chapter 13. <a href="https://github.com/gita/gita">Sanskrit and Roman text source</a>.</p>')
+  const target=$('#gita-verses')
+  const chapterControl=$('[name=gitaChapter]')
+  chapterControl.value=String(number)
+  chapterControl.onchange=()=>{location.hash=route+'/'+chapterControl.value}
+  try {
+    const response=await fetch('/library-gita.json')
+    if(!response.ok)throw new Error('Chapter data unavailable')
+    const chapters=await response.json()
+    if(!target.isConnected)return
+    const script=$('#prayer-language')
+    const show=()=>{
+      const roman=script.value==='en'
+      target.innerHTML='<h2>'+number+' · '+escape(gitaChapterNames[number-1])+'</h2>'+
+        '<ol class="steps prayer-text" lang="'+(roman?'sa-Latn':'sa')+'">'+chapters[number-1].map(verse=>
+        '<li value="'+verse.number+'"><p>'+escape(roman?verse.roman:verse.text).replaceAll('\n','<br>')+'</p></li>').join('')+'</ol>'
+    }
+    script.onchange=()=>{localWrite('prayer-script',script.value);show()}
+    show()
+  }catch{
+    if(target.isConnected)target.textContent='This chapter could not load. Refresh the page to try again.'
+  }
+}
+function library(subpage,article,chapter) {
+  if(subpage==='scriptures')return scriptureLibrary(article,chapter)
   if (prayerTypes.some(([id])=>id===subpage)) return prayerLibrary(subpage,article)
   const types = [['all','All guides'],['home','Home puja'],['vrat','Vrat'],['karmkand','Karmkand'],['pilgrimage','Pilgrimage']]
   const category = types.find(([id])=>subpage===id)?.[1] || 'All guides'
@@ -933,7 +1011,7 @@ function render() {
     page='chadhava'
     history.replaceState(history.state,'','#'+[page,subpage,step].filter(Boolean).join('/'))
   }
-  if (extra) return missingPage('home','Home')
+  if (extra&&!(page==='library'&&subpage==='scriptures')) return missingPage('home','Home')
   const items=user&&user.role!=='devotee'?[...nav,['requests','Dashboard']]:nav
   $('#nav').innerHTML=items.map(([path,label])=>'<a href="#'+path+'" '+(page===path?'aria-current="page"':'')+'>'+label+'</a>').join('')
   $('#account').textContent=user?'Account':'Sign in'
@@ -941,7 +1019,7 @@ function render() {
   else if (page==='poojas') subpage?ritualDetail(subpage,step):poojas()
   else if (page==='panchang') panchang(version,subpage,step)
   else if (['astrology','consult'].includes(page)) servicePage(page,subpage,step)
-  else if (page==='library') library(subpage,step)
+  else if (page==='library') library(subpage,step,extra)
   else if (page==='jaap') jaap()
   else if (page==='requests') requests(version,subpage)
   else if (page==='support') support()
