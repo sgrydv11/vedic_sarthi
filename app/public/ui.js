@@ -209,36 +209,67 @@ function libraryTabs(active) {
   return '<nav class="tabs" aria-label="Library sections">'+sections.map(([id,label])=>
     '<a href="#library/'+id+'"'+(id===active?' class="selected" aria-current="page"':'')+'>'+label+'</a>').join('')+'</nav>'
 }
+const devanagariConsonants=Object.fromEntries(Array.from('कखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहळ').map((letter,i)=>[letter,'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḷ'.split(' ')[i]]))
+const devanagariMarks=Object.fromEntries(Array.from('अआइईउऊऋएऐओऔािीुूृेैोौंँःऽॐ।॥').map((letter,i)=>[letter,'a ā i ī u ū ṛ e ai o au ā i ī u ū ṛ e ai o au ṃ ̃ ḥ ’ Om . .'.split(' ')[i]]))
+function romanPrayer(text) {
+  const chars=Array.from(text.normalize('NFC'))
+  return chars.map((letter,index)=>{
+    if(letter==='्'||letter==='़')return ''
+    const base=devanagariConsonants[letter]
+    if(!base)return devanagariMarks[letter]??letter
+    const next=chars[index+(chars[index+1]==='़'?2:1)]
+    return base+('ािीुूृेैोौ्'.includes(next??'\u0000')?'':'a')
+  }).join('')
+}
+function prayerLanguage(hindi) {
+  return '<label>Reading script<select id="prayer-language"><option value="hi" '+(hindi?'selected':'')+'>हिन्दी / Devanagari</option>'+
+    '<option value="en" '+(!hindi?'selected':'')+'>English / Roman transliteration</option></select></label>'
+}
 function prayerLibrary(category, article) {
   const label=prayerTypes.find(([id])=>category===id)[1]
   const entries=(catalog.prayers||[]).filter(item=>item.category===category)
   const path='library/'+category
+  const hindi=localRead('prayer-script','hi')==='hi'
+  const wireLanguage=onChange=>$('#prayer-language').addEventListener('change',event=>{
+    localWrite('prayer-script',event.target.value)
+    onChange()
+  })
   if (article) {
     const entry=entries.find(item=>item.id===article)
     if (!entry) return missingPage(path,'All '+label+' entries')
-    const text=entry.verses?.length
-      ? '<section class="prayer-text" lang="hi" aria-label="Devotional text in Devanagari">'+entry.verses.map(verse=>'<p>'+escape(verse).replaceAll('\n','<br>')+'</p>').join('')+'</section>'
-      : ''
     main.innerHTML=breadcrumbs([['Library','library'],[label,path],[entry.title]])+
       heading(label,escape(entry.title),'')+
-      '<article class="card info detail-body"><h2>About this '+label.toLowerCase()+'</h2><p>'+escape(entry.summary)+'</p>'+text+
+      '<article class="card info detail-body"><h2>About this '+label.toLowerCase()+'</h2><p>'+escape(entry.summary)+'</p>'+prayerLanguage(hindi)+'<div id="prayer-reading"></div>'+
       (entry.id==='hanuman-chalisa-story'?link('Read Hanuman Chalisa',path+'/hanuman-chalisa','secondary'):'')+'</article>'
+    const showReading=()=>{
+      const original=$('#prayer-language').value==='hi'
+      $('#prayer-reading').innerHTML=entry.verses?.length
+        ? '<section class="prayer-text" lang="'+(original?'hi':'hi-Latn')+'"><h2>'+(original?'मूल पाठ':'Roman transliteration')+'</h2>'+
+          entry.verses.map(verse=>'<p>'+escape(original?verse:romanPrayer(verse)).replaceAll('\\n','<br>')+'</p>').join('')+'</section>'
+        : '<p>'+ (original?'पूरा पाठ अभी उपलब्ध नहीं है।':'Complete lyrics are not available yet.')+'</p>'
+    }
+    wireLanguage(showReading)
+    showReading()
     return
   }
-  main.innerHTML=heading('DEVOTIONAL LIBRARY',label,'')+libraryTabs(category)+
+  main.innerHTML=heading('DEVOTIONAL LIBRARY',label,'')+libraryTabs(category)+prayerLanguage(hindi)+
     '<label class="prayer-search">Search '+label+'<input id="prayer-search" type="search" placeholder="Search by title"></label>'+
+    (category==='aarti'?'<details class="festival-entry"><summary>Aartis awaiting complete lyrics · '+entries.filter(item=>!item.verses?.length).length+'</summary><ul>'+
+      entries.filter(item=>!item.verses?.length).map(item=>'<li>'+link(escape(item.title),path+'/'+item.id,'breadcrumb-link')+'</li>').join('')+'</ul></details>':'')+
     '<p id="prayer-count" role="status"></p><div id="prayer-list" class="grid"></div>'
   const search=$('#prayer-search')
   const show=()=>{
     const query=search.value.normalize('NFKC').toLowerCase().trim()
+    const original=$('#prayer-language').value==='hi'
     const matches=entries.filter(item=>[item.title,item.hindi,item.id].filter(Boolean).some(value=>value.normalize('NFKC').toLowerCase().includes(query)))
     $('#prayer-count').textContent=matches.length+' '+(matches.length===1?'entry':'entries')
     $('#prayer-list').innerHTML=matches.length?matches.map(item=>
-      '<article class="card info"><h3>'+escape(item.title)+'</h3>'+
-      (item.hindi?'<p lang="hi">'+escape(item.hindi)+'</p>':'')+
+      '<article class="card info"><h3>'+escape(original&&item.hindi?item.hindi:item.title)+'</h3>'+
+      (item.hindi?'<p lang="'+(original?'en':'hi')+'">'+escape(original?item.title:item.hindi)+'</p>':'')+
       link('Read '+label,path+'/'+item.id,'secondary')+'</article>').join(''):'<p>No entries match your search.</p>'
   }
   search.addEventListener('input',show)
+  wireLanguage(show)
   show()
 }
 function library(subpage,article) {
