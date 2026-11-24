@@ -25,7 +25,7 @@ const hindiGrahas={
 }
 const hindiRashis=['मेष','वृषभ','मिथुन','कर्क','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुंभ','मीन']
 const grahaName=(name,hindi)=>hindi?(hindiGrahas[name]?.[1]||name):name
-function northIndianChart(chart,hindi) {
+function northIndianChart(chart,hindi,showHouses) {
   const houses=new Map(chart.houses.map(house=>[house.number,house]))
   const cells=houseCenters.map(([x,y],index)=>{
     const number=index+1
@@ -37,17 +37,20 @@ function northIndianChart(chart,hindi) {
     const houseLabel=hindi?'भाव '+number:'House '+number
     const top=Math.min(y,386-(rows.length-1)*12)
     return '<g><title>'+esc(houseLabel+(hindi?', राशि ':', rashi ')+sign+(planets.length?' · '+planets.map(name=>grahaName(name,hindi)).join(', '):''))+'</title>'+
-      '<text class="kundli-house" x="'+x+'" y="'+(top-7)+'">'+(hindi?'भा':'H')+number+' · '+esc(sign)+'</text>'+
+      '<text class="kundli-house" x="'+x+'" y="'+(top-7)+'">'+(showHouses?(hindi?'भा':'H')+number+' · ':'')+esc(sign)+'</text>'+
       rows.map((row,i)=>'<text class="kundli-planets" x="'+x+'" y="'+(top+8+i*12)+'">'+esc(row)+'</text>').join('')+'</g>'
   }).join('')
   return '<figure class="kundli-chart"><svg viewBox="0 0 400 400" role="img" aria-label="'+(hindi?'बारह भावों वाली उत्तर भारतीय कुंडली':'North Indian style chart with 12 houses')+'">'+
     '<path class="kundli-lines" d="M1 1H399V399H1Z M1 1L399 399 M399 1L1 399 M200 1L399 200L200 399L1 200Z"/>'+cells+'</svg>'+
-    '<figcaption>'+(hindi?'भाव 1 लग्न है। भाव के बाद लिखा अंक राशि बताता है। ग्रहों के पूरे नाम नीचे की तालिका में हैं।':'H1 marks the Lagna. The number after each house is its rashi. Planet names are spelled out in the table.')+'</figcaption></figure>'
+    '<figcaption>'+(showHouses
+      ? (hindi?'भाव 1 लग्न है। भाव के बाद लिखा अंक राशि बताता है।':'H1 marks the Lagna. The number after each house is its rashi.')
+      : (hindi?'लग्न ऊपर है। अंक राशियाँ दर्शाते हैं।':'The Lagna is at the top. Numbers indicate rashis.'))+
+    (hindi?' ग्रहों के पूरे नाम नीचे की तालिका में हैं।':' Planet names are spelled out in the table.')+'</figcaption></figure>'
 }
-function planetTable(chart,title,hindi) {
+function planetTable(chart,title,hindi,showHouses) {
   const houseByPlanet=new Map(chart.houses.flatMap(house=>house.planets.map(name=>[name,house.number])))
   const lagna=hindi?(hindiRashis[chart.ascendant?.rashi-1]||'—'):(chart.ascendant?.rashiName||'—')
-  return '<section class="card info section" lang="'+(hindi?'hi':'en')+'"><h3>'+esc(title+(hindi?' · लग्न ':' · Lagna ')+lagna)+'</h3>'+northIndianChart(chart,hindi)+
+  return '<section class="card info section" lang="'+(hindi?'hi':'en')+'"><h3>'+esc(title+(hindi?' · लग्न ':' · Lagna ')+lagna)+'</h3>'+northIndianChart(chart,hindi,showHouses)+
     tables(hindi?'ग्रहों की स्थिति':'Planet positions',hindi?['ग्रह','राशि','भाव','अंश','गरिमा','विशेषताएँ']:['Graha','Rashi','House','Position','Dignity','Flags'],
       Object.entries(chart.planets||{}).map(([name,p])=>[grahaName(name,hindi),hindi?(hindiRashis[p.rashi-1]||p.rashiName):p.rashiName,houseByPlanet.get(name),p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',p.dignity,[p.isRetrograde&&'Retrograde',p.isCombust&&'Combust',p.isVargottama&&'Vargottama'].filter(Boolean).join(', ')||'—']))+'</section>'
 }
@@ -102,6 +105,7 @@ export function mountJyotish(root,mode) {
       }else{
         const moon=getChandraKundli(first),sun=getSuryaKundli(first)
         result.innerHTML='<label>Chart language<select name="chartLanguage"><option value="en">English</option><option value="hi" lang="hi">हिन्दी</option></select></label>'+
+          '<label class="tick"><input type="checkbox" name="showHouses" checked> Show house numbers</label>'+
           '<div data-chart="birth"></div>'+
           '<details class="festival-entry"><summary>Chandra Kundli</summary><div data-chart="moon"></div></details>'+
           '<details class="festival-entry"><summary>Surya Kundli</summary><div data-chart="sun"></div></details>'+
@@ -114,19 +118,21 @@ export function mountJyotish(root,mode) {
         const selector=result.querySelector('[name=varga]')
         const selected=result.querySelector('.selected-chart')
         const language=result.querySelector('[name=chartLanguage]')
+        const houseNumbers=result.querySelector('[name=showHouses]')
         const showSelected=()=>{
           const key=selector.value
-          selected.innerHTML=key?planetTable(first.vargas[key],key.toUpperCase(),language.value==='hi'):''
+          selected.innerHTML=key?planetTable(first.vargas[key],key.toUpperCase(),language.value==='hi',houseNumbers.checked):''
         }
         const showCharts=()=>{
           const hindi=language.value==='hi'
-          result.querySelector('[data-chart=birth]').innerHTML=planetTable(first,hindi?'D1 राशि':'D1 Rashi',hindi)
-          result.querySelector('[data-chart=moon]').innerHTML=planetTable(moon,hindi?'चंद्र कुंडली':'Moon chart',hindi)
-          result.querySelector('[data-chart=sun]').innerHTML=planetTable(sun,hindi?'सूर्य कुंडली':'Sun chart',hindi)
+          result.querySelector('[data-chart=birth]').innerHTML=planetTable(first,hindi?'D1 राशि':'D1 Rashi',hindi,houseNumbers.checked)
+          result.querySelector('[data-chart=moon]').innerHTML=planetTable(moon,hindi?'चंद्र कुंडली':'Moon chart',hindi,houseNumbers.checked)
+          result.querySelector('[data-chart=sun]').innerHTML=planetTable(sun,hindi?'सूर्य कुंडली':'Sun chart',hindi,houseNumbers.checked)
           showSelected()
         }
         selector.addEventListener('change',showSelected)
         language.addEventListener('change',showCharts)
+        houseNumbers.addEventListener('change',showCharts)
         showCharts()
       }
     }catch(error){result.innerHTML='<p role="alert">'+esc(error instanceof Error?error.message:'Unable to calculate for these birth details.')+'</p>'}
