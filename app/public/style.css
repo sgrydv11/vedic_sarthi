@@ -180,3 +180,9 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--wine);flex:none}
 .jyotish-table table{width:100%;border-collapse:collapse}
 .jyotish-table td,.jyotish-table th{text-align:left;padding:.55rem;border-bottom:1px solid var(--line)}
 #jyotish-result dd{min-width:0;overflow-wrap:anywhere}
+.kundli-chart{width:min(100%,28rem);margin:1rem auto}
+.kundli-chart svg{display:block;width:100%;height:auto;background:var(--paper);color:var(--wine)}
+.kundli-chart text{text-anchor:middle;fill:currentColor;font:600 12px system-ui,sans-serif}
+.kundli-chart .kundli-planets{font-size:11px}
+.kundli-lines{stroke:currentColor;fill:none;stroke-width:1.25}
+.kundli-chart figcaption{font-size:.88rem;color:var(--muted);margin-top:.5rem}

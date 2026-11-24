@@ -13,9 +13,33 @@ function detail(value) {
   return esc(typeof value==='boolean'?(value?'Yes':'No'):value)
 }
 const fold=(title,value)=>value==null?'':'<details class="festival-entry"><summary>'+esc(title)+'</summary>'+detail(value)+'</details>'
+const houseCenters=[
+  [200,100],[100,31],[31,100],[100,200],[31,300],[100,369],
+  [200,300],[300,369],[369,300],[300,200],[369,100],[300,31]
+]
+const grahaLabels={Sun:'Su',Moon:'Mo',Mars:'Ma',Mercury:'Me',Jupiter:'Ju',Venus:'Ve',Saturn:'Sa',Rahu:'Ra',Ketu:'Ke',Uranus:'Ur',Neptune:'Ne',Pluto:'Pl'}
+function northIndianChart(chart) {
+  const houses=new Map(chart.houses.map(house=>[house.number,house]))
+  const cells=houseCenters.map(([x,y],index)=>{
+    const number=index+1
+    const house=houses.get(number)
+    const planets=house?.planets||[]
+    const sign=house?.rashi??'—'
+    const rows=[]
+    for(let i=0;i<planets.length;i+=3)rows.push(planets.slice(i,i+3).map(name=>grahaLabels[name]||name.slice(0,2)).join(' '))
+    return '<g><title>'+esc('House '+number+', rashi '+sign+(planets.length?' · '+planets.join(', '):''))+'</title>'+
+      '<text class="kundli-house" x="'+x+'" y="'+(y-7)+'">H'+number+' · '+esc(sign)+'</text>'+
+      rows.map((row,i)=>'<text class="kundli-planets" x="'+x+'" y="'+(y+8+i*12)+'">'+esc(row)+'</text>').join('')+'</g>'
+  }).join('')
+  return '<figure class="kundli-chart"><svg viewBox="0 0 400 400" role="img" aria-label="North Indian style chart with 12 houses">'+
+    '<path class="kundli-lines" d="M1 1H399V399H1Z M1 1L399 399 M399 1L1 399 M200 1L399 200L200 399L1 200Z"/>'+cells+'</svg>'+
+    '<figcaption>H1 marks the Lagna. The number after each house is its rashi. Planet names are spelled out in the table.</figcaption></figure>'
+}
 function planetTable(chart,title) {
-  return tables(title+' · Lagna '+(chart.ascendant?.rashiName||'—'),['Graha','Rashi','House','Position','Dignity','Flags'],
-    Object.entries(chart.planets||{}).map(([name,p])=>[name,p.rashiName,p.house,p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',p.dignity,[p.isRetrograde&&'Retrograde',p.isCombust&&'Combust',p.isVargottama&&'Vargottama'].filter(Boolean).join(', ')||'—']))
+  const houseByPlanet=new Map(chart.houses.flatMap(house=>house.planets.map(name=>[name,house.number])))
+  return '<section class="card info section"><h3>'+esc(title+' · Lagna '+(chart.ascendant?.rashiName||'—'))+'</h3>'+northIndianChart(chart)+
+    tables('Planet positions',['Graha','Rashi','House','Position','Dignity','Flags'],
+      Object.entries(chart.planets||{}).map(([name,p])=>[name,p.rashiName,houseByPlanet.get(name),p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',p.dignity,[p.isRetrograde&&'Retrograde',p.isCombust&&'Combust',p.isVargottama&&'Vargottama'].filter(Boolean).join(', ')||'—']))+'</section>'
 }
 function birthFields(prefix,name) {
   return '<fieldset><legend>'+name+'</legend><div class="panchang-controls">'+
