@@ -245,6 +245,7 @@ function prayerLibrary(category, article) {
       const original=$('#prayer-language').value==='hi'
       $('#prayer-reading').innerHTML=entry.verses?.length
         ? '<section class="prayer-text" lang="'+(original?'hi':'hi-Latn')+'"><h2>'+(original?'मूल पाठ':'Roman transliteration')+'</h2>'+
+          (entry.composition==='original'?'<p class="eyebrow">'+(original?'अवंतिका की नई रचना':'Original Avantika composition')+'</p>':'')+
           entry.verses.map(verse=>'<p>'+escape(original?verse:romanPrayer(verse)).replaceAll('\\n','<br>')+'</p>').join('')+'</section>'
         : '<p>'+ (original?'पूरा पाठ अभी उपलब्ध नहीं है।':'Complete lyrics are not available yet.')+'</p>'
     }
@@ -254,7 +255,7 @@ function prayerLibrary(category, article) {
   }
   main.innerHTML=heading('DEVOTIONAL LIBRARY',label,'')+libraryTabs(category)+prayerLanguage(hindi)+
     '<label class="prayer-search">Search '+label+'<input id="prayer-search" type="search" placeholder="Search by title"></label>'+
-    (category==='aarti'?'<details class="festival-entry"><summary>Aartis awaiting complete lyrics · '+entries.filter(item=>!item.verses?.length).length+'</summary><ul>'+
+    (category==='aarti'&&entries.some(item=>!item.verses?.length)?'<details class="festival-entry"><summary>Aartis awaiting complete lyrics · '+entries.filter(item=>!item.verses?.length).length+'</summary><ul>'+
       entries.filter(item=>!item.verses?.length).map(item=>'<li>'+link(escape(item.title),path+'/'+item.id,'breadcrumb-link')+'</li>').join('')+'</ul></details>':'')+
     '<p id="prayer-count" role="status"></p><div id="prayer-list" class="grid"></div>'
   const search=$('#prayer-search')

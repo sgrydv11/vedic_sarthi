@@ -1805,7 +1805,13 @@
       "id": "bhai-dooj-aarti",
       "category": "aarti",
       "title": "Bhai Dooj Aarti",
-      "summary": "On Bhai Dooj, a sister may apply tilak and wave a lamp for her brother, praying for his well-being. The order of the lamp, sweets and gifts varies by household."
+      "summary": "On Bhai Dooj, a sister may apply tilak and wave a lamp for her brother, praying for his well-being. The order of the lamp, sweets and gifts varies by household.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "भाई दूज की थाली में स्नेह का दीप जलाएँ।\nबहन के मंगल आशीष संग भाई का सुख मनाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "om-jai-jagdish-hare",
@@ -1829,385 +1835,769 @@
       "id": "ganesh-aarti",
       "category": "aarti",
       "title": "Ganesh Aarti",
-      "summary": "Ganesh aarti is often sung after offerings of flowers and modak. Hindi and Marathi households commonly use different songs for the lamp offering."
+      "summary": "Ganesh aarti is often sung after offerings of flowers and modak. Hindi and Marathi households commonly use different songs for the lamp offering.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "गौरीसुत गणपति, शुभ संकल्प सँवारो।\nसमझ से सुलझें कठिन राहें, धीरज मन में धारो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-shri-brishapati-dev",
       "category": "aarti",
       "title": "Brihaspati Aarti",
-      "summary": "Brihaspati is honored as the teacher of the devas. In Thursday household worship, the lamp offering often follows the vrat story."
+      "summary": "Brihaspati is honored as the teacher of the devas. In Thursday household worship, the lamp offering often follows the vrat story.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "देवगुरु बृहस्पति, विवेक का दान दो।\nमीठी वाणी, सत्य के पथ की पहचान दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shri-shivratri-aarti",
       "category": "aarti",
       "title": "Shivratri Aarti",
-      "summary": "Shivratri worship commonly includes bathing the Shiva linga and offering bilva leaves. A lamp may be waved after the offerings in each cycle of night worship."
+      "summary": "Shivratri worship commonly includes bathing the Shiva linga and offering bilva leaves. A lamp may be waved after the offerings in each cycle of night worship.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "शिवरात्रि के जागरण में बेलपत्र चढ़ाएँ।\nनीलकंठ की शांत छवि को हृदय में बसाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "dhanteras-aarti",
       "category": "aarti",
       "title": "Dhanteras Aarti",
-      "summary": "Dhanteras opens the Diwali observances for many households. Families may honor Dhanvantari, Lakshmi or Kubera and light a separate lamp according to local custom."
+      "summary": "Dhanteras opens the Diwali observances for many households. Families may honor Dhanvantari, Lakshmi or Kubera and light a separate lamp according to local custom.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "धनतेरस की साँझ में आरोग्य का दीप जलाएँ।\nधन्वंतरि का स्मरण करें, संयम की राह अपनाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "govardhan-puja-aarti",
       "category": "aarti",
       "title": "Govardhan Maharaj Aarti",
-      "summary": "This lamp offering honors Krishna as the protector of Govardhan. It often concludes worship around a symbolic hill and a display of Annakut offerings."
+      "summary": "This lamp offering honors Krishna as the protector of Govardhan. It often concludes worship around a symbolic hill and a display of Annakut offerings.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "गोवर्धन की छाँव तले ब्रज ने पाया ठाँव।\nअन्नकूट का भोग सजाएँ, सबके संग बाँटें भाव॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-mr-balaji",
       "category": "aarti",
       "title": "Balaji Aarti",
-      "summary": "The name Balaji can refer to Venkateswara or to Hanuman at particular shrines. The words and sequence of an aarti depend on which shrine is being honored."
+      "summary": "The name Balaji can refer to Venkateswara or to Hanuman at particular shrines. The words and sequence of an aarti depend on which shrine is being honored.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "बालाजी के द्वार पर विनय से शीश झुकाएँ।\nसेवा में दृढ़ रहें, मन में भक्ति जगाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-dharmaraj-ji",
       "category": "aarti",
       "title": "Dharmaraj Aarti",
-      "summary": "Dharmaraj is associated with moral accounting and is often identified with Yama. His worship emphasizes responsibility for one’s actions."
+      "summary": "Dharmaraj is associated with moral accounting and is often identified with Yama. His worship emphasizes responsibility for one’s actions.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "धर्मराज, अपने कर्मों का सच्चा लेख दिखाओ।\nन्याय और दया के बीच संतुलन सिखाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-shri-lalita-mata",
       "category": "aarti",
       "title": "Lalita Aarti",
-      "summary": "Lalita is revered as Tripurasundari in Shri Vidya traditions. A lamp offering may follow the chanting of her names."
+      "summary": "Lalita is revered as Tripurasundari in Shri Vidya traditions. A lamp offering may follow the chanting of her names.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "ललिता त्रिपुरसुंदरी, करुणा का द्वार खोलो।\nश्रीचक्र के ध्यान में अंतर्मन को टटोलो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-shri-ramayana-ji",
       "category": "aarti",
       "title": "Ramayan Aarti",
-      "summary": "Ramayan aarti honors the sacred narrative of Rama. It is often offered to the book when a household or community finishes a reading."
+      "summary": "Ramayan aarti honors the sacred narrative of Rama. It is often offered to the book when a household or community finishes a reading.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "रामायण की कथा से मर्यादा हम पाएँ।\nसीता के धैर्य और भरत के त्याग को अपनाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "sankata-mata-aarti",
       "category": "aarti",
       "title": "Sankata Aarti",
-      "summary": "Sankata Mata is worshipped as a mother goddess in Varanasi. A lamp offering may follow prayers seeking strength through difficulties."
+      "summary": "Sankata Mata is worshipped as a mother goddess in Varanasi. A lamp offering may follow prayers seeking strength through difficulties.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "काशी की संकटामाता, भय में साहस भर दो।\nकठिन घड़ी में साथ निभाने का संकल्प दृढ़ कर दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-ekadashi-mata",
       "category": "aarti",
       "title": "Ekadashi Aarti",
-      "summary": "Ekadashi Mata personifies the fasting day observed twice in each lunar month. An aarti may be part of the evening worship of Vishnu on that day."
+      "summary": "Ekadashi Mata personifies the fasting day observed twice in each lunar month. An aarti may be part of the evening worship of Vishnu on that day.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "एकादशी की शांत घड़ी में हरि का ध्यान लगाएँ।\nउपवास के संग सेवा करें, वाणी को संयम सिखाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "baba-gorakhnath-aarti",
       "category": "aarti",
       "title": "Gorakhnath Aarti",
-      "summary": "Gorakhnath is revered as a teacher in the Nath tradition. The lamp offering honors the guru and the continuity of the teaching lineage."
+      "summary": "Gorakhnath is revered as a teacher in the Nath tradition. The lamp offering honors the guru and the continuity of the teaching lineage.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "गोरखनाथ गुरु, साधना का मार्ग बताओ।\nधीमी श्वास और सहज ध्यान में मन को ठहराओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shri-siddhivinayak-aarti",
       "category": "aarti",
       "title": "Siddhivinayak Aarti",
-      "summary": "Siddhivinayak is a form of Ganesh. The title is especially associated with Mumbai’s Prabhadevi temple, while the form is also worshipped in homes."
+      "summary": "Siddhivinayak is a form of Ganesh. The title is especially associated with Mumbai’s Prabhadevi temple, while the form is also worshipped in homes.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "सिद्धिविनायक, नया काम श्रद्धा से आरंभ करें।\nमोदक अर्पित कर सीखें कि श्रम से राह सरल करें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "vishwakarma-aarti",
       "category": "aarti",
       "title": "Vishwakarma Aarti",
-      "summary": "Vishwakarma is revered by artisans and workers as the divine craftsman. Tools and machinery are often cleaned and honored before the lamp offering."
+      "summary": "Vishwakarma is revered by artisans and workers as the divine craftsman. Tools and machinery are often cleaned and honored before the lamp offering.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "विश्वकर्मा, हाथों की कारीगरी निखारो।\nऔज़ारों का मान रखें, काम को ईमान से सँवारो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "ahoi-mata-aarti",
       "category": "aarti",
       "title": "Ahoi Aarti in English",
-      "summary": "Ahoi Ashtami is observed in many North Indian homes for the well-being of children. The lamp is offered to Ahoi Mata, often near a drawing used for the observance."
+      "summary": "Ahoi Ashtami is observed in many North Indian homes for the well-being of children. The lamp is offered to Ahoi Mata, often near a drawing used for the observance.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "अहोई की कथा सुनें, तारों को नमन करें।\nबच्चों के सुख की कामना में स्नेह का व्रत धरें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-bharat-mata",
       "category": "aarti",
       "title": "Bharat Mata Aarti",
-      "summary": "Bharat Mata personifies India as a mother. This aarti belongs to civic and devotional observances centered on that figure."
+      "summary": "Bharat Mata personifies India as a mother. This aarti belongs to civic and devotional observances centered on that figure.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "भारत माता, खेतों और नदियों की रखवाली करें।\nभाषाएँ अनेक, साथ चलें, श्रम का आदर करें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "kartikeya-aarti",
       "category": "aarti",
       "title": "Kartikeya Aarti",
-      "summary": "Kartikeya is also worshipped as Skanda, Murugan and Subrahmanya. Regional traditions differ in the songs used for his lamp offering."
+      "summary": "Kartikeya is also worshipped as Skanda, Murugan and Subrahmanya. Regional traditions differ in the songs used for his lamp offering.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "कार्तिकेय, मयूरवाहन, साहस का अर्थ सिखाओ।\nअपनी शक्ति का उपयोग निर्बल की रक्षा में कराओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shree-bhagwatgeeta-aarti",
       "category": "aarti",
       "title": "Bhagavad Gita Aarti",
-      "summary": "This aarti honors the dialogue between Krishna and Arjuna. A lamp may be offered to the book after a reading or at Gita Jayanti."
+      "summary": "This aarti honors the dialogue between Krishna and Arjuna. A lamp may be offered to the book after a reading or at Gita Jayanti.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "गीता के संवाद में संशय का हल पाएँ।\nकर्म के फल की चिंता छोड़ अपना धर्म निभाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "datatachi-aarti",
       "category": "aarti",
       "title": "Dattachi Aarti",
-      "summary": "Datta worship honors Dattatreya, the guru associated with Brahma, Vishnu and Shiva. Marathi aarti traditions often mark the conclusion of the daily worship."
+      "summary": "Datta worship honors Dattatreya, the guru associated with Brahma, Vishnu and Shiva. Marathi aarti traditions often mark the conclusion of the daily worship.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "दत्तात्रेय गुरु, हर जीव से सीखना सिखाओ।\nप्रकृति को गुरु मानें, सहज जीवन अपनाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "annapurna-aarti",
       "category": "aarti",
       "title": "Annapurna Aarti",
-      "summary": "Annapurna’s lamp offering expresses gratitude for food. It may follow the presentation of cooked grains or other household offerings."
+      "summary": "Annapurna’s lamp offering expresses gratitude for food. It may follow the presentation of cooked grains or other household offerings.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "अन्नपूर्णा माँ, भोजन का आदर करना सिखाओ।\nजिस थाली में अन्न सजे, भूखे को भी खिलाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-shri-shakumbhari-devi-ji",
       "category": "aarti",
       "title": "Shakambhari Aarti",
-      "summary": "Shakambhari is revered as the Goddess who sustains life with plants and food. Vegetables and greens are appropriate symbols in her worship."
+      "summary": "Shakambhari is revered as the Goddess who sustains life with plants and food. Vegetables and greens are appropriate symbols in her worship.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "शाकंभरी माँ, धरती की हरियाली सँवारो।\nफल, शाक और जल के प्रति कृतज्ञता का भाव धारो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "narmada-maa-aarti",
       "category": "aarti",
       "title": "Narmada Aarti",
-      "summary": "Narmada aarti honors the river as a goddess. Lamps are offered at ghats as part of communal worship along the river."
+      "summary": "Narmada aarti honors the river as a goddess. Lamps are offered at ghats as part of communal worship along the river.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "रेवा के तट पर दीप में हमारी विनती बहे।\nनर्मदा का जल निर्मल रहे, हर घाट स्वच्छ रहे॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-shri-chintpurni-devi",
       "category": "aarti",
       "title": "Chintpurni Aarti",
-      "summary": "Chintpurni Devi is worshipped at a Shakti shrine in Himachal Pradesh. Devotees offer a lamp while praying for courage and relief from worry."
+      "summary": "Chintpurni Devi is worshipped at a Shakti shrine in Himachal Pradesh. Devotees offer a lamp while praying for courage and relief from worry.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "चिंतपूर्णी माँ, उलझन में मन को धैर्य दो।\nअपनों की बात सुनें, उसके लिए समय दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "sri-shantadrugchi-aarti",
       "category": "aarti",
       "title": "Shantadurga Aarti",
-      "summary": "Shantadurga is revered in Goa, where tradition describes her as restoring harmony between Shiva and Vishnu."
+      "summary": "Shantadurga is revered in Goa, where tradition describes her as restoring harmony between Shiva and Vishnu.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "शांतादुर्गा माँ, विरोध में मेल कराओ।\nव्यर्थ विवाद थमे, दोनों पक्षों की बात सुनाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "vaishno-mata-aarti",
       "category": "aarti",
       "title": "Vaishno Aarti",
-      "summary": "Vaishno Devi worship at the Trikuta hills honors the Mother Goddess. Temple aarti follows the shrine’s own schedule and liturgy."
+      "summary": "Vaishno Devi worship at the Trikuta hills honors the Mother Goddess. Temple aarti follows the shrine’s own schedule and liturgy.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "त्रिकूट की राह में वैष्णो माँ का नाम गाएँ।\nथके हुए यात्री को पानी दें और हाथ बढ़ाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-kaila-devi",
       "category": "aarti",
       "title": "Kaila Aarti",
-      "summary": "Kaila Devi is honored at Karauli in Rajasthan. The lamp offering is part of a wider local tradition of family pilgrimage."
+      "summary": "Kaila Devi is honored at Karauli in Rajasthan. The lamp offering is part of a wider local tradition of family pilgrimage.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "करौली की कैलादेवी, चरणों में नमन हमारा।\nघर से चले यात्रियों को मिले राह में सहारा॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-sheetla-mata",
       "category": "aarti",
       "title": "Sheetla Aarti",
-      "summary": "Sheetla Mata is associated with cooling and care. Some observances offer food prepared the previous day, then conclude with a lamp."
+      "summary": "Sheetla Mata is associated with cooling and care. Some observances offer food prepared the previous day, then conclude with a lamp.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "शीतला माता, शीतल छाया और धीरज दो।\nघर की देखभाल करें, हाथों में सहकार दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-shri-jhulelal-ji-1",
       "category": "aarti",
       "title": "Jhulelal Aarti",
-      "summary": "Jhulelal is revered in Sindhi Hindu tradition and is closely associated with water. Worship is especially prominent during Cheti Chand."
+      "summary": "Jhulelal is revered in Sindhi Hindu tradition and is closely associated with water. Worship is especially prominent during Cheti Chand.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "झूलेलाल, जल का मान सदा बनाएँ।\nचेटी चंड के दीप संग सबके लिए सद्भाव जगाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "jagannath-ji-s-mangal-aarti",
       "category": "aarti",
       "title": "Jagannath Mangal Aarti",
-      "summary": "Mangal aarti is an early morning offering. In Jagannath worship it belongs to the opening sequence of the day."
+      "summary": "Mangal aarti is an early morning offering. In Jagannath worship it belongs to the opening sequence of the day.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "भोर में नीलाचल पर जगन्नाथ का दीप जलाएँ।\nसुभद्रा और बलभद्र का साथ में ध्यान लगाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-ganga-maai",
       "category": "aarti",
       "title": "Ganga Aarti",
-      "summary": "Ganga aarti honors the Ganga as a sacred river. Public ceremonies often coordinate lamps, bells and sung invocations at the ghats."
+      "summary": "Ganga aarti honors the Ganga as a sacred river. Public ceremonies often coordinate lamps, bells and sung invocations at the ghats.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "गंगा माता, तेरे घाटों का मान बनाएँ।\nनिर्मल जल की सेवा में अपने हाथ लगाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "mata-parvati-s-aarti",
       "category": "aarti",
       "title": "Parvati Aarti",
-      "summary": "Parvati’s aarti honors Shiva’s consort as a mother and source of strength. It may be sung in household worship or during festivals centered on the Goddess."
+      "summary": "Parvati’s aarti honors Shiva’s consort as a mother and source of strength. It may be sung in household worship or during festivals centered on the Goddess.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "पर्वतकन्या पार्वती, तप का बल समझाओ।\nकोमलता और दृढ़ता दोनों साथ निभाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-sita-mata",
       "category": "aarti",
       "title": "Sita Aarti",
-      "summary": "Sita’s lamp offering honors her role in the Ramayana. Images of Sita and Rama are often worshipped together."
+      "summary": "Sita’s lamp offering honors her role in the Ramayana. Images of Sita and Rama are often worshipped together.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "जनकदुलारी सीता, कठिन घड़ी में धैर्य जगाओ।\nधरती की बेटी, अपनी मर्यादा की राह दिखाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-shri-badrinathji-1",
       "category": "aarti",
       "title": "Badrinath Aarti",
-      "summary": "Badrinath worship honors Narayana in the Garhwal Himalaya. Temple offerings mark distinct points in the daily schedule."
+      "summary": "Badrinath worship honors Narayana in the Garhwal Himalaya. Temple offerings mark distinct points in the daily schedule.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "बदरी के नारायण, हिमधरा पर ध्यान लगाएँ।\nतीर्थ की यात्रा में एक दूसरे का हाथ थामें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "bhairv-baba-s-aarti",
       "category": "aarti",
       "title": "Bhairav Baba Aarti",
-      "summary": "Bhairav is revered as a guardian, particularly in Ujjain and Kashi. The lamp offering typically follows the local shrine’s offerings and invocations."
+      "summary": "Bhairav is revered as a guardian, particularly in Ujjain and Kashi. The lamp offering typically follows the local shrine’s offerings and invocations.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "भैरव बाबा, नगर की राह पर सजग रहना सिखाओ।\nनिर्भय होकर अन्याय के सामने सच कहलाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-sant-tukaram",
       "category": "aarti",
       "title": "Tukaram Aarti",
-      "summary": "Tukaram is remembered for Marathi abhangs devoted to Vitthal. An aarti honors the saint within the Varkari tradition."
+      "summary": "Tukaram is remembered for Marathi abhangs devoted to Vitthal. An aarti honors the saint within the Varkari tradition.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "तुकाराम की वाणी से विठ्ठल का प्रेम जगाएँ।\nअभंग के सरल बोलों में अभिमान भूल जाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "gurudev-s-aarti",
       "category": "aarti",
       "title": "Gurudev Aarti",
-      "summary": "A guru aarti directs gratitude toward a spiritual teacher and lineage. Its words depend on the community and the teacher being honored."
+      "summary": "A guru aarti directs gratitude toward a spiritual teacher and lineage. Its words depend on the community and the teacher being honored.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "गुरुदेव, प्रश्न करने की विनम्र रीति सिखाओ।\nजो सीख मिले, उसे जीवन के काम में लाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "baba-balak-nath-aarti",
       "category": "aarti",
       "title": "Balak Nath Aarti",
-      "summary": "Baba Balak Nath is revered in Himachal Pradesh, notably at Deotsidh. Devotional songs and lamp offerings accompany pilgrimage."
+      "summary": "Baba Balak Nath is revered in Himachal Pradesh, notably at Deotsidh. Devotional songs and lamp offerings accompany pilgrimage.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "देवसिद्ध के बालकनाथ, तप का भाव जगाओ।\nयात्रियों के संग चलें, सबका हौसला बढ़ाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-khatu-shyam-ji",
       "category": "aarti",
       "title": "Khatu Shyam Aarti",
-      "summary": "Khatu Shyam is linked in tradition with Barbarika. The shrine at Khatu in Rajasthan is a major center of his worship."
+      "summary": "Khatu Shyam is linked in tradition with Barbarika. The shrine at Khatu in Rajasthan is a major center of his worship.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "खाटू के श्याम, हताश मन को भरोसा दो।\nहार से सीखें, गिरने पर फिर उठने का साहस दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-satyanarayan-ji",
       "category": "aarti",
       "title": "Satyanarayan Aarti",
-      "summary": "Satyanarayan aarti typically concludes the household katha and offering. Prasad is shared with those who heard the story."
+      "summary": "Satyanarayan aarti typically concludes the household katha and offering. Prasad is shared with those who heard the story.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "सत्यनारायण की कथा घर में सब मिलकर सुनें।\nसत्य का आदर करें, प्रसाद सबके साथ बाँटें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "sri-gayatri-mata-ki-aarti",
       "category": "aarti",
       "title": "Gayatri Aarti",
-      "summary": "Gayatri is honored as a personification of the Vedic mantra. Aarti is a separate lamp offering that can follow the recitation."
+      "summary": "Gayatri is honored as a personification of the Vedic mantra. Aarti is a separate lamp offering that can follow the recitation.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "गायत्री माता, विचारों को निर्मल बनाओ।\nउगते प्रकाश की तरह बुद्धि में समझ जगाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "sri-ahoi-mata-ki-aarti",
       "category": "aarti",
       "title": "Ahoi Mata Aarti",
-      "summary": "The Ahoi Mata lamp offering often follows the Ahoi Ashtami story. Water, grain and a festival drawing feature in many household forms."
+      "summary": "The Ahoi Mata lamp offering often follows the Ahoi Ashtami story. Water, grain and a festival drawing feature in many household forms.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "अहोई माता, बच्चों की हँसी बनी रहे।\nघर में धैर्य और देखभाल की रीति बनी रहे॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shri-sai-baba-ki-aarti",
       "category": "aarti",
       "title": "Sai Baba Aarti",
-      "summary": "Shirdi worship uses several daily aartis, including morning and evening services. Their sequence depends on the time of day."
+      "summary": "Shirdi worship uses several daily aartis, including morning and evening services. Their sequence depends on the time of day.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "साईं बाबा, श्रद्धा के संग सबुरी भी आए।\nजिसे ज़रूरत हो, उससे रोटी और समय बाँटें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shukrwaar-aarti",
       "category": "aarti",
       "title": "Friday Aarti",
-      "summary": "Friday worship is associated with different goddesses in different households, including Lakshmi and Santoshi Mata. The specific song follows the deity being honored."
+      "summary": "Friday worship is associated with different goddesses in different households, including Lakshmi and Santoshi Mata. The specific song follows the deity being honored.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "शुक्रवार के दीप में संतोष का भाव धरें।\nघर आए अतिथि का मान करें, उदारता से रहें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shri-krishan-ki-aarti",
       "category": "aarti",
       "title": "Krishna Aarti",
-      "summary": "Krishna aarti may follow offerings of butter, sweets or fruit. In temples that treat the deity as a royal guest, lamp offerings mark stages in the daily routine."
+      "summary": "Krishna aarti may follow offerings of butter, sweets or fruit. In temples that treat the deity as a royal guest, lamp offerings mark stages in the daily routine.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "मुरलीधर कृष्ण, बिखरे मन को एक सुर दो।\nगोकुल की साझी हँसी सा हृदय में उजास दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shree-sharda-aarti",
       "category": "aarti",
       "title": "Sharada Aarti",
-      "summary": "Sharada is a form of Saraswati associated with learning. A lamp may be offered beside books, an instrument or an image of the goddess."
+      "summary": "Sharada is a form of Saraswati associated with learning. A lamp may be offered beside books, an instrument or an image of the goddess.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "शारदा माता, लेखनी में स्पष्ट विचार दो।\nआज जो सीखा, उसे बाँटने का संस्कार दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "bhagavad-geeta-aarti",
       "category": "aarti",
       "title": "Bhagavad Gita Aarti",
-      "summary": "A lamp offering to the Gita expresses respect for its teaching. It can follow recitation of a chapter or a complete reading."
+      "summary": "A lamp offering to the Gita expresses respect for its teaching. It can follow recitation of a chapter or a complete reading.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "कुरुक्षेत्र के प्रश्न हमें अपने भीतर मोड़ें।\nसमत्व का पाठ पढ़ें, भय में विवेक न छोड़ें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shree-kunjbihari-ji-ki-aarti",
       "category": "aarti",
       "title": "Kunj Bihari Aarti",
-      "summary": "Kunj Bihari is a name of Krishna that evokes the groves of Vrindavan. The song is often used in Braj-style Krishna worship."
+      "summary": "Kunj Bihari is a name of Krishna that evokes the groves of Vrindavan. The song is often used in Braj-style Krishna worship.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "कुंज बिहारी, वृंदावन की शीतल छाँव बसाओ।\nराधा के स्नेह और बाँसुरी के स्वर से मन बहलाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shani-dev-ki-aarti",
       "category": "aarti",
       "title": "Shani Aarti",
-      "summary": "Shani worship is commonly observed on Saturdays. In many traditions a sesame-oil lamp accompanies the evening prayers."
+      "summary": "Shani worship is commonly observed on Saturdays. In many traditions a sesame-oil lamp accompanies the evening prayers.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "शनिदेव, अपने कर्मों का उत्तर देना सिखाओ।\nधैर्य से कठिन फल सहें, फिर सद्कर्म अपनाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "vishnu-aarti",
       "category": "aarti",
       "title": "Vishnu Aarti",
-      "summary": "Vishnu aarti can close worship of Narayana or one of his forms. The lamp is normally offered after the food offering."
+      "summary": "Vishnu aarti can close worship of Narayana or one of his forms. The lamp is normally offered after the food offering.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "विष्णु नारायण, पालन की करुणा मन में लाओ।\nशंख की पुकार में सहयोग का अर्थ समझाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "saraswati-aarti",
       "category": "aarti",
       "title": "Saraswati Aarti",
-      "summary": "Saraswati aarti honors the goddess of learning and the arts. It is commonly sung on Vasant Panchami or when books and instruments are placed before her."
+      "summary": "Saraswati aarti honors the goddess of learning and the arts. It is commonly sung on Vasant Panchami or when books and instruments are placed before her.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "सरस्वती माँ, वाणी में संयम और माधुर्य दो।\nवीणा के सुर जैसा अभ्यास और धैर्य दो॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "hanuman-ji-ki-aarti",
       "category": "aarti",
       "title": "Hanuman Aarti",
-      "summary": "Hanuman aarti celebrates his service to Rama and his courage. It is commonly sung after Hanuman Chalisa or temple offerings."
+      "summary": "Hanuman aarti celebrates his service to Rama and his courage. It is commonly sung after Hanuman Chalisa or temple offerings.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "पवनसुत हनुमान, सेवा के लिए बल पाऊँ।\nरामकाज की लगन से अपना संकल्प निभाऊँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "ram-aarti",
       "category": "aarti",
       "title": "Ram Aarti",
-      "summary": "Rama aarti honors the king of Ayodhya, often together with Sita, Lakshmana and Hanuman. It is a familiar part of Ram Navami celebrations."
+      "summary": "Rama aarti honors the king of Ayodhya, often together with Sita, Lakshmana and Hanuman. It is a familiar part of Ram Navami celebrations.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "अयोध्या के राम, न्याय के साथ दया सिखाओ।\nप्रियजनों से किया वचन जीवन में निभाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "kaali-mata-ki-aarti",
       "category": "aarti",
       "title": "Kaali Aarti",
-      "summary": "Kali aarti honors the fierce mother goddess. The lamp follows the schedule and customs of the form being worshipped."
+      "summary": "Kali aarti honors the fierce mother goddess. The lamp follows the schedule and customs of the form being worshipped.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "काली माँ, भय के सामने सच का दीप जलाओ।\nअन्याय देखकर मौन न रहें, ऐसा बल दिलाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "rani-sati-dadi-ji",
       "category": "aarti",
       "title": "Sati Dadi Aarti",
-      "summary": "Rani Sati Dadi is revered in a regional devotional tradition centered on Jhunjhunu, Rajasthan. Devotees offer aarti at the shrine and in affiliated households."
+      "summary": "Rani Sati Dadi is revered in a regional devotional tradition centered on Jhunjhunu, Rajasthan. Devotees offer aarti at the shrine and in affiliated households.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "झुंझुनू की दादी के द्वार पर श्रद्धा का दीप रखें।\nपरिवार में करुणा और परस्पर सम्मान रखें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-panch-parameshthi",
       "category": "aarti",
       "title": "Panch Parmeshthi Aarti",
-      "summary": "In Jain worship, the Panch Parmeshthi are five classes of revered beings. The offering expresses respect for spiritual attainment and the path of discipline."
+      "summary": "In Jain worship, the Panch Parmeshthi are five classes of revered beings. The offering expresses respect for spiritual attainment and the path of discipline.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "अरिहंत से सिद्ध तक वंदन, गुरुजनों को प्रणाम।\nअहिंसा और संयम से निर्मल हो हर काम॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "chandra-dev-s-aarti",
       "category": "aarti",
       "title": "Chandra Dev Aarti",
-      "summary": "Chandra is the Moon deity. Full-moon observances in some traditions pair viewing the Moon with prayers and a lamp offering."
+      "summary": "Chandra is the Moon deity. Full-moon observances in some traditions pair viewing the Moon with prayers and a lamp offering.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "चंद्रदेव, शीतल किरण से साँझ को नहलाओ।\nबढ़ते घटते रूप से परिवर्तन स्वीकारना सिखाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "shri-nath-ji-s-evening-aarti",
       "category": "aarti",
       "title": "Nath Evening Aarti",
-      "summary": "In Nathdwara, evening worship of Shrinathji follows the rhythm of the deity’s daily services. Lamps may accompany the transition from daytime worship toward rest."
+      "summary": "In Nathdwara, evening worship of Shrinathji follows the rhythm of the deity’s daily services. Lamps may accompany the transition from daytime worship toward rest.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "साँझ हुई श्रीनाथजी, दीपक धीरे जलाएँ।\nदिन भर के कार्य तुम्हारे चरणों में रख जाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "mangal-aarti-of-shri-nath-ji",
       "category": "aarti",
       "title": "Nath Aarti",
-      "summary": "This morning offering honors Shrinathji, a form of Krishna associated with Govardhan. It is part of the Pushtimarg tradition."
+      "summary": "This morning offering honors Shrinathji, a form of Krishna associated with Govardhan. It is part of the Pushtimarg tradition.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "प्रातः श्रीनाथजी के द्वार पर विनय से आएँ।\nआज के हर काम को सेवा का रूप बनाएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "jaarti-of-shri-jagannath-ji-1",
       "category": "aarti",
       "title": "Jagannath Aarti",
-      "summary": "Jagannath’s daily worship uses a sequence of services. This page concerns the general lamp offering, while Mangal Aarti refers specifically to the early morning service."
+      "summary": "Jagannath’s daily worship uses a sequence of services. This page concerns the general lamp offering, while Mangal Aarti refers specifically to the early morning service.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "जगन्नाथ के सम्मुख सबकी साझी थाली सजे।\nमहाप्रसाद के भाव में भेदभाव पीछे रहे॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "suryadev-ki-aarti",
       "category": "aarti",
       "title": "Surya Dev Aarti",
-      "summary": "Surya aarti honors the Sun after a devotional offering. Water offered at sunrise is common in many forms of Surya worship."
+      "summary": "Surya aarti honors the Sun after a devotional offering. Water offered at sunrise is common in many forms of Surya worship.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "सूर्यदेव, भोर में अर्घ्य अर्पित कर प्रणाम करें।\nतेरे प्रकाश के साथ आज का श्रम आरंभ करें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "aarti-of-shri-jankinath-ji",
       "category": "aarti",
       "title": "Janakinath Aarti",
-      "summary": "Janakinath means Lord of Janaki, a name for Rama in relation to Sita. The lamp offering honors them together."
+      "summary": "Janakinath means Lord of Janaki, a name for Rama in relation to Sita. The lamp offering honors them together.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "जानकीनाथ, सीता के संग तुम्हें प्रणाम करें।\nआपसी आदर से परिवार की मर्यादा कायम करें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "narsingh-aarti",
       "category": "aarti",
       "title": "Narsingh Aarti",
-      "summary": "Narasimha aarti recalls Vishnu’s protection of Prahlada. The song commonly follows offerings on Narasimha Jayanti or at a shrine dedicated to this form."
+      "summary": "Narasimha aarti recalls Vishnu’s protection of Prahlada. The song commonly follows offerings on Narasimha Jayanti or at a shrine dedicated to this form.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "नरसिंह, प्रह्लाद की अडिग भक्ति याद दिलाओ।\nअत्याचार के आगे सत्य पर टिकना सिखाओ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "sri-santoshi-mata-aarti",
       "category": "aarti",
       "title": "Santoshi Mata Aarti",
-      "summary": "Santoshi Mata is commonly worshipped on Fridays. A household vrat may conclude with a lamp offering and the sharing of prasad."
+      "summary": "Santoshi Mata is commonly worshipped on Fridays. A household vrat may conclude with a lamp offering and the sharing of prasad.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "संतोषी माता, जो मिला उसे कृतज्ञता से लें।\nऔर जो पास है, उसे जरूरतमंद के संग बाँट दें॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "ram-siya-ram-lyrics",
       "category": "aarti",
       "title": "Ram Siya Ram Aarti",
-      "summary": "The repeated names Siya and Ram express devotion to Sita and Rama together. The refrain is used in devotional singing and may accompany a lamp offering."
+      "summary": "The repeated names Siya and Ram express devotion to Sita and Rama together. The refrain is used in devotional singing and may accompany a lamp offering.",
+      "composition": "original",
+      "verses": [
+        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
+        "सिया और राम का साथ हृदय में धीरज लाए।\nवचन और करुणा दोनों अपनी राह बताएँ॥",
+        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
+      ]
     },
     {
       "id": "durga-chalisa",
