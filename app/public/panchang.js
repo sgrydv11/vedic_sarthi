@@ -43,15 +43,35 @@ function windows(label,entries,day) {
     return cell(name,times.length?times.map(slot=>range(slot.start,slot.end,day)).join(' / '):'—')
   }).join('')+'</dl></section>'
 }
+function festivalEntries(items,day) {
+  return list(items,festival=>'<details class="festival-entry"><summary>'+e(festival.name)+
+    (festival.tradition?' · '+e(festival.tradition):'')+'</summary>'+
+    (festival.description?'<p>'+e(festival.description)+'</p>':'')+
+    (festival.regional?.length?'<p>Traditions: '+e(festival.regional.join(', '))+'</p>':'')+
+    (festival.observances?.length?'<ul>'+list(festival.observances,item=>'<li>'+e(item)+'</li>')+'</ul>':'')+
+    (festival.timings?.length?'<dl class="panchang-values">'+list(festival.timings,slot=>cell(slot.name,range(slot.start,slot.end,day)))+'</dl>':'')+
+    '</details>')
+}
 function festivals(result,day) {
-  return '<section class="card info panchang-panel"><h2>Festivals and vrat</h2>'+
-    (result.festivals.length?list(result.festivals,festival=>'<details class="festival-entry"><summary>'+e(festival.name)+
-      (festival.tradition?' · '+e(festival.tradition):'')+'</summary>'+
-      (festival.description?'<p>'+e(festival.description)+'</p>':'')+
-      (festival.regional?.length?'<p>Traditions: '+e(festival.regional.join(', '))+'</p>':'')+
-      (festival.observances?.length?'<ul>'+list(festival.observances,item=>'<li>'+e(item)+'</li>')+'</ul>':'')+
-      (festival.timings?.length?'<dl class="panchang-values">'+list(festival.timings,slot=>cell(slot.name,range(slot.start,slot.end,day)))+'</dl>':'')+
-      '</details>'):'<p>No observances are listed by this calendar for the selected date.</p>')+'</section>'
+  return '<section class="card info panchang-panel"><h2>Festivals &amp; Observances</h2>'+
+    (festivalEntries(result.festivals,day)||'<p>No observances are listed by this calendar for the selected date.</p>')+'</section>'
+}
+const defaultCalendar='purnimanta'
+function calculatePanchang(day,city,calendar=defaultCalendar) {
+  return getPanchangam(atNoon(day),new Observer(...cities[city],0),{timezoneOffset:330,calendarType:calendar})
+}
+export function renderUpcomingObservances(root,start=today()) {
+  const city='Ujjain'
+  const days=Array.from({length:7},(_,index)=>shift(start,index))
+  const cards=days.map(day=>{
+    const items=calculatePanchang(day,city).festivals
+    if(!items.length)return ''
+    return '<section class="card info"><h3>'+e(longFormatter.format(atNoon(day)))+'</h3>'+
+      festivalEntries(items,day)+'<p><a class="secondary" href="#panchang/'+day+'/'+citySlug(city)+'">View daily Panchang</a></p></section>'
+  }).join('')
+  root.innerHTML='<h2>Festivals &amp; Observances</h2><p>'+city+' · '+e(shortDate.format(atNoon(start)))+' – '+
+    e(shortDate.format(atNoon(days.at(-1))))+' · Purnimanta Panchang</p>'+
+    (cards?'<div class="grid">'+cards+'</div>':'<p>No observances are listed for these seven days.</p>')
 }
 function dayView(day,city,calendar,result,alternate) {
   const amanta=calendar==='amanta'?result.masa:alternate.masa
@@ -90,9 +110,8 @@ export function mountPanchang(root,initialDay,initialCity) {
   function calculate(date,scheme=calendar) {
     const key=[city,date,scheme].join('|')
     if (!cache.has(key)) {
-      const observer=new Observer(...cities[city],0)
       if(cache.size>96)cache.clear()
-      cache.set(key,getPanchangam(atNoon(date),observer,{timezoneOffset:330,calendarType:scheme}))
+      cache.set(key,calculatePanchang(date,city,scheme))
     }
     return cache.get(key)
   }

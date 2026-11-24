@@ -749,6 +749,15 @@ function publishEvent() {
 }
 async function ritualEvents(version,subpage,step) {
   main.innerHTML=heading('TEMPLE SERVICES','Upcoming temple events','Find dated pujas and Chadhava published by operations.')+'<p id="events-panel">Loading…</p>'
+  if (!subpage) {
+    main.insertAdjacentHTML('beforeend','<section class="section" id="event-observances"><p role="status">Loading Panchang observances…</p></section>')
+    const target=$('#event-observances')
+    import('./panchang.js').then(({renderUpcomingObservances})=>{
+      if (target.isConnected) renderUpcomingObservances(target)
+    }).catch(()=>{
+      if (target.isConnected) target.textContent='Panchang observances could not be loaded.'
+    })
+  }
   try {
     const [data,details]=await Promise.all([api('events'),api('devotional')])
     if (version!==renderNumber) return
