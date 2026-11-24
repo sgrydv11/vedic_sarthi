@@ -74,8 +74,6 @@ export function mountJyotish(root,mode) {
   const gochar=mode==='gochar'
   root.innerHTML='<form class="card info" id="jyotish-form">'+birthFields('first',matching?'First profile (groom)':'Birth details')+
     (matching?birthFields('second','Second profile (bride)'):'')+
-    '<div class="panchang-controls"><label>Ayanamsa<select name="ayanamsa"><option value="lahiri">Lahiri</option><option value="kp">KP</option><option value="raman">Raman</option></select></label>'+
-    '<label>House system<select name="houseSystem"><option value="whole_sign">Whole Sign</option><option value="equal_house">Equal House</option><option value="sripati">Sripati</option><option value="placidus">Placidus</option></select></label>'+
     (gochar?'<label>Transit date<input type="date" name="transit" required value="'+new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Kolkata'}).format(new Date())+'"></label>':'')+
     '<button class="primary" type="submit">Calculate</button></div><p>Calculations run in your browser. Birth details stay on this device. <a class="breadcrumb-link" href="/jyotish-licenses.txt">Calculation sources and licenses</a></p></form><div id="jyotish-result" aria-live="polite"></div>'
   const form=root.querySelector('form')
@@ -89,7 +87,7 @@ export function mountJyotish(root,mode) {
   form.addEventListener('submit',event=>{
     event.preventDefault()
     try {
-      const options={ayanamsa:form.elements.ayanamsa.value,houseSystem:form.elements.houseSystem.value,includeChalit:!matching&&!gochar,includeKp:!matching&&!gochar}
+      const options={ayanamsa:'lahiri',houseSystem:'whole_sign',includeChalit:!matching&&!gochar,includeKp:!matching&&!gochar}
       const first=chart(form,'first',options)
       if(matching){
         const second=chart(form,'second',options)
