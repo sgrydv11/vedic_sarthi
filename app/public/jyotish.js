@@ -4,8 +4,8 @@ const places={Ujjain:[23.1765,75.7885],Delhi:[28.6139,77.209],Mumbai:[19.076,72.
 const esc=value=>String(value??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
 const dateFormat=new Intl.DateTimeFormat('en-IN',{dateStyle:'medium',timeZone:'Asia/Kolkata'})
 const label=key=>key.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,c=>c.toUpperCase())
-const tables=(heading,headers,rows)=>'<section class="card info section"><h3>'+esc(heading)+'</h3><div class="jyotish-table"><table><thead><tr>'+headers.map(h=>'<th scope="col">'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+
-  rows.map(row=>'<tr>'+row.map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></section>'
+const tables=(heading,headers,rows)=>'<section class="card info section"><h3>'+esc(heading)+'</h3><div class="jyotish-table"><table role="table"><thead role="rowgroup"><tr role="row">'+headers.map(h=>'<th role="columnheader" scope="col">'+esc(h)+'</th>').join('')+'</tr></thead><tbody role="rowgroup">'+
+  rows.map(row=>'<tr role="row">'+row.map((v,index)=>'<td role="cell"><span class="jyotish-cell-label" aria-hidden="true">'+esc(headers[index])+'</span><span>'+esc(v)+'</span></td>').join('')+'</tr>').join('')+'</tbody></table></div></section>'
 function detail(value) {
   if(value instanceof Date)return esc(dateFormat.format(value))
   if(Array.isArray(value))return '<ol>'+value.map(v=>'<li>'+detail(v)+'</li>').join('')+'</ol>'
