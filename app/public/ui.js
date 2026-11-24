@@ -162,9 +162,23 @@ function panchang(version,day,city) {
     if (target.isConnected) target.textContent='Panchang could not load. Reload the page to try again.'
   })
 }
+const jyotishTools={'janam-kundli':'Janam Kundli','kundli-milan':'Kundli Milan',gochar:'Gochar and Sade Sati'}
+function jyotishPage(mode) {
+  const title=jyotishTools[mode]
+  main.innerHTML=breadcrumbs([['Astrology','astrology'],[title]])+heading('VEDIC ASTROLOGY',title,'')+
+    '<section id="jyotish-tool"><p role="status">Loading calculator…</p></section>'+
+    (mode==='gochar'?'':'<p>'+link('Request a Pandit review','astrology/'+mode+'/book','secondary')+'</p>')
+  const target=$('#jyotish-tool')
+  import('./jyotish.js').then(({mountJyotish})=>{
+    if(target.isConnected)mountJyotish(target,mode)
+  }).catch(()=>{
+    if(target.isConnected)target.textContent='The astrology calculator could not load. Refresh the page to try again.'
+  })
+}
 function servicePage(kind,subpage,step) {
   const isDaan = kind==='daan'
   const isAstro = kind==='astrology'
+  if(isAstro&&!step&&Object.hasOwn(jyotishTools,subpage))return jyotishPage(subpage)
   const items = isDaan ? catalog.daan : catalog[isAstro?'astrology':'consult'].map(name=>({name}))
   if (subpage) {
     const item=items.find(entry=>slug(entry.name)===subpage)
@@ -184,7 +198,8 @@ function servicePage(kind,subpage,step) {
     return
   }
   main.innerHTML = heading(isDaan?'SACRED GIVING':isAstro?'VEDIC ASTROLOGY':'ACHARYA CONSULTATIONS',isDaan?'Daan & Gau Seva':isAstro?'Astrology':'Request a consultation',
-    isDaan?'Choose a cause and submit a pledge for manual fulfillment. This preview collects no donation funds.':isAstro?'Submit details for manual review by a Pandit. Automated charts, scores and transit calculations are unavailable in this preview.':'Choose a topic, consultation format and preferred date. Staff can schedule your request in the operations portal.')+
+    isDaan?'Choose a cause and submit a pledge for manual fulfillment. This preview collects no donation funds.':isAstro?'Calculate a birth chart, compare Kundlis or check transits. You can also request a Pandit review.':'Choose a topic, consultation format and preferred date. Staff can schedule your request in the operations portal.')+
+    (isAstro?'<p>'+link('Gochar and Sade Sati','astrology/gochar','secondary')+'</p>':'')+
     '<div class="grid">'+items.map(item=>'<article class="card info"><span class="feature-icon">'+icon(symbols[kind])+'</span><h3>'+escape(item.name)+'</h3>'+
     (item.description?'<p>'+escape(item.description)+'</p>':'')+link('View details',kind+'/'+slug(item.name),'secondary')+'</article>').join('')+'</div>'+(!isDaan&&!isAstro?panditProfiles():'')
 }

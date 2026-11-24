@@ -174,3 +174,9 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--wine);flex:none}
 .prayer-search input{width:100%}
 .prayer-text{font-size:1.2rem;line-height:1.9;overflow-wrap:anywhere}
 .prayer-text p{margin-block:0 1rem}
+#jyotish-form fieldset{border:1px solid var(--line);margin:0 0 1rem;padding:.75rem;min-width:0}
+#jyotish-form [hidden]{display:none}
+.jyotish-table{overflow:auto}
+.jyotish-table table{width:100%;border-collapse:collapse}
+.jyotish-table td,.jyotish-table th{text-align:left;padding:.55rem;border-bottom:1px solid var(--line)}
+#jyotish-result dd{min-width:0;overflow-wrap:anywhere}
