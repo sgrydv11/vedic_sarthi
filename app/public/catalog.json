@@ -2447,13 +2447,16 @@
       "id": "ram-aarti",
       "category": "aarti",
       "title": "Ram Aarti",
-      "summary": "Rama aarti honors the king of Ayodhya, often together with Sita, Lakshmana and Hanuman. It is a familiar part of Ram Navami celebrations.",
-      "composition": "original",
+      "summary": "A traditional hymn by Tulsidas from the Vinay Patrika, sung in Rama worship.",
+      "composition": "traditional",
       "verses": [
-        "आज श्रद्धा की लौ से यह आरती सजाएँ।\nमन के भीतर सेवा और सद्भाव जगाएँ॥",
-        "अयोध्या के राम, न्याय के साथ दया सिखाओ।\nप्रियजनों से किया वचन जीवन में निभाओ॥",
-        "छोटी सी इस भेंट में अपना आभार लाएँ।\nघर लौटें तो अपने कर्मों से यह दीप जलाएँ॥"
-      ]
+        "श्रीरामचन्द्र कृपालु भजु मन हरण भवभय दारुणम्।\nनवकंज लोचन कंज मुख कर कंज पद कंजारुणम्॥",
+        "कंदर्प अगणित अमित छवि नवनील नीरद सुन्दरम्।\nपटपीत मानहुँ तड़ित रुचि शुचि नौमि जनक सुतावरम्॥",
+        "भजु दीनबन्धु दिनेश दानव दैत्यवंश निकन्दनम्।\nरघुनन्द आनन्दकन्द कोसलचन्द दशरथ नन्दनम्॥",
+        "सिर मुकुट कुंडल तिलक चारु उदारु अंग विभूषणम्।\nआजानुभुज शर चाप धर संग्राम जित खरदूषणम्॥",
+        "इति वदति तुलसीदास शंकर शेष मुनि मन रंजनम्।\nमम हृदय कंज निवास कुरु कामादि खलदल गंजनम्॥"
+      ],
+      "hindi": "श्रीरामचन्द्र कृपालु भजु मन"
     },
     {
       "id": "kaali-mata-ki-aarti",

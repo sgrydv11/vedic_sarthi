@@ -245,7 +245,7 @@ function prayerLibrary(category, article) {
       const original=$('#prayer-language').value==='hi'
       $('#prayer-reading').innerHTML=entry.verses?.length
         ? '<section class="prayer-text" lang="'+(original?'hi':'hi-Latn')+'"><h2>'+(original?'मूल पाठ':'Roman transliteration')+'</h2>'+
-          (entry.composition==='original'?'<p class="eyebrow">'+(original?'अवंतिका की नई रचना':'Original Avantika composition')+'</p>':'')+
+          (entry.composition==='original'?'<p class="eyebrow">'+(original?'अवंतिका की नई रचना':'Original Avantika composition')+'</p>':entry.composition==='traditional'?'<p class="eyebrow">'+(original?'परंपरागत पाठ':'Traditional text')+'</p>':'')+
           entry.verses.map(verse=>'<p>'+escape(original?verse:romanPrayer(verse)).replaceAll('\\n','<br>')+'</p>').join('')+'</section>'
         : '<p>'+ (original?'पूरा पाठ अभी उपलब्ध नहीं है।':'Complete lyrics are not available yet.')+'</p>'
     }
@@ -257,12 +257,16 @@ function prayerLibrary(category, article) {
     '<label class="prayer-search">Search '+label+'<input id="prayer-search" type="search" placeholder="Search by title"></label>'+
     (category==='aarti'&&entries.some(item=>!item.verses?.length)?'<details class="festival-entry"><summary>Aartis awaiting complete lyrics · '+entries.filter(item=>!item.verses?.length).length+'</summary><ul>'+
       entries.filter(item=>!item.verses?.length).map(item=>'<li>'+link(escape(item.title),path+'/'+item.id,'breadcrumb-link')+'</li>').join('')+'</ul></details>':'')+
+    (category==='aarti'?select('aartiType','Composition',['All aartis','Traditional texts','Original Avantika compositions']):'')+
     '<p id="prayer-count" role="status"></p><div id="prayer-list" class="grid"></div>'
   const search=$('#prayer-search')
+  const aartiType=$('[name=aartiType]')
   const show=()=>{
     const query=search.value.normalize('NFKC').toLowerCase().trim()
     const original=$('#prayer-language').value==='hi'
-    const matches=entries.filter(item=>[item.title,item.hindi,item.id].filter(Boolean).some(value=>value.normalize('NFKC').toLowerCase().includes(query)))
+    const matches=entries.filter(item=>
+      (!aartiType||aartiType.value==='All aartis'||(aartiType.value==='Original Avantika compositions')===(item.composition==='original'))&&
+      [item.title,item.hindi,item.id].filter(Boolean).some(value=>value.normalize('NFKC').toLowerCase().includes(query)))
     $('#prayer-count').textContent=matches.length+' '+(matches.length===1?'entry':'entries')
     $('#prayer-list').innerHTML=matches.length?matches.map(item=>
       '<article class="card info"><h3>'+escape(original&&item.hindi?item.hindi:item.title)+'</h3>'+
@@ -270,6 +274,7 @@ function prayerLibrary(category, article) {
       link('Read '+label,path+'/'+item.id,'secondary')+'</article>').join(''):'<p>No entries match your search.</p>'
   }
   search.addEventListener('input',show)
+  aartiType?.addEventListener('change',show)
   wireLanguage(show)
   show()
 }
