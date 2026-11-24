@@ -94,10 +94,19 @@ export function mountJyotish(root,mode) {
       }else{
         result.innerHTML=planetTable(first,'D1 Rashi')+
           '<details class="festival-entry"><summary>Chandra Kundli</summary>'+planetTable(getChandraKundli(first),'Moon chart')+'</details>'+
-          '<details class="festival-entry"><summary>Surya Kundli</summary>'+planetTable(getSuryaKundli(first),'Sun chart')+'</details>'+'<section class="card info section"><h3>Chart details</h3>'+
+          '<details class="festival-entry"><summary>Surya Kundli</summary>'+planetTable(getSuryaKundli(first),'Sun chart')+'</details>'+
+          '<section id="divisional-charts" class="card info section"><h3>Charts</h3><label>Divisional chart<select name="varga">'+
+          '<option value="">Choose a chart</option>'+Object.keys(first.vargas||{}).filter(key=>key!=='d1').map(key=>'<option value="'+esc(key)+'">'+esc(key.toUpperCase())+'</option>').join('')+
+          '</select></label><div class="selected-chart" aria-live="polite"></div></section>'+
+          '<section class="card info section"><h3>Chart details</h3>'+
           [['Houses',first.houses],['Vimshottari Dasha',first.dasha],['Special lagnas',getSpecialLagnas(first)],['Jaimini Arudha',getArudhaPadas(first)],['Graha Drishti',first.drishti],
-           ['Ashtakavarga',first.ashtakavarga],['Bhava Chalit',first.chalit],['KP astrology',first.kp]].map(([name,value])=>fold(name,value)).join('')+'</section>'+
-          '<section class="card info section"><h3>Divisional charts</h3>'+Object.entries(first.vargas||{}).filter(([key])=>key!=='d1').map(([key,value])=>'<details class="festival-entry"><summary>'+esc(key.toUpperCase())+'</summary>'+planetTable(value,key.toUpperCase())+'</details>').join('')+'</section>'
+           ['Ashtakavarga',first.ashtakavarga],['Bhava Chalit',first.chalit],['KP astrology',first.kp]].map(([name,value])=>fold(name,value)).join('')+'</section>'
+        const selector=result.querySelector('[name=varga]')
+        const selected=result.querySelector('.selected-chart')
+        selector.addEventListener('change',()=>{
+          const key=selector.value
+          selected.innerHTML=key?planetTable(first.vargas[key],key.toUpperCase()):''
+        })
       }
     }catch(error){result.innerHTML='<p role="alert">'+esc(error instanceof Error?error.message:'Unable to calculate for these birth details.')+'</p>'}
   })
