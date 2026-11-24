@@ -6,7 +6,21 @@
       "place": "Mahakaleshwar (Ujjain), Omkareshwar (MP), Kashi Vishwanath",
       "category": "Shiva worship",
       "fee": 2100,
-      "description": "Ceremonial abhishek of the Shivling with Panchamrit and water."
+      "description": "Ceremonial abhishek of the Shivling with Panchamrit and water.",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Omkareshwar",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ]
     },
     {
       "id": "mangal-bhaat-puja",
@@ -14,7 +28,13 @@
       "place": "Mangalnath & Angareshwar Temples (Ujjain)",
       "category": "Graha Shanti",
       "fee": 1600,
-      "description": "Traditional offering of cooked rice at Mangalnath or Angareshwar."
+      "description": "Traditional offering of cooked rice at Mangalnath or Angareshwar.",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "kaal-sarp-dosh-puja",
@@ -22,7 +42,17 @@
       "place": "Ram Ghat & Siddhavat (Ujjain), Trimbakeshwar (Maharashtra)",
       "category": "Graha Shanti",
       "fee": 3100,
-      "description": "A traditional ceremony at the Shipra ghats."
+      "description": "A traditional ceremony at the Shipra ghats.",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Trimbakeshwar",
+          "state": "Maharashtra"
+        }
+      ]
     },
     {
       "id": "navagraha-shanti-puja",
@@ -30,7 +60,17 @@
       "place": "Navagraha Shani Mandir (Ujjain), Kumbakonam (Tamil Nadu)",
       "category": "Graha Shanti",
       "fee": 2500,
-      "description": "A ceremony honoring the nine Grahas."
+      "description": "A ceremony honoring the nine Grahas.",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Kumbakonam",
+          "state": "Tamil Nadu"
+        }
+      ]
     },
     {
       "id": "mahamrityunjaya-jaap",
@@ -38,7 +78,13 @@
       "place": "Mahakaleshwar Authorized Ashrams (Ujjain)",
       "category": "Shiva worship",
       "fee": 15000,
-      "description": "Priest-led recitation of the Mahamrityunjaya mantra."
+      "description": "Priest-led recitation of the Mahamrityunjaya mantra.",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "rahu-ketu-shanti-puja",
@@ -46,7 +92,17 @@
       "place": "Rahu Temple & Ram Ghat (Ujjain), Srikalahasti (AP)",
       "category": "Graha Shanti",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Srikalahasti",
+          "state": "Andhra Pradesh"
+        }
+      ]
     },
     {
       "id": "shani-shanti-sade-sati",
@@ -54,7 +110,17 @@
       "place": "Triveni Shani Temple (Ujjain), Shani Mandir (Morena, MP)",
       "category": "Graha Shanti",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Morena",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "guru-chandal-dosh-puja",
@@ -62,7 +128,17 @@
       "place": "Ujjain Authorized Ashrams & Varanasi",
       "category": "Graha Shanti",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ]
     },
     {
       "id": "grahan-dosh-puja",
@@ -70,7 +146,17 @@
       "place": "Shipra River Ghats (Ujjain) & Haridwar",
       "category": "Graha Shanti",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Haridwar",
+          "state": "Uttarakhand"
+        }
+      ]
     },
     {
       "id": "pitra-dosh-nivaran-puja",
@@ -78,7 +164,17 @@
       "place": "Siddhavat Ghat (Ujjain), Gaya (Bihar)",
       "category": "Graha Shanti",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Gaya",
+          "state": "Bihar"
+        }
+      ]
     },
     {
       "id": "gandmool-nakshatra-shanti",
@@ -86,7 +182,13 @@
       "place": "Ujjain & Local Family Temples",
       "category": "Graha Shanti",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "laghu-rudra-maha-rudra",
@@ -94,7 +196,17 @@
       "place": "Mahakaleshwar & Omkareshwar",
       "category": "Shiva worship",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Omkareshwar",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "panchamrit-abhishek",
@@ -110,7 +222,17 @@
       "place": "Siddhavat & Ram Ghat (Ujjain), Trimbakeshwar",
       "category": "Ancestral rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Trimbakeshwar",
+          "state": "Maharashtra"
+        }
+      ]
     },
     {
       "id": "pind-daan-tarpan",
@@ -118,7 +240,21 @@
       "place": "Siddhavat (Ujjain), Gaya (Bihar), Prayagraj",
       "category": "Ancestral rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Prayagraj",
+          "state": "Uttar Pradesh"
+        },
+        {
+          "city": "Gaya",
+          "state": "Bihar"
+        }
+      ]
     },
     {
       "id": "tripindi-shradh",
@@ -126,7 +262,21 @@
       "place": "Ujjain, Varanasi, Haridwar",
       "category": "Ancestral rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        },
+        {
+          "city": "Haridwar",
+          "state": "Uttarakhand"
+        }
+      ]
     },
     {
       "id": "rin-mukti-puja",
@@ -134,7 +284,13 @@
       "place": "Rinmukteshwar Mahadev Temple (Ujjain)",
       "category": "Prosperity",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "kanakadhara-shri-suktam",
@@ -142,7 +298,21 @@
       "place": "Harsiddhi Temple (Ujjain), Kolhapur, Tirupati",
       "category": "Prosperity",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Kolhapur",
+          "state": "Maharashtra"
+        },
+        {
+          "city": "Tirupati",
+          "state": "Andhra Pradesh"
+        }
+      ]
     },
     {
       "id": "kuber-puja",
@@ -150,7 +320,13 @@
       "place": "Ujjain & Home/Office Altars",
       "category": "Prosperity",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "baglamukhi-havan",
@@ -158,7 +334,17 @@
       "place": "Baglamukhi Mata (Nalkheda & Datia, MP)",
       "category": "Prosperity",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Nalkheda",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Datia",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "saraswati-vidyarambh",
@@ -166,7 +352,17 @@
       "place": "Sharda Devi Temple (Maihar, MP), Sringeri",
       "category": "Prosperity",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Maihar",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Sringeri",
+          "state": "Karnataka"
+        }
+      ]
     },
     {
       "id": "ganpati-atharvashirsha",
@@ -174,7 +370,17 @@
       "place": "Chintaman Ganesh Temple (Ujjain), Siddhivinayak",
       "category": "Devotional rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Mumbai",
+          "state": "Maharashtra"
+        }
+      ]
     },
     {
       "id": "sundarkand-hanuman-path",
@@ -182,7 +388,17 @@
       "place": "Jam Sawli Hanuman (Chhindwara, MP), Ujjain",
       "category": "Devotional rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Chhindwara",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "durga-saptashati-chandi",
@@ -190,7 +406,17 @@
       "place": "Harsiddhi Temple (Ujjain), Maihar (MP)",
       "category": "Devotional rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Maihar",
+          "state": "Madhya Pradesh"
+        }
+      ]
     },
     {
       "id": "santan-gopal-puja",
@@ -198,7 +424,21 @@
       "place": "Gopal Mandir (Ujjain), Mathura & Vrindavan",
       "category": "Devotional rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Mathura",
+          "state": "Uttar Pradesh"
+        },
+        {
+          "city": "Vrindavan",
+          "state": "Uttar Pradesh"
+        }
+      ]
     },
     {
       "id": "katyayani-puja",
@@ -206,7 +446,17 @@
       "place": "Vrindavan & Ujjain Temples",
       "category": "Devotional rites",
       "fee": null,
-      "description": ""
+      "description": "",
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Vrindavan",
+          "state": "Uttar Pradesh"
+        }
+      ]
     },
     {
       "id": "satyanarayan-katha",
@@ -287,6 +537,648 @@
       "category": "Karmkand",
       "fee": null,
       "description": "Blessing for a new vehicle."
+    },
+    {
+      "id": "rahu-and-chandra-mantra-jaap-with-rudrabhishek",
+      "name": "Rahu and Chandra Mantra Jaap with Rudrabhishek",
+      "place": "Rahu paithani Temple, Uttarakhand",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Paithani",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "maa-bagalamukhi-red-chilli-havan",
+      "name": "Maa Bagalamukhi Red Chilli Havan",
+      "place": "Bagla Mukhi Dham, Ujjain",
+      "category": "Devi worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "hanuman-raksha-kavach-and-chalisa-path",
+      "name": "Hanuman Raksha Kavach and Chalisa Path",
+      "place": "Hanuman Garhi Dham, Ayodhya",
+      "category": "Hanuman worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ayodhya",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "bagalamukhi-chilli-havan-and-hanuman-sindoor-abhishek",
+      "name": "Bagalamukhi Chilli Havan and Hanuman Sindoor Abhishek",
+      "place": "Bagla Mukhi Dham Ujjain & Hanuman Garhi Tirth Kshetra Ayodhya, India",
+      "category": "Devi worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Ayodhya",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "kartik-purnima-pitru-shanti-puja",
+      "name": "Kartik Purnima Pitru Shanti Puja",
+      "place": "Assi Ghat, Varanasi",
+      "category": "Ancestral rites",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "kashi-dev-deepawali-1-100-lamp-seva",
+      "name": "Kashi Dev Deepawali 1,100-Lamp Seva",
+      "place": "Assi Ghat, Varanasi",
+      "category": "Festival rituals",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "ganesh-mangal-kripa-and-riddhi-siddhi-puja",
+      "name": "Ganesh Mangal Kripa and Riddhi-Siddhi Puja",
+      "place": "Shri Chintamani Ganesh Temple, Varanasi",
+      "category": "Ganesh worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "ganesh-sugarcane-juice-abhishek",
+      "name": "Ganesh Sugarcane-Juice Abhishek",
+      "place": "Shri Chintamani Ganesh Temple, Varanasi",
+      "category": "Ganesh worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "bada-ganesh-mahapuja",
+      "name": "Bada Ganesh Mahapuja",
+      "place": "Bada Ganesh Temple, Ujjain",
+      "category": "Ganesh worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "guru-chandal-shanti-with-rahu-and-brihaspati-jaap",
+      "name": "Guru Chandal Shanti with Rahu and Brihaspati Jaap",
+      "place": "Shri Guru Brihaspati Temple, Ujjain",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "vivah-and-santan-prapti-mahayagya",
+      "name": "Vivah and Santan Prapti Mahayagya",
+      "place": "Shri Guru Brihaspati Temple, Ujjain",
+      "category": "Marriage and family",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "lakshmi-saubhagya-and-dhan-samriddhi-puja",
+      "name": "Lakshmi Saubhagya and Dhan Samriddhi Puja",
+      "place": "Maa Gaj Lakshmi Temple, Ujjain",
+      "category": "Lakshmi and Kubera worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "lakshmi-ganesh-mahayagya",
+      "name": "Lakshmi Ganesh Mahayagya",
+      "place": "Maa Gaj Lakshmi Temple, Ujjain",
+      "category": "Lakshmi and Kubera worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "dhan-lakshmi-puja",
+      "name": "Dhan Lakshmi Puja",
+      "place": "Maa Gaj Lakshmi Temple, Ujjain",
+      "category": "Lakshmi and Kubera worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "lakshmi-and-kubera-puja-and-havan",
+      "name": "Lakshmi and Kubera Puja and Havan",
+      "place": "Maa Gaj Lakshmi Temple, Ujjain",
+      "category": "Lakshmi and Kubera worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "dhan-akarshan-lakshmi-puja",
+      "name": "Dhan Akarshan Lakshmi Puja",
+      "place": "Maa Gaj Lakshmi Temple, Ujjain",
+      "category": "Lakshmi and Kubera worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "shani-sade-sati-and-mahadasha-shanti",
+      "name": "Shani Sade Sati and Mahadasha Shanti",
+      "place": "Shri Navagrah Shani Temple, Ujjain",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "kamakhya-prem-and-manokamna-siddhi-puja",
+      "name": "Kamakhya Prem and Manokamna Siddhi Puja",
+      "place": "Kam Roop Tirth Kshetra, Guwahati",
+      "category": "Devi worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Guwahati",
+          "state": "Assam"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "rahu-ketu-shanti-with-rudrabhishek",
+      "name": "Rahu-Ketu Shanti with Rudrabhishek",
+      "place": "Rahu paithani Temple, Uttarakhand",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Paithani",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "shani-karma-and-dosha-shanti-puja",
+      "name": "Shani Karma and Dosha Shanti Puja",
+      "place": "Shri Navagrah Shani Temple, Ujjain",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "shani-shanti-with-mustard-oil-abhishek",
+      "name": "Shani Shanti with Mustard-Oil Abhishek",
+      "place": "Shri Navagrah Shani Temple, Ujjain",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "kamakhya-sarva-karya-siddhi-puja",
+      "name": "Kamakhya Sarva Karya Siddhi Puja",
+      "place": "Kam Roop Tirth Kshetra, Guwahati",
+      "category": "Devi worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Guwahati",
+          "state": "Assam"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "shani-mantra-jaap-and-hanuman-ashtak-path",
+      "name": "Shani Mantra Jaap and Hanuman Ashtak Path",
+      "place": "Shri Navagrah Shani Temple, Ujjain",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "surya-shanti-with-aditya-hridaya-and-arghya",
+      "name": "Surya Shanti with Aditya Hridaya and Arghya",
+      "place": "Surya Kund, Kashi",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "surya-rajyog-puja",
+      "name": "Surya Rajyog Puja",
+      "place": "Surya Kund, Kashi",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "rahu-ketu-mool-mantra-jaap-and-shanti-anushthan",
+      "name": "Rahu-Ketu Mool Mantra Jaap and Shanti Anushthan",
+      "place": "Navagrah Temple, Kashi",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "monday-rudrabhishek-at-kashi-vishwanath",
+      "name": "Monday Rudrabhishek at Kashi Vishwanath",
+      "place": "Kashi Vishwanath Tirth Kshetra, Varanasi",
+      "category": "Shiva worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "omkareshwar-wellness-puja-and-yagya",
+      "name": "Omkareshwar Wellness Puja and Yagya",
+      "place": "Omkareshwar Jyotirlinga Tirth Kshetra, Mandhata (Shivapuri)",
+      "category": "Shiva worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Omkareshwar",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "shiva-parvati-marriage-blessing-puja",
+      "name": "Shiva-Parvati Marriage Blessing Puja",
+      "place": "Triyuginarayan Temple, Rudraprayag",
+      "category": "Marriage and family",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Rudraprayag",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "triyuginarayan-relationship-puja",
+      "name": "Triyuginarayan Relationship Puja",
+      "place": "Triyuginarayan Temple, Rudraprayag",
+      "category": "Marriage and family",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Rudraprayag",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "triyuginarayan-prem-vivah-yog-puja",
+      "name": "Triyuginarayan Prem Vivah Yog Puja",
+      "place": "Triyuginarayan Temple, Rudraprayag",
+      "category": "Marriage and family",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Rudraprayag",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "makhauda-dham-putra-kameshti-yagya",
+      "name": "Makhauda Dham Putra Kameshti Yagya",
+      "place": "Makhauda Dham, Basti,Ayodhya",
+      "category": "Marriage and family",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Basti",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "lakshmi-narayana-shiva-parvati-and-sita-rama-maha-aarti",
+      "name": "Lakshmi-Narayana, Shiva-Parvati and Sita-Rama Maha Aarti",
+      "place": "Triyuginarayan Temple, Rudraprayag",
+      "category": "Marriage and family",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Rudraprayag",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "mahamrityunjaya-jaap-at-kashi-vishwanath",
+      "name": "Mahamrityunjaya Jaap at Kashi Vishwanath",
+      "place": "Kashi Vishwanath Tirth Kshetra, Varanasi",
+      "category": "Shiva worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "ashta-bhairav-kavach-mantra-jaap-and-yagya",
+      "name": "Ashta Bhairav Kavach, Mantra Jaap and Yagya",
+      "place": "Kal Bhairav Dham, Kashi",
+      "category": "Bhairav worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "kaal-bhairav-mantras-and-bagalamukhi-chilli-offering",
+      "name": "Kaal Bhairav Mantras and Bagalamukhi Chilli Offering",
+      "place": "Vikrant Bhairav Ujjain, Ujjain",
+      "category": "Devi worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "bhairav-jayanti-tridev-raksha-mahapuja",
+      "name": "Bhairav Jayanti Tridev Raksha Mahapuja",
+      "place": "Bagla Mukhi Dham Ujjain & Hanuman Garhi Tirth Kshetra Ayodhya, India",
+      "category": "Devi worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Ayodhya",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "gaja-lakshmi-shri-yantra-abhishek-and-beej-mantra-jaap",
+      "name": "Gaja Lakshmi Shri Yantra Abhishek and Beej Mantra Jaap",
+      "place": "Maa Gaj Lakshmi Temple, Ujjain",
+      "category": "Lakshmi and Kubera worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "adi-keshava-santan-prapti-and-putra-kameshti-yagya",
+      "name": "Adi Keshava Santan Prapti and Putra Kameshti Yagya",
+      "place": "Adi Keshava Temple, Varanasi",
+      "category": "Marriage and family",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "kamalatmika-lotus-seed-offering-and-kubera-nav-nidhi-puja",
+      "name": "Kamalatmika Lotus Seed Offering and Kubera Nav Nidhi Puja",
+      "place": "Maa Gaj Lakshmi Temple, Ujjain",
+      "category": "Lakshmi and Kubera worship",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "combined-shani-and-rahu-puja",
+      "name": "Combined Shani and Rahu Puja",
+      "place": "Rahu Mandir Paithani & Shri Navgrah Shani Mandir, Ujjain, india",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Ujjain",
+          "state": "Madhya Pradesh"
+        },
+        {
+          "city": "Paithani",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "rahu-transit-mantra-jaap-and-dashansh-havan",
+      "name": "Rahu Transit Mantra Jaap and Dashansh Havan",
+      "place": "Rahu paithani Temple, Uttarakhand",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Paithani",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "rahu-mool-mantra-jaap-and-dashansh-havan",
+      "name": "Rahu Mool Mantra Jaap and Dashansh Havan",
+      "place": "Rahu paithani Temple, Uttarakhand",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Paithani",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "paithani-rahu-offerings-and-indreshwar-milk-abhishek",
+      "name": "Paithani Rahu Offerings and Indreshwar Milk Abhishek",
+      "place": "Rahu paithani Temple, Uttarakhand",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Paithani",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
+    },
+    {
+      "id": "rahu-mool-mantra-jaap-and-shanti-maha-havan",
+      "name": "Rahu Mool Mantra Jaap and Shanti Maha Havan",
+      "place": "Rahu paithani Temple, Uttarakhand",
+      "category": "Graha Shanti",
+      "fee": null,
+      "locations": [
+        {
+          "city": "Paithani",
+          "state": "Uttarakhand"
+        }
+      ],
+      "confirmAvailability": true
     }
   ],
   "calendar": [

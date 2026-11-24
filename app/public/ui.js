@@ -117,16 +117,38 @@ function home() {
     '<section class="section"><div class="section-top"><div><p class="eyebrow">UJJAIN RITUALS</p><h2>Featured poojas</h2></div>'+link('View catalog','poojas','secondary')+'</div><div class="grid">'+catalog.rituals.slice(0,3).map(ritualSummary).join('')+'</div></section>'+panditProfiles()
 }
 function poojas() {
-  main.innerHTML = heading('RITUAL CATALOG','Find a pooja','Explore rituals by tradition, venue or occasion.')+
-    '<div class="filters"><label class="search">'+icon('search')+'<input id="search" aria-label="Search poojas" placeholder="Search pooja or venue"></label>'+select('category','Category',['All categories',...new Set(catalog.rituals.map(item=>item.category))])+'</div><div id="ritual-grid" class="grid"></div>'
-  const filter = () => {
-    const category = $('select[name=category]').value
-    const query = $('#search').value.toLowerCase().trim()
-    const found = catalog.rituals.filter(item=>(category==='All categories'||category===item.category)&&[item.name,item.place,item.category].some(text=>text.toLowerCase().includes(query)))
-    $('#ritual-grid').innerHTML = found.map(ritualSummary).join('') || '<p>No poojas match this search.</p>'
+  const unique=values=>[...new Set(values)].sort((a,b)=>a.localeCompare(b))
+  const locations=catalog.rituals.flatMap(item=>item.locations||[])
+  const all=(label,values)=>[['',label],...unique(values)]
+  main.innerHTML=heading('RITUAL CATALOG','Find a pooja','Explore rituals by category, state, city or temple.')+
+    '<div class="filters"><label class="search">'+icon('search')+'<input id="search" aria-label="Search poojas" placeholder="Search pooja or venue"></label>'+
+    select('category','Category',all('All categories',catalog.rituals.map(item=>item.category)))+
+    select('state','State',all('All states',locations.map(location=>location.state)))+
+    select('city','City',all('All cities',locations.map(location=>location.city).filter(Boolean)))+
+    '</div><p id="ritual-count" role="status"></p><div id="ritual-grid" class="grid"></div>'
+  const category=$('select[name=category]')
+  const state=$('select[name=state]')
+  const city=$('select[name=city]')
+  const search=$('#search')
+  const filter=()=>{
+    const query=search.value.toLowerCase().trim()
+    const found=catalog.rituals.filter(item=>
+      (!category.value||category.value===item.category)&&
+      ((!state.value&&!city.value)||(item.locations||[]).some(location=>
+        (!state.value||state.value===location.state)&&(!city.value||city.value===location.city)))&&
+      [item.name,item.place,item.category,...(item.locations||[]).flatMap(location=>[location.city,location.state])]
+        .some(value=>value?.toLowerCase().includes(query)))
+    $('#ritual-count').textContent=found.length+' '+(found.length===1?'pooja':'poojas')
+    $('#ritual-grid').innerHTML=found.map(ritualSummary).join('')||'<p>No poojas match these filters.</p>'
   }
-  $('#search').oninput = filter
-  $('select[name=category]').onchange = filter
+  state.onchange=()=>{
+    const previous=city.value
+    const choices=locations.filter(location=>!state.value||location.state===state.value).map(location=>location.city).filter(Boolean)
+    city.replaceChildren(new Option('All cities',''),...unique(choices).map(value=>new Option(value,value)))
+    if(choices.includes(previous))city.value=previous
+    filter()
+  }
+  city.onchange=category.onchange=search.oninput=filter
   filter()
 }
 function panchang(version,day,city) {
@@ -807,7 +829,8 @@ function ritualDetail(id,step) {
   if (step) return bookingPage(chain,'Request '+ritual.name,'Choose a preferred date and tell the Pandit Ji whose name and intention to include.','pooja',ritual.id)
   const fee=ritual.fee===null?'Quote on request':money(ritual.fee)+' estimated ritual fee'
   main.innerHTML=breadcrumbs(chain)+heading(escape(ritual.category),escape(ritual.name),escape(ritual.description||'Discuss preparations for this ritual with an Avantika Pandit Ji.'))+
-    '<section class="card info detail-body"><h2>Where it is performed</h2><p>'+escape(ritual.place)+'</p><p><strong>'+escape(fee)+'</strong></p>'+
+    '<section class="card info detail-body"><h2>Temple or venue</h2><p>'+escape(ritual.place)+'</p>'+
+    (ritual.confirmAvailability?'<p>Send a request so Avantika can confirm temple availability, date and price.</p>':'')+'<p><strong>'+escape(fee)+'</strong></p>'+
     '<h2>What you can request</h2><p>Choose an in-person visit or ask for a ritual on your behalf. For a remote request, operations can share a ritual video and arrange optional Prasad delivery within India.</p>'+
     '<div class="actions">'+link('Request pooja',route+'/book')+link('See dated events','events','secondary')+'</div></section>'+
     '<section class="section detail-body"><h2>Before you submit</h2><ul><li>Have the devotee name and Sankalp ready. Add Gotra or family names where applicable.</li>'+
