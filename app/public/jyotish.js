@@ -18,7 +18,14 @@ const houseCenters=[
   [200,300],[300,369],[369,300],[300,200],[369,100],[300,31]
 ]
 const grahaLabels={Sun:'Su',Moon:'Mo',Mars:'Ma',Mercury:'Me',Jupiter:'Ju',Venus:'Ve',Saturn:'Sa',Rahu:'Ra',Ketu:'Ke',Uranus:'Ur',Neptune:'Ne',Pluto:'Pl'}
-function northIndianChart(chart) {
+const hindiGrahas={
+  Sun:['सू','सूर्य'],Moon:['चं','चंद्र'],Mars:['मं','मंगल'],Mercury:['बु','बुध'],
+  Jupiter:['गु','बृहस्पति'],Venus:['शु','शुक्र'],Saturn:['श','शनि'],Rahu:['रा','राहु'],Ketu:['के','केतु'],
+  Uranus:['यू','यूरेनस'],Neptune:['ने','नेपच्यून'],Pluto:['प्लू','प्लूटो']
+}
+const hindiRashis=['मेष','वृषभ','मिथुन','कर्क','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुंभ','मीन']
+const grahaName=(name,hindi)=>hindi?(hindiGrahas[name]?.[1]||name):name
+function northIndianChart(chart,hindi) {
   const houses=new Map(chart.houses.map(house=>[house.number,house]))
   const cells=houseCenters.map(([x,y],index)=>{
     const number=index+1
@@ -26,20 +33,23 @@ function northIndianChart(chart) {
     const planets=house?.planets||[]
     const sign=house?.rashi??'—'
     const rows=[]
-    for(let i=0;i<planets.length;i+=3)rows.push(planets.slice(i,i+3).map(name=>grahaLabels[name]||name.slice(0,2)).join(' '))
-    return '<g><title>'+esc('House '+number+', rashi '+sign+(planets.length?' · '+planets.join(', '):''))+'</title>'+
-      '<text class="kundli-house" x="'+x+'" y="'+(y-7)+'">H'+number+' · '+esc(sign)+'</text>'+
-      rows.map((row,i)=>'<text class="kundli-planets" x="'+x+'" y="'+(y+8+i*12)+'">'+esc(row)+'</text>').join('')+'</g>'
+    for(let i=0;i<planets.length;i+=3)rows.push(planets.slice(i,i+3).map(name=>(hindi?hindiGrahas[name]?.[0]:grahaLabels[name])||name.slice(0,2)).join(' '))
+    const houseLabel=hindi?'भाव '+number:'House '+number
+    const top=Math.min(y,386-(rows.length-1)*12)
+    return '<g><title>'+esc(houseLabel+(hindi?', राशि ':', rashi ')+sign+(planets.length?' · '+planets.map(name=>grahaName(name,hindi)).join(', '):''))+'</title>'+
+      '<text class="kundli-house" x="'+x+'" y="'+(top-7)+'">'+(hindi?'भा':'H')+number+' · '+esc(sign)+'</text>'+
+      rows.map((row,i)=>'<text class="kundli-planets" x="'+x+'" y="'+(top+8+i*12)+'">'+esc(row)+'</text>').join('')+'</g>'
   }).join('')
-  return '<figure class="kundli-chart"><svg viewBox="0 0 400 400" role="img" aria-label="North Indian style chart with 12 houses">'+
+  return '<figure class="kundli-chart"><svg viewBox="0 0 400 400" role="img" aria-label="'+(hindi?'बारह भावों वाली उत्तर भारतीय कुंडली':'North Indian style chart with 12 houses')+'">'+
     '<path class="kundli-lines" d="M1 1H399V399H1Z M1 1L399 399 M399 1L1 399 M200 1L399 200L200 399L1 200Z"/>'+cells+'</svg>'+
-    '<figcaption>H1 marks the Lagna. The number after each house is its rashi. Planet names are spelled out in the table.</figcaption></figure>'
+    '<figcaption>'+(hindi?'भाव 1 लग्न है। भाव के बाद लिखा अंक राशि बताता है। ग्रहों के पूरे नाम नीचे की तालिका में हैं।':'H1 marks the Lagna. The number after each house is its rashi. Planet names are spelled out in the table.')+'</figcaption></figure>'
 }
-function planetTable(chart,title) {
+function planetTable(chart,title,hindi) {
   const houseByPlanet=new Map(chart.houses.flatMap(house=>house.planets.map(name=>[name,house.number])))
-  return '<section class="card info section"><h3>'+esc(title+' · Lagna '+(chart.ascendant?.rashiName||'—'))+'</h3>'+northIndianChart(chart)+
-    tables('Planet positions',['Graha','Rashi','House','Position','Dignity','Flags'],
-      Object.entries(chart.planets||{}).map(([name,p])=>[name,p.rashiName,houseByPlanet.get(name),p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',p.dignity,[p.isRetrograde&&'Retrograde',p.isCombust&&'Combust',p.isVargottama&&'Vargottama'].filter(Boolean).join(', ')||'—']))+'</section>'
+  const lagna=hindi?(hindiRashis[chart.ascendant?.rashi-1]||'—'):(chart.ascendant?.rashiName||'—')
+  return '<section class="card info section" lang="'+(hindi?'hi':'en')+'"><h3>'+esc(title+(hindi?' · लग्न ':' · Lagna ')+lagna)+'</h3>'+northIndianChart(chart,hindi)+
+    tables(hindi?'ग्रहों की स्थिति':'Planet positions',hindi?['ग्रह','राशि','भाव','अंश','गरिमा','विशेषताएँ']:['Graha','Rashi','House','Position','Dignity','Flags'],
+      Object.entries(chart.planets||{}).map(([name,p])=>[grahaName(name,hindi),hindi?(hindiRashis[p.rashi-1]||p.rashiName):p.rashiName,houseByPlanet.get(name),p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',p.dignity,[p.isRetrograde&&'Retrograde',p.isCombust&&'Combust',p.isVargottama&&'Vargottama'].filter(Boolean).join(', ')||'—']))+'</section>'
 }
 function birthFields(prefix,name) {
   return '<fieldset><legend>'+name+'</legend><div class="panchang-controls">'+
@@ -92,9 +102,11 @@ export function mountJyotish(root,mode) {
           Object.entries(transit.planets).map(([name,p])=>[name,p.rashiName,p.houseFromMoon,p.netStatus]))+
           '<section class="card info section"><h3>Transit details</h3>'+fold('Sade Sati and other transits',transit.specialTransits)+'</section>'
       }else{
-        result.innerHTML=planetTable(first,'D1 Rashi')+
-          '<details class="festival-entry"><summary>Chandra Kundli</summary>'+planetTable(getChandraKundli(first),'Moon chart')+'</details>'+
-          '<details class="festival-entry"><summary>Surya Kundli</summary>'+planetTable(getSuryaKundli(first),'Sun chart')+'</details>'+
+        const moon=getChandraKundli(first),sun=getSuryaKundli(first)
+        result.innerHTML='<label>Chart language<select name="chartLanguage"><option value="en">English</option><option value="hi" lang="hi">हिन्दी</option></select></label>'+
+          '<div data-chart="birth"></div>'+
+          '<details class="festival-entry"><summary>Chandra Kundli</summary><div data-chart="moon"></div></details>'+
+          '<details class="festival-entry"><summary>Surya Kundli</summary><div data-chart="sun"></div></details>'+
           '<section id="divisional-charts" class="card info section"><h3>Charts</h3><label>Divisional chart<select name="varga">'+
           '<option value="">Choose a chart</option>'+Object.keys(first.vargas||{}).filter(key=>key!=='d1').map(key=>'<option value="'+esc(key)+'">'+esc(key.toUpperCase())+'</option>').join('')+
           '</select></label><div class="selected-chart" aria-live="polite"></div></section>'+
@@ -103,10 +115,21 @@ export function mountJyotish(root,mode) {
            ['Ashtakavarga',first.ashtakavarga],['Bhava Chalit',first.chalit],['KP astrology',first.kp]].map(([name,value])=>fold(name,value)).join('')+'</section>'
         const selector=result.querySelector('[name=varga]')
         const selected=result.querySelector('.selected-chart')
-        selector.addEventListener('change',()=>{
+        const language=result.querySelector('[name=chartLanguage]')
+        const showSelected=()=>{
           const key=selector.value
-          selected.innerHTML=key?planetTable(first.vargas[key],key.toUpperCase()):''
-        })
+          selected.innerHTML=key?planetTable(first.vargas[key],key.toUpperCase(),language.value==='hi'):''
+        }
+        const showCharts=()=>{
+          const hindi=language.value==='hi'
+          result.querySelector('[data-chart=birth]').innerHTML=planetTable(first,hindi?'D1 राशि':'D1 Rashi',hindi)
+          result.querySelector('[data-chart=moon]').innerHTML=planetTable(moon,hindi?'चंद्र कुंडली':'Moon chart',hindi)
+          result.querySelector('[data-chart=sun]').innerHTML=planetTable(sun,hindi?'सूर्य कुंडली':'Sun chart',hindi)
+          showSelected()
+        }
+        selector.addEventListener('change',showSelected)
+        language.addEventListener('change',showCharts)
+        showCharts()
       }
     }catch(error){result.innerHTML='<p role="alert">'+esc(error instanceof Error?error.message:'Unable to calculate for these birth details.')+'</p>'}
   })
