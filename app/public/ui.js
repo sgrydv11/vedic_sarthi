@@ -201,7 +201,7 @@ function servicePage(kind,subpage,step) {
     isDaan?'Choose a cause and submit a pledge for manual fulfillment. This preview collects no donation funds.':isAstro?'Calculate a birth chart, compare Kundlis or check transits. You can also request a Pandit review.':'Choose a topic, consultation format and preferred date. Staff can schedule your request in the operations portal.')+
     (isAstro?'<p>'+link('Gochar and Sade Sati','astrology/gochar','secondary')+'</p>':'')+
     '<div class="grid">'+items.map(item=>'<article class="card info"><span class="feature-icon">'+icon(symbols[kind])+'</span><h3>'+escape(item.name)+'</h3>'+
-    (item.description?'<p>'+escape(item.description)+'</p>':'')+link('View details',kind+'/'+slug(item.name),'secondary')+'</article>').join('')+'</div>'+(!isDaan&&!isAstro?panditProfiles():'')
+    (item.description?'<p>'+escape(item.description)+'</p>':'')+(isAstro&&item.name==='Daily Panchang'?link('Open Panchang','panchang','secondary'):link('View details',kind+'/'+slug(item.name),'secondary'))+'</article>').join('')+'</div>'+(!isDaan&&!isAstro?panditProfiles():'')
 }
 const prayerTypes = [['mantra','Mantra'],['aarti','Aarti'],['chalisa','Chalisa']]
 function libraryTabs(active) {
@@ -1010,6 +1010,11 @@ function render() {
     subpage=subpage?'daan-'+subpage:undefined
     page='chadhava'
     history.replaceState(history.state,'','#'+[page,subpage,step].filter(Boolean).join('/'))
+  }
+  if(page==='astrology'&&subpage==='daily-panchang'&&!extra){
+    page='panchang'
+    subpage=step=undefined
+    history.replaceState(history.state,'','#panchang')
   }
   if (extra&&!(page==='library'&&subpage==='scriptures')) return missingPage('home','Home')
   const items=user&&user.role!=='devotee'?[...nav,['requests','Dashboard']]:nav
