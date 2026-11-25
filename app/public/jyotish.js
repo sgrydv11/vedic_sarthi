@@ -1,6 +1,7 @@
 import { getKundli, Observer, matchKundli, getGocharAnalysis, getSpecialLagnas, getArudhaPadas, getChandraKundli, getSuryaKundli } from './jyotish-engine.js'
 
-const places={Ujjain:[23.1765,75.7885],Delhi:[28.6139,77.209],Mumbai:[19.076,72.8777],Kolkata:[22.5726,88.3639],Chennai:[13.0827,80.2707],Bengaluru:[12.9716,77.5946],Hyderabad:[17.385,78.4867],Varanasi:[25.3176,82.9739],Jaipur:[26.9124,75.7873],Lucknow:[26.8467,80.9462],Indore:[22.7196,75.8577],Bhopal:[23.2599,77.4126]}
+const defaultPlace=['Ujjain, Madhya Pradesh',23.1765,75.7885]
+
 const esc=value=>String(value??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
 const dateFormat=new Intl.DateTimeFormat('en-IN',{dateStyle:'medium',timeZone:'Asia/Kolkata'})
 const label=key=>key.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,c=>c.toUpperCase())
@@ -58,18 +59,19 @@ function birthFields(prefix,name) {
   return '<fieldset><legend>'+name+'</legend><div class="panchang-controls">'+
     '<label>Date of birth<input name="'+prefix+'Date" type="date" min="1906-01-01" required></label>'+
     '<label>Local birth time<input name="'+prefix+'Time" type="time" required></label>'+
-    '<label>Birthplace<select name="'+prefix+'Place">'+Object.keys(places).map(p=>'<option>'+p+'</option>').join('')+'<option value="custom">Enter coordinates</option></select></label></div>'+
+    '<label>Search city or state<input name="'+prefix+'Search" type="search" autocomplete="off" placeholder="e.g. Ujjain, Madhya Pradesh"></label>'+
+    '<label>Birthplace<select name="'+prefix+'Place" required></select></label></div>'+
     '<div class="panchang-controls" hidden data-coords="'+prefix+'"><label>Latitude<input type="number" step="any" min="-89" max="89" name="'+prefix+'Lat"></label>'+
     '<label>Longitude<input type="number" step="any" min="-180" max="180" name="'+prefix+'Lon"></label>'+
     '<label>UTC offset in minutes<input type="number" min="-720" max="840" name="'+prefix+'Offset" value="330"></label></div></fieldset>'
 }
-function chart(form,prefix,options) {
+function chart(form,prefix,options,places) {
   const get=key=>form.elements[prefix+key].value
   const custom=get('Place')==='custom'
   const offset=custom?Number(get('Offset')):330
   const when=new Date(Date.parse(get('Date')+'T'+get('Time')+':00Z')-offset*60000)
   if(!Number.isFinite(+when)||when>new Date())throw new Error('Enter a valid birth date and time in the past.')
-  const coordinates=custom?[Number(get('Lat')),Number(get('Lon'))]:places[get('Place')]
+  const coordinates=custom?[Number(get('Lat')),Number(get('Lon'))]:places[Number(get('Place'))].slice(1)
   return getKundli(when,new Observer(...coordinates,0),options)
 }
 export function mountJyotish(root,mode) {
@@ -78,22 +80,56 @@ export function mountJyotish(root,mode) {
   root.innerHTML='<form class="card info" id="jyotish-form">'+birthFields('first',matching?'First profile (groom)':'Birth details')+
     (matching?birthFields('second','Second profile (bride)'):'')+
     (gochar?'<label>Transit date<input type="date" name="transit" required value="'+new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Kolkata'}).format(new Date())+'"></label>':'')+
-    '<button class="primary" type="submit">Calculate</button></div><p>Calculations run in your browser. Birth details stay on this device. <a class="breadcrumb-link" href="/jyotish-licenses.txt">Calculation sources and licenses</a></p></form><div id="jyotish-result" aria-live="polite"></div>'
+    '<button class="primary" type="submit">Calculate</button></div><p>Calculations run in your browser. Birth details stay on this device. <a class="breadcrumb-link" href="/jyotish-licenses.txt">Calculation sources and licenses</a> · <a class="breadcrumb-link" href="/india-birthplaces-source.txt">Birthplace data</a></p></form><div id="jyotish-result" aria-live="polite"></div>'
   const form=root.querySelector('form')
   const result=root.querySelector('#jyotish-result')
+  const places=[defaultPlace]
+  const refreshPlaceLists=[]
   for(const section of form.querySelectorAll('[data-coords]')){
-    const place=form.elements[section.dataset.coords+'Place']
+    const prefix=section.dataset.coords
+    const place=form.elements[prefix+'Place']
+    const search=form.elements[prefix+'Search']
     const sync=()=>{section.hidden=place.value!=='custom';for(const control of section.querySelectorAll('input')){control.disabled=section.hidden;control.required=!section.hidden}}
+    const refresh=(previous=place.value)=>{
+      const words=search.value.toLowerCase().split(/[\s,]+/).filter(Boolean)
+      const matches=[]
+      for(let index=0;index<places.length&&matches.length<30;index++){
+        const name=places[index][0].toLowerCase()
+        if(words.every(word=>name.includes(word)))matches.push(new Option(places[index][0],String(index)))
+      }
+      place.replaceChildren(new Option(matches.length?'Choose a birthplace':'No matches. Refine the search or enter coordinates.',''),
+        ...matches,new Option('Enter coordinates','custom'))
+      if([...place.options].some(option=>option.value===previous))place.value=previous
+      sync()
+    }
     place.addEventListener('change',sync)
-    sync()
+    search.addEventListener('input',()=>refresh(''))
+    refresh('0')
+    refreshPlaceLists.push(refresh)
   }
+  const placeStatus=document.createElement('p')
+  placeStatus.setAttribute('role','status')
+  placeStatus.textContent='Loading India birthplace directory…'
+  form.append(placeStatus)
+  fetch('/india-birthplaces.json').then(response=>{
+    if(!response.ok)throw new Error('Birthplace directory unavailable')
+    return response.json()
+  }).then(rows=>{
+    if(!root.isConnected)return
+    for(const row of rows)if(row[0]!==defaultPlace[0])places.push(row)
+    refreshPlaceLists.forEach(refresh=>refresh())
+    placeStatus.textContent=''
+  }).catch(()=>{
+    if(root.isConnected)placeStatus.textContent='The birthplace directory could not load. You can still enter coordinates.'
+  })
+
   form.addEventListener('submit',event=>{
     event.preventDefault()
     try {
       const options={ayanamsa:'lahiri',houseSystem:'whole_sign',includeChalit:!matching&&!gochar,includeKp:!matching&&!gochar}
-      const first=chart(form,'first',options)
+      const first=chart(form,'first',options,places)
       if(matching){
-        const second=chart(form,'second',options)
+        const second=chart(form,'second',options,places)
         const match=matchKundli(first,second)
         result.innerHTML=tables('Ashtakoota Milan · '+match.ashtakoot.totalScore+' / 36',['Koota','Score','Maximum'],match.ashtakoot.kootas.map(k=>[k.name,k.score,k.maxScore]))+
           '<section class="card info section"><h3>Mangal Dosha</h3>'+fold('First profile',match.dosha.boy)+fold('Second profile',match.dosha.girl)+'</section>'

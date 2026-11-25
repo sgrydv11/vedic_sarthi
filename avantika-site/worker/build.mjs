@@ -11,6 +11,8 @@ const files = {
   '/panchang-licenses.txt':['panchang-licenses.txt','text/plain; charset=utf-8'],
   '/ui.js':['ui.js','text/javascript; charset=utf-8'],
   '/style.css':['style.css','text/css; charset=utf-8'],
+  '/india-birthplaces.json':['india-birthplaces.json','application/json; charset=utf-8'],
+  '/india-birthplaces-source.txt':['india-birthplaces-source.txt','text/plain; charset=utf-8'],
   '/library-gita.json':['library-gita.json','application/json; charset=utf-8'],
   '/catalog.json':['catalog.json','application/json; charset=utf-8'],
   '/hero.webp':['hero.webp','image/webp'],

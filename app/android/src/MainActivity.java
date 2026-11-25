@@ -44,6 +44,8 @@ public final class MainActivity extends Activity {
         assets.put("/style.css", "text/css");
         assets.put("/catalog.json", "application/json");
         assets.put("/library-gita.json", "application/json");
+        assets.put("/india-birthplaces.json", "application/json");
+        assets.put("/india-birthplaces-source.txt", "text/plain");
         assets.put("/panchang.js", "text/javascript");
         assets.put("/panchang-engine.js", "text/javascript");
         assets.put("/panchang-licenses.txt", "text/plain");

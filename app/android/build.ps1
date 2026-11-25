@@ -30,7 +30,7 @@ foreach ($directory in @($work, "$work/classes", "$work/dex", "$work/assets/web"
   New-Item -ItemType Directory -Force -Path $directory | Out-Null
 }
 
-foreach ($file in @('index.html','ui.js','style.css','catalog.json','library-gita.json','panchang.js','panchang-engine.js','panchang-licenses.txt','jyotish.js','jyotish-engine.js','jyotish-licenses.txt','hero.webp','pandit-arvind.jpg','pandit-madhav.jpg')) {
+foreach ($file in @('index.html','ui.js','style.css','catalog.json','library-gita.json','india-birthplaces.json','india-birthplaces-source.txt','panchang.js','panchang-engine.js','panchang-licenses.txt','jyotish.js','jyotish-engine.js','jyotish-licenses.txt','hero.webp','pandit-arvind.jpg','pandit-madhav.jpg')) {
   Copy-Item -LiteralPath (Join-Path $project "../public/$file") -Destination "$work/assets/web"
 }
 $manifest = Join-Path $project 'AndroidManifest.xml'
