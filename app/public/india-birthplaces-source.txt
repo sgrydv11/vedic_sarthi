@@ -1,3 +1,5 @@
+Country names and additional Indian place names were imported from the supplied database.sql (2015). No SQL statements were executed. The supplied file contains state and city rows for India only, with no coordinates or time zones. Legacy names were normalized, and dangling state ID 36 was mapped to Chhattisgarh based on its districts.
+
 India city and town names and state labels
 
 Source snapshot: country-state-city 3.2.1
