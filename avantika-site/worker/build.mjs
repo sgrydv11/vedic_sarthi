@@ -14,8 +14,8 @@ const files = {
   '/library-gita.json':['library-gita.json','application/json; charset=utf-8'],
   '/catalog.json':['catalog.json','application/json; charset=utf-8'],
   '/hero.webp':['hero.webp','image/webp'],
-  '/vishal-rawal.jpg':['vishal-rawal.jpg','image/jpeg'],
-  '/yashwant-rawal.jpg':['yashwant-rawal.jpg','image/jpeg'],
+  '/pandit-arvind.jpg':['pandit-arvind.jpg','image/jpeg'],
+  '/pandit-madhav.jpg':['pandit-madhav.jpg','image/jpeg'],
   '/download/avantika.apk':['../android/Avantika.apk','application/vnd.android.package-archive']
 }
 const assets = Object.fromEntries(await Promise.all(Object.entries(files).map(async ([path,[file,type]])=>{

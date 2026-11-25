@@ -98,15 +98,15 @@ function auth(mode='login', continuation) {
 }
 const ritualSummary = item => '<article class="ritual card"><div class="ritual-art '+(['shiva','mangal','river'][catalog.rituals.indexOf(item)%3])+'"><span class="tag">'+escape(item.category)+'</span><span class="ritual-glyph" aria-hidden="true">'+icon(['diya','sun','stars'][catalog.rituals.indexOf(item)%3])+'</span></div><div class="ritual-body"><h3>'+escape(item.name)+'</h3><p class="location">'+icon('pin')+escape(item.place)+'</p>'+(item.description?'<p>'+escape(item.description)+'</p>':'')+'<div class="ritual-action"><span>'+(item.fee===null?'Quote on request':money(item.fee))+'</span>'+link('View pooja','poojas/'+item.id,'secondary')+'</div></div></article>'
 const pandits = [
-  {name:'Param Pujya Vishal Rawal Ji',knownAs:'Bittu Bhaiya',photo:'vishal-rawal',topics:'Vedic pooja · Sankalp',
-    intro:'Meet Vishal Rawal Ji, known as Bittu Bhaiya. Devotees can request guidance on preparing their Sankalp and planning a pooja.'},
-  {name:'Param Pujya Yashwant Rawal Ji',knownAs:'Lalli Guru',photo:'yashwant-rawal',topics:'Karmkand · Family ceremonies',
-    intro:'Meet Yashwant Rawal Ji, known as Lalli Guru. Families can request guidance on preparing for traditional ceremonies and observing their customs.'}
+  {name:'Pandit Arvind Shastri',photo:'pandit-arvind',topics:'Vedic pooja · Sankalp',
+    intro:'Explore how to prepare a Sankalp and what to gather before requesting a pooja.'},
+  {name:'Pandit Madhav Acharya',photo:'pandit-madhav',topics:'Karmkand · Family ceremonies',
+    intro:'Explore traditional ceremony preparations and customs to discuss with your family and priest.'}
 ]
 function panditProfiles() {
-  return '<section class="section pandit-section" aria-labelledby="pandit-heading"><h2 id="pandit-heading">Meet the Pandit Jis</h2><div class="pandit-grid">'+
-    pandits.map(pandit => '<article class="card pandit-card"><div class="pandit-portrait '+pandit.photo+'"><img src="/'+pandit.photo+'.jpg" alt="Portrait of '+pandit.name+'"></div>'+
-      '<div><h3>'+pandit.name+'</h3><p class="pandit-alias">'+pandit.knownAs+'</p><p class="eyebrow">'+pandit.topics+'</p><p>'+pandit.intro+'</p></div></article>').join('')+'</div></section>'
+  return '<section class="section pandit-section" aria-labelledby="pandit-heading"><h2 id="pandit-heading">Pandit Ji profiles</h2><p>Fictional profiles with AI-generated portraits.</p><div class="pandit-grid">'+
+    pandits.map(pandit => '<article class="card pandit-card"><div class="pandit-portrait '+pandit.photo+'"><img src="/'+pandit.photo+'.jpg" alt="AI-generated portrait of '+pandit.name+'"></div>'+
+      '<div><h3>'+pandit.name+'</h3><p class="eyebrow">'+pandit.topics+'</p><p>'+pandit.intro+'</p></div></article>').join('')+'</div></section>'
 }
 function home() {
   const quick = [['poojas','Book a Pooja'],['panchang','Panchang'],['astrology','Kundli & Milan'],['jaap','Jaap Mala'],['library','Ritual Guides'],['consult','Consult an Acharya'],['requests','My Requests'],['mandir','My Mandir'],['temples','Temple Directory'],['chadhava','Chadhava'],['devotional','Devotional Library'],['community','Community'],['store','Store']]

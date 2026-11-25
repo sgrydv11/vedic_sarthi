@@ -43,9 +43,16 @@ public final class MainActivity extends Activity {
         assets.put("/ui.js", "text/javascript");
         assets.put("/style.css", "text/css");
         assets.put("/catalog.json", "application/json");
+        assets.put("/library-gita.json", "application/json");
+        assets.put("/panchang.js", "text/javascript");
+        assets.put("/panchang-engine.js", "text/javascript");
+        assets.put("/panchang-licenses.txt", "text/plain");
+        assets.put("/jyotish.js", "text/javascript");
+        assets.put("/jyotish-engine.js", "text/javascript");
+        assets.put("/jyotish-licenses.txt", "text/plain");
         assets.put("/hero.webp", "image/webp");
-        assets.put("/vishal-rawal.jpg", "image/jpeg");
-        assets.put("/yashwant-rawal.jpg", "image/jpeg");
+        assets.put("/pandit-arvind.jpg", "image/jpeg");
+        assets.put("/pandit-madhav.jpg", "image/jpeg");
         ASSETS = Collections.unmodifiableMap(assets);
     }
     private WebView web;

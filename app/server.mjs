@@ -19,7 +19,7 @@ function verifyLegacy(password,stored) {
   const [salt,digest]=stored.split(':')
   return Boolean(digest?.length===128 && timingSafeEqual(scryptSync(password,salt,64),Buffer.from(digest,'hex')))
 }
-const files = {'/':'index.html','/ui.js':'ui.js','/panchang.js':'panchang.js','/jyotish.js':'jyotish.js','/jyotish-engine.js':'jyotish-engine.js','/jyotish-licenses.txt':'jyotish-licenses.txt','/panchang-engine.js':'panchang-engine.js','/panchang-licenses.txt':'panchang-licenses.txt','/style.css':'style.css','/catalog.json':'catalog.json','/library-gita.json':'library-gita.json','/hero.webp':'hero.webp','/vishal-rawal.jpg':'vishal-rawal.jpg','/yashwant-rawal.jpg':'yashwant-rawal.jpg'}
+const files = {'/':'index.html','/ui.js':'ui.js','/panchang.js':'panchang.js','/jyotish.js':'jyotish.js','/jyotish-engine.js':'jyotish-engine.js','/jyotish-licenses.txt':'jyotish-licenses.txt','/panchang-engine.js':'panchang-engine.js','/panchang-licenses.txt':'panchang-licenses.txt','/style.css':'style.css','/catalog.json':'catalog.json','/library-gita.json':'library-gita.json','/hero.webp':'hero.webp','/pandit-arvind.jpg':'pandit-arvind.jpg','/pandit-madhav.jpg':'pandit-madhav.jpg'}
 const types = {html:'text/html',js:'text/javascript',txt:'text/plain',css:'text/css',json:'application/json',webp:'image/webp',jpg:'image/jpeg'}
 const staffCode = {pandit:process.env.PANDIT_CODE,admin:process.env.ADMIN_CODE}
 for (const [role, code] of Object.entries(staffCode)) {
