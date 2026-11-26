@@ -27,6 +27,7 @@ const hindiRashis=['मेष','वृषभ','मिथुन','कर्क','
 const grahaName=(name,hindi)=>hindi?(hindiGrahas[name]?.[1]||name):name
 function northIndianChart(chart,hindi,showHouses) {
   const houses=new Map(chart.houses.map(house=>[house.number,house]))
+  const ascendant=hindi?(hindiRashis[chart.ascendant?.rashi-1]||'—'):(chart.ascendant?.rashiName||'—')
   const cells=houseCenters.map(([x,y],index)=>{
     const number=index+1
     const house=houses.get(number)
@@ -42,7 +43,9 @@ function northIndianChart(chart,hindi,showHouses) {
   }).join('')
   return '<figure class="kundli-chart"><svg viewBox="0 0 400 400" role="img" aria-label="'+(hindi?'बारह भावों वाली उत्तर भारतीय कुंडली':'North Indian style chart with 12 houses')+'">'+
     '<path class="kundli-lines" d="M1 1H399V399H1Z M1 1L399 399 M399 1L1 399 M200 1L399 200L200 399L1 200Z"/>'+cells+'</svg>'+
-    '<figcaption>'+(showHouses
+    '<figcaption>'+(hindi
+      ? 'यह जन्म कुंडली बारह भावों में राशियों और ग्रहों की स्थिति दिखाती है। लग्न '+esc(ascendant)+' है। '
+      : 'This chart shows the signs and planetary placements across all 12 houses. The ascendant (Lagna) is '+esc(ascendant)+'. ')+(showHouses
       ? (hindi?'भाव 1 लग्न है। भाव के बाद लिखा अंक राशि बताता है।':'H1 marks the Lagna. The number after each house is its rashi.')
       : (hindi?'लग्न ऊपर है। अंक राशियाँ दर्शाते हैं।':'The Lagna is at the top. Numbers indicate rashis.'))+
     (hindi?' ग्रहों के पूरे नाम नीचे की तालिका में हैं।':' Planet names are spelled out in the table.')+'</figcaption></figure>'
