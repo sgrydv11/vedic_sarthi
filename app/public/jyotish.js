@@ -47,12 +47,44 @@ function northIndianChart(chart,hindi,showHouses) {
       : (hindi?'लग्न ऊपर है। अंक राशियाँ दर्शाते हैं।':'The Lagna is at the top. Numbers indicate rashis.'))+
     (hindi?' ग्रहों के पूरे नाम नीचे की तालिका में हैं।':' Planet names are spelled out in the table.')+'</figcaption></figure>'
 }
+const hindiDignities={exalted:'उच्च',debilitated:'नीच',moolatrikona:'मूलत्रिकोण',own:'स्वराशि',friendly:'मित्र राशि',enemy:'शत्रु राशि',neutral:'सम राशि'}
 function planetTable(chart,title,hindi,showHouses) {
   const houseByPlanet=new Map(chart.houses.flatMap(house=>house.planets.map(name=>[name,house.number])))
   const lagna=hindi?(hindiRashis[chart.ascendant?.rashi-1]||'—'):(chart.ascendant?.rashiName||'—')
   return '<section class="card info section" lang="'+(hindi?'hi':'en')+'"><h3>'+esc(title+(hindi?' · लग्न ':' · Lagna ')+lagna)+'</h3>'+northIndianChart(chart,hindi,showHouses)+
     tables(hindi?'ग्रहों की स्थिति':'Planet positions',hindi?['ग्रह','राशि','भाव','अंश','गरिमा','विशेषताएँ']:['Graha','Rashi','House','Position','Dignity','Flags'],
-      Object.entries(chart.planets||{}).map(([name,p])=>[grahaName(name,hindi),hindi?(hindiRashis[p.rashi-1]||p.rashiName):p.rashiName,houseByPlanet.get(name),p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',p.dignity,[p.isRetrograde&&'Retrograde',p.isCombust&&'Combust',p.isVargottama&&'Vargottama'].filter(Boolean).join(', ')||'—']))+'</section>'
+      Object.entries(chart.planets||{}).map(([name,p])=>[grahaName(name,hindi),hindi?(hindiRashis[p.rashi-1]||p.rashiName):p.rashiName,houseByPlanet.get(name),p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',hindi?(hindiDignities[p.dignity]||p.dignity):p.dignity,[p.isRetrograde&&(hindi?'वक्री':'Retrograde'),p.isCombust&&(hindi?'अस्त':'Combust'),p.isVargottama&&(hindi?'वर्गोत्तम':'Vargottama')].filter(Boolean).join(', ')||'—']))+'</section>'
+}
+const vargaNames={
+  d1:['Rashi (Birth Chart)','राशि (जन्म कुंडली)'],d2:['Hora','होरा'],d3:['Drekkana','द्रेष्काण'],
+  d4:['Chaturthamsha','चतुर्थांश'],d5:['Panchamsha','पंचमांश'],d6:['Shashthamsha','षष्ठांश'],
+  d7:['Saptamsha','सप्तांश'],d8:['Ashtamsha','अष्टमांश'],d9:['Navamsha','नवांश'],
+  d10:['Dashamsha','दशमांश'],d11:['Rudramsha','रुद्रांश'],d12:['Dwadashamsha','द्वादशांश'],
+  d16:['Shodashamsha','षोडशांश'],d20:['Vimshamsha','विंशांश'],d24:['Chaturvimshamsha','चतुर्विंशांश'],
+  d27:['Saptavimshamsha','सप्तविंशांश'],d30:['Trimshamsha','त्रिंशांश'],d40:['Khavedamsha','खवेदांश'],
+  d45:['Akshavedamsha','अक्षवेदांश'],d60:['Shashtyamsha','षष्ट्यंश']
+}
+const chartName=(key,hindi)=>key.toUpperCase()+' · '+vargaNames[key][hindi?1:0]
+const dashaDateFormat=new Intl.DateTimeFormat('hi-IN',{dateStyle:'medium',timeZone:'Asia/Kolkata'})
+function dashaTimeline(kundli,hindi) {
+  const format=hindi?dashaDateFormat:dateFormat
+  const birth=kundli.birthDetails.rawDate
+  const limit=new Date(birth)
+  limit.setUTCFullYear(birth.getUTCFullYear()+100)
+  if(limit.getUTCMonth()!==birth.getUTCMonth())limit.setUTCDate(0)
+  const title=hindi?'विंशोत्तरी दशा · जन्म से 100 वर्ष':'Vimshottari Dasha · First 100 years from birth'
+  const levels=hindi?['महादशा','अंतर्दशा','प्रत्यंतर्दशा']:['Mahadasha','Antardasha','Pratyantardasha']
+  const overlaps=period=>+period.startTime<+limit&&+period.endTime>+birth
+  const range=period=>format.format(Math.max(+birth,+period.startTime))+' – '+format.format(Math.min(+limit,+period.endTime))
+  const name=period=>grahaName(period.planet,hindi)
+  const summary=(period,level)=>esc(levels[level]+' · '+name(period))+' <span class="dasha-dates">'+esc(range(period))+'</span>'
+  const mahadashas=kundli.dasha.mahadashas.filter(overlaps)
+  return '<h3>'+title+'</h3><p>'+esc(format.format(birth)+' – '+format.format(limit)+' · '+(hindi?'भारतीय मानक समय':'India Standard Time'))+'</p>'+
+    mahadashas.map(maha=>'<details class="festival-entry"><summary>'+summary(maha,0)+'</summary>'+
+      (maha.antars||[]).filter(overlaps).map(antar=>'<details class="festival-entry dasha-antar"><summary>'+summary(antar,1)+'</summary>'+
+        tables(levels[2],hindi?['ग्रह','आरंभ','समाप्ति']:['Planet','Start','End'],(antar.pratyantars||[]).filter(overlaps).map(period=>
+          [name(period),format.format(Math.max(+birth,+period.startTime)),format.format(Math.min(+limit,+period.endTime))]))+
+        '</details>').join('')+'</details>').join('')
 }
 function birthFields(prefix,name) {
   return '<fieldset><legend>'+name+'</legend><div class="panchang-controls">'+
@@ -173,13 +205,14 @@ export function mountJyotish(root,mode) {
         result.innerHTML='<label>Chart language<select name="chartLanguage"><option value="en">English</option><option value="hi" lang="hi">हिन्दी</option></select></label>'+
           '<label class="tick"><input type="checkbox" name="showHouses" checked> Show house numbers</label>'+
           '<div data-chart="birth"></div>'+
-          '<details class="festival-entry"><summary>Chandra Kundli</summary><div data-chart="moon"></div></details>'+
-          '<details class="festival-entry"><summary>Surya Kundli</summary><div data-chart="sun"></div></details>'+
-          '<section id="divisional-charts" class="card info section"><h3>Charts</h3><label>Divisional chart<select name="varga">'+
-          '<option value="">Choose a chart</option>'+Object.keys(first.vargas||{}).filter(key=>key!=='d1').map(key=>'<option value="'+esc(key)+'">'+esc(key.toUpperCase())+'</option>').join('')+
+          '<details class="festival-entry"><summary data-chart-label="moon">Chandra Kundli</summary><div data-chart="moon"></div></details>'+
+          '<details class="festival-entry"><summary data-chart-label="sun">Surya Kundli</summary><div data-chart="sun"></div></details>'+
+          '<section id="divisional-charts" class="card info section"><h3 data-chart-label="vargas">Charts</h3><label><span data-chart-label="select">Divisional chart</span><select name="varga">'+
+          '<option value="">Choose a chart</option>'+Object.keys(first.vargas||{}).filter(key=>key!=='d1').map(key=>'<option value="'+esc(key)+'">'+esc(chartName(key,false))+'</option>').join('')+
           '</select></label><div class="selected-chart" aria-live="polite"></div></section>'+
+          '<section id="dasha-timeline" class="card info section"></section>'+
           '<section class="card info section"><h3>Chart details</h3>'+
-          [['Houses',first.houses],['Vimshottari Dasha',first.dasha],['Special lagnas',getSpecialLagnas(first)],['Jaimini Arudha',getArudhaPadas(first)],['Graha Drishti',first.drishti],
+          [['Houses',first.houses],['Special lagnas',getSpecialLagnas(first)],['Jaimini Arudha',getArudhaPadas(first)],['Graha Drishti',first.drishti],
            ['Ashtakavarga',first.ashtakavarga],['Bhava Chalit',first.chalit],['KP astrology',first.kp]].map(([name,value])=>fold(name,value)).join('')+'</section>'
         const selector=result.querySelector('[name=varga]')
         const selected=result.querySelector('.selected-chart')
@@ -187,19 +220,30 @@ export function mountJyotish(root,mode) {
         const houseNumbers=result.querySelector('[name=showHouses]')
         const showSelected=()=>{
           const key=selector.value
-          selected.innerHTML=key?planetTable(first.vargas[key],key.toUpperCase(),language.value==='hi',houseNumbers.checked):''
+          selected.innerHTML=key?planetTable(first.vargas[key],chartName(key,language.value==='hi'),language.value==='hi',houseNumbers.checked):''
         }
         const showCharts=()=>{
           const hindi=language.value==='hi'
-          result.querySelector('[data-chart=birth]').innerHTML=planetTable(first,hindi?'D1 राशि':'D1 Rashi',hindi,houseNumbers.checked)
-          result.querySelector('[data-chart=moon]').innerHTML=planetTable(moon,hindi?'चंद्र कुंडली':'Moon chart',hindi,houseNumbers.checked)
-          result.querySelector('[data-chart=sun]').innerHTML=planetTable(sun,hindi?'सूर्य कुंडली':'Sun chart',hindi,houseNumbers.checked)
+          result.querySelector('[data-chart=birth]').innerHTML=planetTable(first,chartName('d1',hindi),hindi,houseNumbers.checked)
+          result.querySelector('[data-chart=moon]').innerHTML=planetTable(moon,hindi?'चंद्र कुंडली':'Chandra Kundli (Moon Chart)',hindi,houseNumbers.checked)
+          result.querySelector('[data-chart=sun]').innerHTML=planetTable(sun,hindi?'सूर्य कुंडली':'Surya Kundli (Sun Chart)',hindi,houseNumbers.checked)
           showSelected()
         }
         selector.addEventListener('change',showSelected)
-        language.addEventListener('change',showCharts)
+        const showLanguage=()=>{
+          const hindi=language.value==='hi'
+          const labels=hindi?{moon:'चंद्र कुंडली',sun:'सूर्य कुंडली',vargas:'वर्ग कुंडलियाँ',select:'वर्ग कुंडली चुनें'}
+            :{moon:'Chandra Kundli',sun:'Surya Kundli',vargas:'Charts',select:'Divisional chart'}
+          for(const [key,label] of Object.entries(labels))result.querySelector('[data-chart-label='+key+']').textContent=label
+          for(const option of selector.options)option.textContent=option.value?chartName(option.value,hindi):(hindi?'कुंडली चुनें':'Choose a chart')
+          const timeline=result.querySelector('#dasha-timeline')
+          timeline.lang=hindi?'hi':'en'
+          timeline.innerHTML=dashaTimeline(first,hindi)
+          showCharts()
+        }
+        language.addEventListener('change',showLanguage)
         houseNumbers.addEventListener('change',showCharts)
-        showCharts()
+        showLanguage()
       }
     }catch(error){result.innerHTML='<p role="alert">'+esc(error instanceof Error?error.message:'Unable to calculate for these birth details.')+'</p>'}
   })

@@ -217,3 +217,5 @@ h1,h2,h3,p,.primary,.secondary,.hero-link,summary,.tabs a,.breadcrumbs li{overfl
   .pandit-card{grid-template-columns:76px minmax(0,1fr)}
   .panchang-values dd{text-align:left}
 }
+#dasha-timeline .dasha-antar{margin-inline-start:clamp(.35rem,2vw,1.25rem)}
+#dasha-timeline .dasha-dates{display:block;margin:.15rem 0 .2rem 1.05rem;font-weight:400;color:var(--muted)}
