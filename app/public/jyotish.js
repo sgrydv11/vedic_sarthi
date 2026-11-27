@@ -48,10 +48,24 @@ function northIndianChart(chart,hindi,showHouses) {
     (hindi?' ग्रहों के पूरे नाम नीचे की तालिका में हैं।':' Planet names are spelled out in the table.')+'</figcaption></figure>'
 }
 const hindiDignities={exalted:'उच्च',debilitated:'नीच',moolatrikona:'मूलत्रिकोण',own:'स्वराशि',friendly:'मित्र राशि',enemy:'शत्रु राशि',neutral:'सम राशि'}
+function chartSummary(chart,houseByPlanet,lagna,hindi) {
+  const sign=planet=>hindi?(hindiRashis[planet?.rashi-1]||planet?.rashiName):planet?.rashiName
+  const placements=['Sun','Moon'].flatMap(name=>{
+    const rashi=sign(chart.planets?.[name])
+    const house=houseByPlanet.get(name)
+    if(!rashi||!house)return []
+    return [hindi
+      ? grahaName(name,true)+' '+rashi+' राशि में, भाव '+house+' में है।'
+      : name+' is in '+rashi+', in house '+house+'.']
+  })
+  return [hindi?'इस कुंडली का लग्न '+lagna+' है।':'This chart has '+lagna+' Lagna (ascendant).',...placements,
+    hindi?'पहला भाव लग्न से शुरू होता है, और नीचे की तालिका में ग्रहों की स्थिति है।'
+      :'The first house starts at the Lagna, and the table below lists the planetary placements.'].join(' ')
+}
 function planetTable(chart,title,hindi,showHouses) {
   const houseByPlanet=new Map(chart.houses.flatMap(house=>house.planets.map(name=>[name,house.number])))
   const lagna=hindi?(hindiRashis[chart.ascendant?.rashi-1]||'—'):(chart.ascendant?.rashiName||'—')
-  return '<section class="card info section" lang="'+(hindi?'hi':'en')+'"><h3>'+esc(title+(hindi?' · लग्न ':' · Lagna ')+lagna)+'</h3>'+northIndianChart(chart,hindi,showHouses)+
+  return '<section class="card info section" lang="'+(hindi?'hi':'en')+'"><h3>'+esc(title+(hindi?' · लग्न ':' · Lagna ')+lagna)+'</h3><p class="kundli-summary">'+esc(chartSummary(chart,houseByPlanet,lagna,hindi))+'</p>'+northIndianChart(chart,hindi,showHouses)+
     tables(hindi?'ग्रहों की स्थिति':'Planet positions',hindi?['ग्रह','राशि','भाव','अंश','गरिमा','विशेषताएँ']:['Graha','Rashi','House','Position','Dignity','Flags'],
       Object.entries(chart.planets||{}).map(([name,p])=>[grahaName(name,hindi),hindi?(hindiRashis[p.rashi-1]||p.rashiName):p.rashiName,houseByPlanet.get(name),p.degree==null?'—':p.degree+'° '+(p.minute??0)+'′',hindi?(hindiDignities[p.dignity]||p.dignity):p.dignity,[p.isRetrograde&&(hindi?'वक्री':'Retrograde'),p.isCombust&&(hindi?'अस्त':'Combust'),p.isVargottama&&(hindi?'वर्गोत्तम':'Vargottama')].filter(Boolean).join(', ')||'—']))+'</section>'
 }
